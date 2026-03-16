@@ -1,0 +1,34 @@
+# Jaidee & Ko Website Redesign
+
+- [x] Project Setup
+  - [x] Initialize Next.js project (App Router, Tailwind, TypeScript)
+  - [x] Setup global CSS, fonts, and foundational design tokens
+  - [x] Configure asset optimization (next/image, compressed videos)
+- [x] Core Components
+  - [x] Build Navigation (Navbar & Footer)
+  - [x] Build Trust Ticker (CSS-only infinite scroll)
+  - [x] Build Contact Forms (Quick Contact & Full Contact)
+  - [x] Build Testimonials Slider
+  - [x] Build Portfolio Grid with Filters
+  - [x] Build Lead Magnet & Exit Intent Popup
+- [/] Pages Implementation
+  - [x] Homepage (`/`)
+    - [x] Hero Section (Autoplay video, Scarcity CTA)
+    - [x] Services Snapshot
+    - [x] Featured Work
+  - [x] Services Page (`/services`)
+    - [x] Corporate Video, Social Media, etc.
+  - [x] Portfolio Page (`/our-work`)
+  - [x] SEO Landing Pages
+    - [x] `/corporate-video-production-singapore`
+    - [x] `/social-media-video-agency`
+  - [x] Info Pages (`/our-process`, `/faq`, `/contact`)
+  - [x] Content Hub (`/blog`, `/resources`)
+- [x] SEO & Performance Optimization
+  - [x] Configure static exports / SSG
+  - [x] Implement meta tags and OpenGraph data per page
+  - [x] Run Lighthouse tests (Target: 90+ Performance, <2MB)
+- [x] Verification
+  - [x] Test form submissions
+  - [x] Test responsive design
+  - [x] Validate SEO structures
