@@ -137,7 +137,7 @@ export function SocialProof() {
               className="pt-2 flex flex-wrap items-center gap-6"
             >
               <Button size="lg" className="h-14 px-8 gap-3 bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-lg shadow-primary/20 transition-all rounded-full" asChild>
-                <Link href="/services">
+                <Link href="/about">
                   Learn More About Us <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
