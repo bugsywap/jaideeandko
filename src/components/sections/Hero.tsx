@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,49 +9,53 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const rafRef = useRef<number | null>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   
-  // High-height container to drive the animation sequence
+  // Container height drives the animation sequence
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Smooth the scroll progress for a more "premium" interaction
+  // Natural Flow Physics: Buffers mouse wheel clicks for smooth movement
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+    stiffness: 400,
+    damping: 90,
+    restDelta: 0.0001
   });
 
-  // 1. GIF Transformations: Center -> Right
-  // Initial (0): Centered, Big
-  const gifScale = useTransform(smoothProgress, [0, 0.4], [1.5, 1]);
-  const gifOpacity = useTransform(smoothProgress, [0, 0.1], [0.8, 1]);
+  // High-Frequency Sync Loop (requestAnimationFrame)
+  // This ensures the video updates at the screen's refresh rate (60Hz+)
+  useEffect(() => {
+    const updateVideo = () => {
+      if (videoRef.current && videoRef.current.duration && isVideoReady) {
+        const latest = smoothProgress.get();
+        // Map 0-1 progress to 0-duration with sub-frame precision
+        videoRef.current.currentTime = latest * videoRef.current.duration;
+      }
+      rafRef.current = requestAnimationFrame(updateVideo);
+    };
 
-  // To center the GIF on the screen from the right column of a 2-col grid:
-  // The element is in a 50% width column. Its center is naturally at 75%.
-  // To move its center to 50%, we need to move it left by 25% of the TOTAL container.
-  // Since the element itself is 50% of the container, "-50%" relative to itself is exactly what we need.
-  const desktopGifTranslateX = useTransform(smoothProgress, [0, 0.6], ["-50%", "0%"]);
-  
-  // 2. Text Transformations: Fades and slides from left
-  const textOpacity = useTransform(smoothProgress, [0.5, 0.8], [0, 1]);
-  const textX = useTransform(smoothProgress, [0.5, 0.8], [-100, 0]);
-  
-  // 4. Buttons: Pop up at the very end
-  const buttonsScale = useTransform(smoothProgress, [0.85, 1], [0, 1]);
-  const buttonsOpacity = useTransform(smoothProgress, [0.85, 1], [0, 1]);
+    rafRef.current = requestAnimationFrame(updateVideo);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isVideoReady, smoothProgress]);
 
   return (
     <div ref={containerRef} className="relative h-[400vh] bg-background">
-      {/* Sticky Content: Keeps everything in view until animation finishes */}
+      {/* Sticky Content */}
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 gap-12 items-center md:grid-cols-2 relative h-full">
             
             {/* Text Content Layer */}
             <motion.div 
-              style={{ opacity: textOpacity, x: textX }}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex gap-6 flex-col z-20"
             >
               <div>
@@ -66,11 +70,7 @@ export function Hero() {
                 </p>
               </div>
               
-              {/* Buttons Pop-up */}
-              <motion.div 
-                style={{ scale: buttonsScale, opacity: buttonsOpacity }}
-                className="flex flex-row gap-4 mt-8"
-              >
+              <div className="flex flex-row gap-4 mt-8">
                 <Button size="lg" className="h-16 px-10 gap-3 text-primary bg-transparent border-primary hover:bg-primary/10 font-bold transition-all duration-300 rounded-full" variant="outline" asChild>
                   <Link href="#how-it-works">
                     See How It Works <PhoneCall className="w-4 h-4" />
@@ -81,42 +81,53 @@ export function Hero() {
                     Let's Go <MoveRight className="w-4 h-4" />
                   </Link>
                 </Button>
-              </motion.div>
+              </div>
             </motion.div>
             
-            {/* Right Side - GIF Hero (Starts Centered & Big) */}
-            <motion.div 
-              style={{ 
-                x: desktopGifTranslateX,
-                scale: gifScale,
-                opacity: gifOpacity
-              }}
-              className="relative w-full h-[600px] lg:h-[750px] flex items-center justify-center z-10"
-            >
-              {/* No Borders, Just the GIF */}
-              <img 
-                src="/img/gif1.gif" 
-                alt="Jaidee & Ko Hero" 
-                className="w-full h-full object-contain pointer-events-none"
-              />
+            {/* Right Side - Visual Hero (Pure Natural Flow) */}
+            <div className="relative w-full h-[600px] lg:h-[750px] flex items-center justify-center z-10">
+              <div className="relative w-full h-full">
+                {!isVideoReady && (
+                  <img 
+                    src="/img/gif1.gif" 
+                    alt="Hero Static"
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+                )}
+                
+                <video
+                  ref={videoRef}
+                  src="/img/hero-scroll.mp4"
+                  className={`w-full h-full object-contain pointer-events-none transition-opacity duration-500 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
+                  muted
+                  playsInline
+                  preload="auto"
+                  onLoadedData={() => {
+                    setIsVideoReady(true);
+                    if (videoRef.current) {
+                      videoRef.current.pause();
+                      videoRef.current.currentTime = 0;
+                    }
+                  }}
+                  onError={() => setIsVideoReady(false)}
+                />
+              </div>
               
-              {/* Subtle background glow that appears as text reveals */}
-              <motion.div 
-                style={{ opacity: textOpacity }}
+              <div 
                 className="absolute inset-0 bg-primary/5 blur-[120px] -z-10 rounded-full scale-125"
               />
-            </motion.div>
+            </div>
             
           </div>
         </div>
 
-        {/* Initial Scroll Indicator */}
+        {/* Subtle Scroll Indicator */}
         <motion.div 
-          style={{ opacity: useTransform(smoothProgress, [0, 0.15], [1, 0]) }}
+          style={{ opacity: useTransform(smoothProgress, [0, 0.2], [1, 0]) }}
           className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
         >
-          <div className="w-[1.5px] h-16 bg-gradient-to-b from-primary to-transparent" />
-          <p className="text-[10px] uppercase tracking-[0.4em] text-primary font-black animate-pulse">Scroll to Start</p>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-primary/50 font-black">Scroll to Play Animation</p>
+          <div className="w-[1.5px] h-8 bg-gradient-to-b from-primary/50 to-transparent" />
         </motion.div>
       </div>
     </div>
