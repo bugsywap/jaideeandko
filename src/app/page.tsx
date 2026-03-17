@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero"
 import { TrustTicker } from "@/components/sections/TrustTicker"
+import { VideoCarousel } from "@/components/sections/VideoCarousel"
 import { ServicesSnapshot } from "@/components/sections/ServicesSnapshot"
 import { QuickContact } from "@/components/sections/QuickContact"
 import { PortfolioGrid } from "@/components/sections/PortfolioGrid"
@@ -11,7 +12,10 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <TrustTicker />
+      <div className="border-y border-border/50">
+        <TrustTicker />
+      </div>
+      <VideoCarousel />
       <ServicesSnapshot />
       
       <section className="py-24 bg-background">
@@ -28,3 +32,4 @@ export default function Home() {
     </>
   )
 }
+

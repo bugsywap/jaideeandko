@@ -3,17 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 
-const placeholderVideos = [
-  "https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-sky-in-a-video-32627-large.mp4",
-  "https://assets.mixkit.co/videos/preview/mixkit-mother-with-her-little-daughter-eating-a-marshmallow-in-nature-39764-large.mp4",
-  "https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4",
-  "https://assets.mixkit.co/videos/preview/mixkit-taking-photos-from-different-angles-of-a-model-34421-large.mp4",
-  "https://assets.mixkit.co/videos/preview/mixkit-young-woman-talking-on-video-call-on-a-rooftop-43015-large.mp4"
-];
-
-// Duplicate enough times so scrolling length easily covers screen space
-const duplicatedVideos = [...placeholderVideos, ...placeholderVideos, ...placeholderVideos, ...placeholderVideos];
-
 export function Hero() {
   return (
     <div className="w-full py-20 lg:py-40 bg-background pt-32 overflow-hidden">
@@ -23,23 +12,23 @@ export function Hero() {
           {/* Text Content */}
           <div className="flex gap-4 flex-col z-10">
             <div>
-              <Badge variant="outline" className="border-primary text-primary bg-primary/10">Jaidee & Ko</Badge>
+              <Badge variant="outline" className="border-primary text-primary bg-primary/10 px-4 py-1 text-sm font-semibold tracking-wider uppercase">Jaidee & Ko</Badge>
             </div>
             <div className="flex gap-4 flex-col">
-              <h1 className="text-5xl md:text-7xl max-w-lg tracking-tighter text-left font-bold text-foreground leading-[1.1]">
-                Corporate Video & Social Content
+              <h1 className="text-5xl md:text-8xl max-w-lg tracking-tighter text-left font-bold text-foreground leading-[1.05]">
+                Corporate Video & <span className="text-primary">Social Content</span>
               </h1>
               <p className="text-xl leading-relaxed tracking-tight text-foreground/70 max-w-md text-left">
                 For B2B companies, NGOs, and founders in Singapore and Southeast Asia. We turn complex narratives into approachable visual storytelling.
               </p>
             </div>
-            <div className="flex flex-row gap-4 mt-4">
-              <Button size="lg" className="gap-2 text-primary bg-transparent border-primary hover:bg-primary/10 font-bold" variant="outline" asChild>
+            <div className="flex flex-row gap-4 mt-8">
+              <Button size="lg" className="h-14 px-8 gap-2 text-primary bg-transparent border-primary hover:bg-primary/10 font-bold transition-all duration-300" variant="outline" asChild>
                 <Link href="#how-it-works">
                   See How It Works <PhoneCall className="w-4 h-4 ml-2" />
                 </Link>
               </Button>
-              <Button size="lg" className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-bold" asChild>
+              <Button size="lg" className="h-14 px-8 gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-lg shadow-primary/20 transition-all duration-300 transform hover:scale-105" asChild>
                 <Link href="/contact">
                   Let's Go <MoveRight className="w-4 h-4 ml-2" />
                 </Link>
@@ -47,27 +36,30 @@ export function Hero() {
             </div>
           </div>
           
-          {/* Right Side - Carousel */}
-          <div className="relative w-full h-[500px] flex items-center overflow-hidden rounded-2xl">
-            {/* White Fade Overlays */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10"></div>
+          {/* Right Side - GIF Hero Image */}
+          <div className="relative w-full h-[500px] lg:h-[600px] group">
+            {/* Animated Backdrop Effect */}
+            <div className="absolute -inset-4 bg-primary/20 rounded-[2rem] blur-3xl group-hover:bg-primary/30 transition-all duration-700 opacity-50"></div>
             
-            {/* Infinite Carousel Track */}
-            <div 
-              className="flex gap-4 w-max animate-infinite-scroll" 
-              style={{ animationDuration: '60s', animationDirection: 'reverse' }}
-            >
-              {duplicatedVideos.map((videoSrc, idx) => (
-                <div key={idx} className="relative w-64 aspect-[9/16] rounded-2xl overflow-hidden shrink-0 shadow-lg border border-border bg-surface">
-                   <video 
-                     className="w-full h-full object-cover" 
-                     autoPlay loop muted playsInline
-                   >
-                     <source src={videoSrc} type="video/mp4" />
-                   </video>
+            <div className="relative h-full w-full rounded-3xl overflow-hidden border border-border/50 shadow-2xl bg-surface/50 backdrop-blur-sm p-4">
+              <img 
+                src="/img/gif1.gif" 
+                alt="Jaidee & Ko Hero" 
+                className="w-full h-full object-cover rounded-2xl shadow-inner brightness-110 contrast-110"
+              />
+              
+              {/* Subtle glassmorphism overlay on bottom */}
+              <div className="absolute bottom-8 left-8 right-8 p-6 bg-background/30 backdrop-blur-md rounded-2xl border border-white/10 hidden lg:block">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                    <div className="w-4 h-4 bg-primary rounded-full animate-pulse"></div>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Crafting Stories in Singapore</p>
+                    <p className="text-white/60 text-sm italic">Premium Production for Premium Brands</p>
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
           
@@ -76,3 +68,4 @@ export function Hero() {
     </div>
   );
 }
+
