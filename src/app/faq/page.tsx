@@ -9,20 +9,36 @@ export const metadata = {
 
 const faqs = [
   {
-    question: "What is your typical turnaround time?",
-    answer: "For a standard corporate or founder story video, our end-to-end process (from strategy to final delivery) typically takes 4–6 weeks. Fast-track social media content batches can be delivered in as little as 2 weeks after filming."
+    question: "1. What services do you offer & what are the costs?",
+    answer: "Our creative services include: \n\n- Social Video Production\n- Corporate Video Production\n- Branded Content Creation\n- Film Production (including development, pre-production, filming, post-production, and social media management)\n\nPricing is tailored to each project's unique requirements. Our services start from $1.5k and can range up to $200k+ for extensive, high-end solutions.\n\nFor a personalized quote, we recommend getting in touch to discuss your specific needs and goals."
   },
   {
-    question: "Do you only work with clients in Singapore?",
-    answer: "While we are headquartered in Singapore, we frequently partner with regional teams across Southeast Asia. We've shot campaigns in the Philippines, Indonesia, and Thailand for our multinational clients."
+    question: "2. What types of clients do you work with?",
+    answer: "We focus on B2B businesses, industry leaders, NGOs, and non-profits, particularly those that often work behind the scenes but deserve to be seen. Our specialty is helping these organizations tell their stories in a way that feels genuine and impactful. We create approachable corporate videos that inspire advocacy and effectively communicate our clients' missions and values."
   },
   {
-    question: "How does pricing work?",
-    answer: "We offer custom packages starting from SGD 3,500 for standalone projects. For ongoing social media content retainers, we build bespoke pricing models based on your required volume and distribution needs."
+    question: "3. What equipment do you use for filming?",
+    answer: "We utilize high-quality, industry-standard equipment including cameras, lighting, and sound gear."
   },
   {
-    question: "Do you help with social media distribution?",
-    answer: "Yes. As part of our extended services, we can provide thumbnail designs, optimized copy, hook variations, and a posting calendar to ensure your video assets actually get seen."
+    question: "4. What’s fully curated video vs ‘social-style’ video?",
+    answer: "A fully curated video is typically more polished and designed for high-end marketing, while a social-style video is more raw, honest, and real. We believe social-style content connects more authentically with modern audiences."
+  },
+  {
+    question: "5. Is there a minimum commitment for content development?",
+    answer: "To successfully perform organically on socials we offer and encourage a longer working relationship with our partners but also offer per project based pricing too."
+  },
+  {
+    question: "6. Do you do pro bono work?",
+    answer: "Yes and no. We’re open to featuring businesses if we believe there’s a story worth telling for our audience. In these cases, the video is created from Jaidee & Ko’s perspective, and you’re welcome to share and use it for your own promotion. Fully pro bono work is considered on a case-by-case basis."
+  },
+  {
+    question: "7. Can we be involved in the creative process?",
+    answer: "Yes! We encourage collaboration. While we handle the technical and creative aspects, we value your input and want to ensure the final product reflects your vision and goals."
+  },
+  {
+    question: "8. How can I get a quote for my project?",
+    answer: "To receive a quote, please fill out the contact form on our website or book a call with us to discuss your project in detail."
   }
 ]
 

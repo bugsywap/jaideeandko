@@ -5,12 +5,11 @@ import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const rafRef = useRef<number | null>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
   
   // Container height drives the animation sequence
@@ -19,29 +18,42 @@ export function Hero() {
     offset: ["start start", "end end"]
   });
 
-  // Natural Flow Physics: Buffers mouse wheel clicks for smooth movement
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 400,
-    damping: 90,
-    restDelta: 0.0001
+    stiffness: 100, // Reduced stiffness for smoother manual "scrub" feel
+    damping: 30,
+    restDelta: 0.001
   });
 
-  // High-Frequency Sync Loop (requestAnimationFrame)
-  // This ensures the video updates at the screen's refresh rate (60Hz+)
+  // Force strict pause on mount and during updates
   useEffect(() => {
-    const updateVideo = () => {
-      if (videoRef.current && videoRef.current.duration && isVideoReady) {
-        const latest = smoothProgress.get();
-        // Map 0-1 progress to 0-duration with sub-frame precision
-        videoRef.current.currentTime = latest * videoRef.current.duration;
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.playbackRate = 0;
+      videoRef.current.currentTime = 0;
+    }
+  }, []);
+
+  // High-Precision Sync Loop
+  // requestAnimationFrame is the gold standard for buttery-smooth visual scrubbing
+  useEffect(() => {
+    let rafId: number;
+    const syncVideo = () => {
+      if (videoRef.current && isVideoReady && videoRef.current.duration) {
+        // Enforce paused state to prevent "playing on its own"
+        if (!videoRef.current.paused) videoRef.current.pause();
+        
+        const progress = smoothProgress.get();
+        // Direct map: progress (0-1) -> video time (0-duration)
+        const targetTime = progress * videoRef.current.duration;
+        
+        // Precise time-scrubbing
+        videoRef.current.currentTime = targetTime;
       }
-      rafRef.current = requestAnimationFrame(updateVideo);
+      rafId = requestAnimationFrame(syncVideo);
     };
 
-    rafRef.current = requestAnimationFrame(updateVideo);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
+    rafId = requestAnimationFrame(syncVideo);
+    return () => cancelAnimationFrame(rafId);
   }, [isVideoReady, smoothProgress]);
 
   return (
@@ -102,10 +114,12 @@ export function Hero() {
                   muted
                   playsInline
                   preload="auto"
+                  autoPlay={false}
                   onLoadedData={() => {
                     setIsVideoReady(true);
                     if (videoRef.current) {
                       videoRef.current.pause();
+                      videoRef.current.playbackRate = 0;
                       videoRef.current.currentTime = 0;
                     }
                   }}
