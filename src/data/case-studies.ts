@@ -110,7 +110,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2024",
     description: "Communicating the complex journey of digital evolution in banking, making technological progress relatable and visionary.",
     gallery: [
-      { vimeoId: "1021466679", type: 'event' },
+      { vimeoId: "1021466679", type: 'corporate' },
       { vimeoId: "1021463357", type: 'corporate' }
     ]
   },
