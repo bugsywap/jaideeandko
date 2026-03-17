@@ -4,55 +4,204 @@ import { useState } from "react"
 import Link from "next/link"
 import { Play, Mail, ArrowRight } from "lucide-react"
 
+interface PortfolioItem {
+  id: number;
+  title: string;
+  client: string;
+  category: string;
+  vimeoId?: string;
+  image?: string;
+  slug: string;
+}
+
 // Mock Data based on the audit
-const portfolioItems = [
+const portfolioItems: PortfolioItem[] = [
+  // --- SOCIAL VIDEOS (9:16) ---
   {
     id: 1,
-    title: "Gala 2025",
-    client: "Young Founders School",
-    category: "ngo",
-    image: "https://images.unsplash.com/photo-1540317580384-e5d43867caa6?auto=format&fit=crop&q=80&w=800",
-    slug: "/our-work/yfs"
+    title: "Social Impact I",
+    client: "Jaidee & Ko",
+    category: "social",
+    vimeoId: "1020466051",
+    slug: "/our-work/social-1"
   },
   {
     id: 2,
-    title: "Be You, Lead the New",
-    client: "Accenture Philippines",
-    category: "corporate",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800",
-    slug: "/our-work/accentureph"
+    title: "Founder Perspectives",
+    client: "Innovate SG",
+    category: "social",
+    vimeoId: "1026056505",
+    slug: "/our-work/social-2"
   },
   {
     id: 3,
-    title: "Failure to Launch",
-    client: "Enterprise SG",
-    category: "founder",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800",
-    slug: "/our-work/enterprisesg"
+    title: "Vertical Storytelling",
+    client: "TechAsia",
+    category: "social",
+    vimeoId: "1021485785",
+    slug: "/our-work/social-3"
   },
   {
     id: 4,
-    title: "Welcome to GSS Vegas 2024",
-    client: "Meltwater",
-    category: "event",
-    image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=800",
-    slug: "/our-work/meltwater"
+    title: "Brand Engagement",
+    client: "Global Finance",
+    category: "social",
+    vimeoId: "1021486218",
+    slug: "/our-work/social-4"
   },
   {
     id: 5,
-    title: "Founder's Story",
-    client: "3 Degrees",
+    title: "Creative Reel",
+    client: "Creative Hub",
     category: "social",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800",
-    slug: "/our-work/3degrees"
+    vimeoId: "1026056187",
+    slug: "/our-work/social-5"
   },
   {
     id: 6,
-    title: "Commitment to Sustainable Future",
+    title: "NGO Spotlight",
+    client: "NGO Connect",
+    category: "social",
+    vimeoId: "1026056303",
+    slug: "/our-work/social-6"
+  },
+  {
+    id: 7,
+    title: "Momentum",
+    client: "Venture Partners",
+    category: "social",
+    vimeoId: "1021485735",
+    slug: "/our-work/social-7"
+  },
+  {
+    id: 8,
+    title: "Visual Narrative",
+    client: "Story Haus",
+    category: "social",
+    vimeoId: "1026056396",
+    slug: "/our-work/social-8"
+  },
+
+  // --- CORPORATE VIDEOS (16:9) ---
+  {
+    id: 9,
+    title: "Corporate Vision 2025",
+    client: "Enterprise SG",
+    category: "corporate",
+    vimeoId: "1131310388",
+    slug: "/our-work/corp-1"
+  },
+  {
+    id: 10,
+    title: "Strategic Partnerships",
+    client: "Accenture",
+    category: "corporate",
+    vimeoId: "1131319086",
+    slug: "/our-work/corp-2"
+  },
+  {
+    id: 11,
+    title: "Innovation Summit",
+    client: "Tech Summit",
+    category: "corporate",
+    vimeoId: "1021466679",
+    slug: "/our-work/corp-3"
+  },
+  {
+    id: 12,
+    title: "Global Leadership",
+    client: "Meltwater",
+    category: "corporate",
+    vimeoId: "1021463357",
+    slug: "/our-work/corp-4"
+  },
+  {
+    id: 13,
+    title: "Founder Journey",
+    client: "3 Degrees",
+    category: "corporate",
+    vimeoId: "1021494730",
+    slug: "/our-work/corp-5"
+  },
+  {
+    id: 14,
+    title: "Sustainable Future",
     client: "UOB Asset Management",
     category: "corporate",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
-    slug: "/our-work/uobam"
+    vimeoId: "738471780",
+    slug: "/our-work/corp-6"
+  },
+  {
+    id: 15,
+    title: "Community Impact",
+    client: "Young Founders",
+    category: "corporate",
+    vimeoId: "1021450871",
+    slug: "/our-work/corp-7"
+  },
+  {
+    id: 16,
+    title: "Digital Transformation",
+    client: "Standard Chartered",
+    category: "corporate",
+    vimeoId: "1131316789",
+    slug: "/our-work/corp-8"
+  },
+  {
+    id: 17,
+    title: "Excellence in Motion",
+    client: "Singtel",
+    category: "corporate",
+    vimeoId: "1131316295",
+    slug: "/our-work/corp-9"
+  },
+  {
+    id: 18,
+    title: "Future of Finance",
+    client: "DBS Bank",
+    category: "corporate",
+    vimeoId: "1021465916",
+    slug: "/our-work/corp-10"
+  },
+  {
+    id: 19,
+    title: "Impact Storytelling",
+    client: "WWF Singapore",
+    category: "corporate",
+    vimeoId: "1021483669",
+    slug: "/our-work/corp-11"
+  },
+  {
+    id: 20,
+    title: "Corporate Resilience",
+    client: "Sembcorp",
+    category: "corporate",
+    vimeoId: "1021466316",
+    slug: "/our-work/corp-12"
+  },
+  {
+    id: 21,
+    title: "Beyond the Screen",
+    client: "Mediacorp",
+    category: "corporate",
+    vimeoId: "1021466066",
+    slug: "/our-work/corp-13"
+  },
+  {
+    id: 22,
+    title: "Global Reach",
+    client: "Singapore Airlines",
+    category: "corporate",
+    vimeoId: "1021467300",
+    slug: "/our-work/corp-14"
+  },
+  {
+    id: 23,
+    title: "Innovation Hub",
+    client: "JTC Corporation",
+    category: "corporate",
+    vimeoId: "1131318031",
+    slug: "/our-work/corp-15"
   }
 ]
 
@@ -67,6 +216,7 @@ const categories = [
 
 export function PortfolioGrid() {
   const [filter, setFilter] = useState("all")
+  const [activeId, setActiveId] = useState<number | null>(null)
 
   const filteredItems = filter === "all" 
     ? portfolioItems 
@@ -87,7 +237,10 @@ export function PortfolioGrid() {
           {categories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setFilter(cat.id)}
+              onClick={() => {
+                setFilter(cat.id)
+                setActiveId(null) // Reset video when changing filters
+              }}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 filter === cat.id
                   ? "bg-primary text-primary-foreground"
@@ -104,23 +257,40 @@ export function PortfolioGrid() {
           {filteredItems.map((item) => {
             const isSocial = item.category === "social"
             const aspectRatioClass = isSocial ? "aspect-[9/16]" : "aspect-[16/9]"
+            const isActive = activeId === item.id
 
             return (
-              <article key={item.id} className="relative flex flex-col items-start justify-between group break-inside-avoid">
-                <div className="relative w-full overflow-hidden rounded-2xl bg-surface">
-                  <div className={`${aspectRatioClass} w-full`}>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-white/20 backdrop-blur-md p-4 rounded-full">
-                        <Play className="h-8 w-8 text-white fill-white" />
-                      </div>
-                    </div>
+              <article key={item.id} className="relative flex flex-col items-start justify-between group break-inside-avoid cursor-pointer">
+                <div 
+                  className="relative w-full overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg group"
+                  onClick={() => setActiveId(isActive ? null : item.id)}
+                >
+                  <div className={`${aspectRatioClass} w-full relative`}>
+                    {item.vimeoId && isActive ? (
+                      <iframe
+                        src={`https://player.vimeo.com/video/${item.vimeoId}?autoplay=1&byline=0&title=0&portrait=0&autopause=0`}
+                        className="absolute inset-0 w-full h-full"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        title={item.title}
+                      ></iframe>
+                    ) : (
+                      <>
+                        <img
+                          src={item.vimeoId ? `https://vumbnail.com/${item.vimeoId}.jpg?width=1280` : item.image}
+                          alt={item.title}
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-90"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="bg-primary/90 backdrop-blur-sm p-4 rounded-full transform transition-all duration-300 group-hover:scale-110 group-hover:bg-primary">
+                            <Play className="h-8 w-8 text-white fill-white" />
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
                 
@@ -129,7 +299,7 @@ export function PortfolioGrid() {
                     <span className="text-foreground/70 font-medium uppercase tracking-wider">{item.client}</span>
                   </div>
                   <div className="group relative">
-                    <h3 className="mt-2 text-xl font-bold leading-6 text-foreground group-hover:text-foreground/70 transition-colors">
+                    <h3 className="mt-2 text-xl font-bold leading-6 text-foreground group-hover:text-primary transition-colors">
                       <Link href={item.slug}>
                         <span className="absolute inset-0" />
                         {item.title}
