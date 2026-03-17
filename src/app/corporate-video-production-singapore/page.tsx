@@ -1,5 +1,5 @@
 import { ServicesSnapshot } from "@/components/sections/ServicesSnapshot"
-import { TestimonialSlider } from "@/components/sections/Testimonials"
+import { TestimonialsSection } from "@/components/sections/Testimonials"
 import { QuickContact } from "@/components/sections/QuickContact"
 import { TrustTicker } from "@/components/sections/TrustTicker"
 
@@ -26,7 +26,7 @@ export default function SEO_CorporateVideoSingapore() {
 
       <TrustTicker />
       <ServicesSnapshot />
-      <TestimonialSlider />
+      <TestimonialsSection />
 
       <section className="py-24 bg-background">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
