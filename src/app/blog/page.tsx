@@ -1,5 +1,6 @@
 import { QuickContact } from "@/components/sections/QuickContact"
 import { Badge } from "@/components/ui/badge"
+import { BlogGrid } from "@/components/sections/BlogGrid"
 
 export const metadata = {
   title: "Video Marketing Blog | Jaidee & Ko",
@@ -24,19 +25,8 @@ export default function BlogPage() {
         </div>
       </div>
 
-      <div className="relative border-b border-border/50 pb-24">
-        <div className="absolute inset-0 bg-surface/50 -skew-y-2 transform -z-10 origin-top-right" />
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          
-          {/* Temporary stub for static build */}
-          <div className="bg-background border border-border rounded-3xl p-12 text-center max-w-2xl mx-auto shadow-sm">
-            <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8l-4 4v14a2 2 0 0 0 2 2z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 12h4"/><path d="M10 16h4"/></svg>
-            </div>
-             <h3 className="text-2xl font-bold text-foreground mb-2">New articles coming soon.</h3>
-             <p className="text-foreground/70 text-lg">We are currently curating our best insights. Check back shortly!</p>
-          </div>
-        </div>
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+        <BlogGrid />
       </div>
 
       <section className="mt-16 lg:mt-32 relative">

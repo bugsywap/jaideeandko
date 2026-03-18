@@ -8,6 +8,7 @@ import { QuickContact } from "@/components/sections/QuickContact"
 import { PortfolioGrid } from "@/components/sections/PortfolioGrid"
 import { TestimonialsSection } from "@/components/sections/Testimonials"
 import { LeadMagnetBanner } from "@/components/sections/LeadMagnetBanner"
+import { BlogCarousel } from "@/components/sections/BlogCarousel"
 import { ExitIntentPopup } from "@/components/ui/ExitPopup"
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
       <CaseStudyCarousel />
       <PortfolioGrid />
       <TestimonialsSection />
+      <BlogCarousel />
       <LeadMagnetBanner />
       
       <ExitIntentPopup />

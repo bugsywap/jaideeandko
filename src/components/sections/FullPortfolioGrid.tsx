@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { Play, ArrowRight, Filter, LayoutGrid, MonitorPlay, Smartphone } from "lucide-react"
+import { Play, ArrowRight, Filter, LayoutGrid, MonitorPlay, Smartphone, Calendar, Heart } from "lucide-react"
+import { VimeoPlayer } from "@/components/ui/VimeoPlayer"
 
 interface PortfolioItem {
   id: number;
@@ -207,8 +208,10 @@ const portfolioItems: PortfolioItem[] = [
 
 const categories = [
   { id: "all", name: "All Work", icon: LayoutGrid },
-  { id: "corporate", name: "Corporate", icon: MonitorPlay },
-  { id: "social", name: "Social Content", icon: Smartphone },
+  { id: "corporate", name: "Corporate Video", icon: MonitorPlay },
+  { id: "social", name: "Social Video", icon: Smartphone },
+  { id: "event", name: "Event", icon: Calendar },
+  { id: "ngo", name: "NGO", icon: Heart },
 ]
 
 export function FullPortfolioGrid() {
@@ -242,10 +245,8 @@ export function FullPortfolioGrid() {
                 )}
               >
                 {isActive && (
-                  <motion.div
-                    layoutId="active-filter"
+                  <div
                     className="absolute inset-0 bg-primary z-0"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
                 <Icon className={cn("w-4 h-4 relative z-10 transition-colors", isActive ? "text-primary-foreground" : "text-primary group-hover:scale-110")} />
@@ -257,66 +258,36 @@ export function FullPortfolioGrid() {
       </div>
 
       {/* Modern Responsive Grid */}
-      <motion.div
-        layout
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-12"
-      >
-        <AnimatePresence mode="popLayout">
-          {filteredItems.map((item) => {
-            const isSocial = item.category === "social"
-            const aspectRatio = isSocial ? "aspect-[9/16]" : "aspect-[16/9]"
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-12">
+        {filteredItems.map((item) => {
+          const isSocial = item.category === "social"
+          const aspectRatio = isSocial ? "aspect-[9/16]" : "aspect-[16/9]"
 
-            return (
-              <motion.div
-                layout
-                key={item.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                className="group relative flex flex-col"
-              >
-                <div className={cn(
-                  "relative w-full overflow-hidden rounded-[2rem] bg-black border border-white/5 shadow-2xl transition-all duration-700",
-                  "group-hover:translate-y-[-8px] group-hover:shadow-primary/20",
-                  aspectRatio
-                )}>
-                  {item.vimeoId ? (
-                    <iframe
-                      src={`https://player.vimeo.com/video/${item.vimeoId}?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0&muted=1&autopause=0`}
-                      className="absolute inset-0 w-full h-full scale-[1.05] transition-transform duration-1000 group-hover:scale-110"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover" />
-                  )}
+          return (
+            <div
+              key={item.id}
+              className="group relative flex flex-col"
+            >
+              <div className={cn(
+                "relative w-full overflow-hidden rounded-[2rem] bg-black border border-white/5 shadow-lg",
+                aspectRatio
+              )}>
+                {item.vimeoId ? (
+                  <VimeoPlayer
+                    vimeoId={item.vimeoId}
+                    className="absolute inset-0 w-full h-full"
+                  />
+                ) : (
+                  <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover" />
+                )}
 
-                  {/* Glassmorphism Overlays */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-
-                  {/* Subtle Glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_50%_120%,rgba(117,185,162,0.15),transparent_70%)]" />
-
-                  {/* Content Overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <span className="text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-2">{item.client}</span>
-                    <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors duration-300 leading-tight">
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  {/* Play Button Indicator */}
-                  <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0">
-                    <Play className="w-5 h-5 text-white fill-white" />
-                  </div>
-                </div>
-              </motion.div>
-            )
-          })}
-        </AnimatePresence>
-      </motion.div>
+                {/* Subtle base overlay to ensure controls/branding are visible if needed, but keeping it clean */}
+                <div className="absolute inset-0 bg-black/5 pointer-events-none" />
+              </div>
+            </div>
+          )
+        })}
+      </div>
 
       {/* Empty State */}
       {filteredItems.length === 0 && (
