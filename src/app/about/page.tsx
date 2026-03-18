@@ -81,7 +81,7 @@ export default function AboutPage() {
                     The name <span className="font-bold text-foreground">Jaidee</span> comes from a Thai word meaning <span className="text-primary italic">"good heart."</span> Inspired by our founder Gary’s journey, it reflects the kindness and sincerity we bring to every frame.
                   </p>
                   <p>
-                    <span className="font-bold text-foreground">Ko</span> is a playful twist on Gary’s surname, blending personal passion with professional mastery. Our brand represents the birth of new ideas—balancing heart and intention with creativity and strategy.
+                    <span className="font-bold text-foreground">Ko</span> is a playful twist on Gary’s surname, blending personal passion with professional mastery. Our brand represents the birth of new ideas, balancing heart and intention with creativity and strategy.
                   </p>
                   <p>
                     We don’t just create videos; we craft narrative bridges. Gary’s vision is to help small teams with big dreams become the impact they want to see in the world.
@@ -130,7 +130,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-3xl font-black mb-6">Our Vision</h3>
               <p className="text-lg text-foreground/70 leading-relaxed">
-                To elevate the incredible work happening around the world that is too often overlooked—from essential services to innovative organizations making real-world impact. We aim to shift perceptions through visibility.
+                To elevate the incredible work happening around the world that is too often overlooked, from essential services to innovative organizations making real-world impact. We aim to shift perceptions through visibility.
               </p>
             </motion.div>
           </div>

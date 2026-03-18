@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} font-sans antialiased flex min-h-screen flex-col`}>
         <Header />
-        <main className="flex-1 pt-24">{children}</main>
+        <main className="flex-1 pt-16">{children}</main>
         <FloatingSocials />
         <Footer />
       </body>

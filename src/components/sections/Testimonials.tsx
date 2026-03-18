@@ -59,8 +59,8 @@ export function TestimonialsSection({ className }: { className?: string }) {
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
           <div className="group flex overflow-hidden p-2 pt-6 pb-12 [--gap:2rem] [gap:var(--gap)] flex-row [--duration:80s]">
             <div className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row group-hover:[animation-play-state:paused]">
-              {/* Double array map for infinite seamless scrolling effect */}
-              {[...Array(2)].map((_, setIndex) => (
+              {/* Triple-buffered marquee for seamless infinite scrolling */}
+              {[...Array(3)].map((_, setIndex) => (
                 testimonials.map((testimonial, i) => (
                   <TestimonialCard 
                     key={`${setIndex}-${i}`}

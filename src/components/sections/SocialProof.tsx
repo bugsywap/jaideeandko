@@ -144,7 +144,7 @@ export function SocialProof() {
 
               <div className="hidden sm:flex items-center gap-2 text-foreground/50">
                 <div className="flex -space-x-2">
-                  {[...Array(3)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <div key={i} className="w-8 h-8 rounded-full border-2 border-background bg-muted overflow-hidden flex items-center justify-center text-[10px] font-bold">
                       <Star className="w-4 h-4 text-primary fill-primary" />
                     </div>

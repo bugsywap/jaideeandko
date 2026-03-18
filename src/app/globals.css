@@ -22,6 +22,8 @@
   
   --animate-infinite-scroll: infinite-scroll 100s linear infinite;
   --animate-marquee: marquee var(--duration) linear infinite;
+  --animate-vertical-scroll: vertical-scroll 30s linear infinite;
+  --animate-vertical-scroll-reverse: vertical-scroll-reverse 30s linear infinite;
   
   @keyframes infinite-scroll {
     from { transform: translateX(0); }
@@ -30,7 +32,17 @@
   
   @keyframes marquee {
     from { transform: translateX(0); }
-    to { transform: translateX(calc(-100% - var(--gap))); }
+    to { transform: translateX(calc(-33.33% - (var(--gap) / 3))); }
+  }
+
+  @keyframes vertical-scroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+
+  @keyframes vertical-scroll-reverse {
+    from { transform: translateY(-50%); }
+    to { transform: translateY(0); }
   }
 }
 
@@ -54,4 +66,12 @@ body {
 ::selection {
   background-color: var(--foreground);
   color: var(--background);
+}
+
+.mask-fade-y {
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }

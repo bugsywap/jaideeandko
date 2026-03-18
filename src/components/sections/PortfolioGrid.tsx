@@ -2,7 +2,9 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 import { Play, Mail, ArrowRight, Loader2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface PortfolioItem {
   id: number;
@@ -230,7 +232,7 @@ export function PortfolioGrid() {
     }
 
     try {
-      const response = await fetch("https://formspree.io/f/xvgzbgge", {
+      const response = await fetch("https://formspree.io/f/mqaeajje", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -258,94 +260,90 @@ export function PortfolioGrid() {
     ? portfolioItems 
     : portfolioItems.filter(item => item.category === filter)
 
+  // Use high-quality thumbnail mapping
+  const getThumbnail = (vimeoId: string) => {
+    return `https://vumbnail.com/${vimeoId}.jpg?width=1920&quality=high`
+  }
+
+  // Re-organize items for a more balanced three-column grid
+  // Instead of simple CSS columns, we'll map to specific grid slots if we want precise control
+  // For now, let's just make the grid more robust.
+
   return (
     <div className="py-24 sm:py-32 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Featured Work</h2>
-          <p className="mt-2 text-lg leading-8 text-foreground/70">
-            Stories that drive engagement and business results.
+          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Work.</span>
+          </h2>
+          <p className="mt-6 text-lg md:text-xl leading-relaxed text-foreground/70 max-w-xl mx-auto">
+            Premium storytelling that drives engagement and business results for industry leaders.
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => {
-                setFilter(cat.id)
-                setActiveId(null) // Reset video when changing filters
-              }}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                filter === cat.id
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-surface text-foreground hover:bg-border"
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
-        </div>
-
-        {/* Masonry Grid */}
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
-          {filteredItems.map((item) => {
+        {/* Robust Grid Layout */}
+        <div className="mx-auto mt-16 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 items-start">
+          {portfolioItems.slice(0, 3).map((item) => {
             const isSocial = item.category === "social"
             const aspectRatioClass = isSocial ? "aspect-[9/16]" : "aspect-[16/9]"
-            const isActive = activeId === item.id
 
             return (
-              <article key={item.id} className="relative flex flex-col items-start justify-between group break-inside-avoid cursor-pointer">
+              <article key={item.id} className="relative flex flex-col group animate-in fade-in slide-in-from-bottom-4 duration-700">
                 <div 
-                  className="relative w-full overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg group"
-                  onClick={() => setActiveId(isActive ? null : item.id)}
+                  className={cn(
+                    "relative w-full overflow-hidden rounded-[2.5rem] bg-surface-muted border border-border/40 shadow-sm transition-all duration-500",
+                    "group-hover:shadow-2xl group-hover:shadow-primary/20 group-hover:-translate-y-2 group-hover:border-primary/40"
+                  )}
                 >
-                  <div className={`${aspectRatioClass} w-full relative`}>
-                    {item.vimeoId && isActive ? (
+                  <div className={cn(aspectRatioClass, "w-full relative bg-black")}>
+                    {item.vimeoId ? (
                       <iframe
-                        src={`https://player.vimeo.com/video/${item.vimeoId}?autoplay=1&byline=0&title=0&portrait=0&autopause=0`}
-                        className="absolute inset-0 w-full h-full"
+                        src={`https://player.vimeo.com/video/${item.vimeoId}?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0&muted=1&autopause=0`}
+                        className="absolute inset-0 w-full h-full scale-[1.01]"
                         frameBorder="0"
-                        allow="autoplay; fullscreen; picture-in-picture"
+                        allow="autoplay; fullscreen"
                         loading="lazy"
                         title={item.title}
                       ></iframe>
                     ) : (
-                      <>
-                        <img
-                          src={item.vimeoId ? `https://vumbnail.com/${item.vimeoId}.jpg?width=1280` : item.image}
-                          alt={item.title}
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-90"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="bg-primary/90 backdrop-blur-sm p-4 rounded-full transform transition-all duration-300 group-hover:scale-110 group-hover:bg-primary">
-                            <Play className="h-8 w-8 text-white fill-white" />
-                          </div>
-                        </div>
-                      </>
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
                     )}
+                    {/* Elegant Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity duration-500" />
+                    
+                    {/* High-Contrast Tags */}
+                    <div className="absolute bottom-8 left-8 flex flex-col gap-1">
+                      <span className="text-xs font-black uppercase tracking-[0.3em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                        {item.client}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="max-w-xl mt-6">
-                  <div className="flex items-center gap-x-4 text-xs">
-                    <span className="text-foreground/70 font-medium uppercase tracking-wider">{item.client}</span>
-                  </div>
+                <div className="px-6 mt-8">
                   <div className="group relative">
-                    <h3 className="mt-2 text-xl font-bold leading-6 text-foreground group-hover:text-primary transition-colors">
-                      <Link href={item.slug}>
-                        <span className="absolute inset-0" />
+                    <h3 className="text-2xl font-black leading-tight text-foreground transition-colors flex items-center gap-3">
                         {item.title}
-                      </Link>
                     </h3>
                   </div>
                 </div>
               </article>
             )
           })}
+        </div>
+
+        {/* Show More Button */}
+        <div className="mt-16 flex justify-center">
+          <Button size="lg" className="h-14 px-10 gap-3 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold transition-all rounded-full group" asChild>
+            <Link href="/our-work">
+              Show More Work
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
         </div>
         
         {/* Post-Portfolio Conversion - Glowing Theme Banner */}

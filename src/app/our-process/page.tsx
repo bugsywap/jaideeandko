@@ -11,7 +11,7 @@ const processes = [
   {
     step: "01",
     title: "Discovery & Audit",
-    description: "We start by getting to know you—your values, mission, vision, and culture. We run a comprehensive audit of your current visual assets and social presence to identify gaps and opportunities.",
+    description: "We start by getting to know you, your values, mission, vision, and culture. We run a comprehensive audit of your current visual assets and social presence to identify gaps and opportunities.",
     icon: Search
   },
   {

@@ -68,12 +68,8 @@ export default function ContactPage() {
             
           </div>
 
-          {/* Form Side */}
           <div className="lg:col-span-3">
             <div className="bg-surface rounded-3xl p-8 sm:p-10 border border-border shadow-2xl relative">
-               <div className="absolute top-0 right-0 py-2 px-4 bg-primary text-primary-foreground text-sm font-bold rounded-bl-xl rounded-tr-3xl">
-                FAST RESPONSE
-              </div>
               <FullContact />
             </div>
           </div>

@@ -17,17 +17,9 @@ export default function Home() {
       <div className="border-y border-border/50">
         <TrustTicker />
       </div>
-      <VideoCarousel />
       <ServicesSnapshot />
       <SocialProof />
       <CaseStudyCarousel />
-      
-      <section className="py-24 bg-background">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <QuickContact />
-        </div>
-      </section>
-
       <PortfolioGrid />
       <TestimonialsSection />
       <LeadMagnetBanner />

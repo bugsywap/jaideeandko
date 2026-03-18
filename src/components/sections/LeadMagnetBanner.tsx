@@ -19,7 +19,7 @@ export function LeadMagnetBanner() {
     }
 
     try {
-      const response = await fetch("https://formspree.io/f/xvgzbgge", {
+      const response = await fetch("https://formspree.io/f/mqaeajje", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
