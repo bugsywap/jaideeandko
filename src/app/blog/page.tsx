@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/badge"
 import { BlogGrid } from "@/components/sections/BlogGrid"
 
 export const metadata = {
-  title: "Video Marketing Blog | Jaidee & Ko",
-  description: "Insights, trends, and strategies for B2B video marketing in Southeast Asia.",
+  title: "B2B Video Marketing Strategy & Insights | Jaidee & Ko",
+  description: "Discover tactical strategies, industry trends, and founder-led insights to scale your brand's digital presence through premium video marketing.",
 }
 
 export default function BlogPage() {
@@ -25,8 +25,13 @@ export default function BlogPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <BlogGrid />
+      <div className="container mx-auto px-6 max-w-7xl relative z-10 py-32 border border-border/50 rounded-3xl bg-surface/10 backdrop-blur-sm text-center">
+        <h2 className="text-2xl font-black text-foreground/40 uppercase tracking-[0.3em]">
+          Articles will be posted soon
+        </h2>
+        <p className="text-foreground/30 mt-4 font-medium italic">
+          We're currently refining our latest strategic deep-dives. Stay tuned.
+        </p>
       </div>
 
       <section className="mt-16 lg:mt-32 relative">

@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { caseStudies } from "@/data/case-studies"
 import { Badge } from "@/components/ui/badge"
@@ -5,6 +6,16 @@ import { Play, ArrowLeft, ShieldCheck, Mail, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { QuickContact } from "@/components/sections/QuickContact"
 import { VimeoPlayer } from "@/components/ui/VimeoPlayer"
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const study = caseStudies.find((s) => s.slug === slug)
+  
+  return {
+    title: `${study?.client || 'Project'}: ${study?.title || 'Case Study'} | Jaidee & Ko`,
+    description: study?.description || "Success story and visual showcase of our premium production work.",
+  }
+}
 
 export async function generateStaticParams() {
   return caseStudies.map((study) => ({

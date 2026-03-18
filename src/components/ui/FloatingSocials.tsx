@@ -58,13 +58,13 @@ export function FloatingSocials() {
   }, [])
 
   return (
-    <div className="fixed left-6 bottom-1/2 translate-y-1/2 z-50 hidden md:block">
+    <div className="fixed right-6 bottom-1/2 translate-y-1/2 z-50 hidden md:block">
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
+            exit={{ opacity: 0, x: 20 }}
             className="flex flex-col gap-4 p-3 rounded-2xl bg-surface/40 backdrop-blur-xl border border-border/50 shadow-2xl shadow-primary/10"
           >
             {socials.map((social) => (
@@ -73,12 +73,12 @@ export function FloatingSocials() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, x: 5 }}
+                whileHover={{ scale: 1.1, x: -5 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-2 rounded-xl text-foreground/50 hover:text-primary hover:bg-primary/10 transition-all duration-300 group relative"
               >
                 <social.icon className="w-5 h-5" />
-                <span className="absolute left-full ml-4 px-2 py-1 rounded bg-foreground text-background text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap">
+                <span className="absolute right-full mr-4 px-3 py-1.5 rounded-lg bg-foreground text-background text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-300 translate-x-4 group-hover:translate-x-0 shadow-xl whitespace-nowrap">
                   {social.name}
                 </span>
               </motion.a>

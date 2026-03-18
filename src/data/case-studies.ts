@@ -125,7 +125,7 @@ export const caseStudies: CaseStudy[] = [
     client: "Wealth GPS",
     category: "FinTech Innovation",
     year: "2024",
-    description: "Wealth GPs marks their 2025 Gala Awards with gratitude and growth—celebrating success, reflecting on their journey, and opening doors for those seeking a second chance.",
+    description: "Wealth GPs marks their 2025 Gala Awards with gratitude and growth, celebrating success, reflecting on their journey, and opening doors for those seeking a second chance.",
     gallery: [
 
     ]
@@ -161,7 +161,7 @@ export const caseStudies: CaseStudy[] = [
     client: "Kaleoscopic Communications",
     category: "Conservation",
     year: "2024",
-    description: "Kaleidoscopic, presents a new podcast in collaboration with ANEXT Bank, spotlighting the untold stories of Singapore’s entrepreneurs — and the real ways ANEXT has helped them grow their businesses.",
+    description: "Kaleidoscopic, presents a new podcast in collaboration with ANEXT Bank, spotlighting the untold stories of Singapore’s entrepreneurs, and the real ways ANEXT has helped them grow their businesses.",
     gallery: [
       { vimeoId: "1021483731", type: 'corporate' },
       { vimeoId: "1021483755", type: 'corporate' },

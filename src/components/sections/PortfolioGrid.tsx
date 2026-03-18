@@ -281,57 +281,59 @@ export function PortfolioGrid() {
           </p>
         </div>
 
-        {/* Robust Grid Layout */}
-        <div className="mx-auto mt-16 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 items-start">
+        {/* Robust Grid Layout - Narrower container to make videos smaller */}
+        <div className="mx-auto mt-16 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 items-start max-w-5xl">
           {portfolioItems.slice(0, 3).map((item) => {
             const isSocial = item.category === "social"
             const aspectRatioClass = isSocial ? "aspect-[9/16]" : "aspect-[16/9]"
 
             return (
-              <article key={item.id} className="relative flex flex-col group animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div
-                  className={cn(
-                    "relative w-full overflow-hidden rounded-[2.5rem] bg-surface-muted border border-border/40 shadow-sm transition-all duration-500",
-                    "group-hover:shadow-2xl group-hover:shadow-primary/20 group-hover:-translate-y-2 group-hover:border-primary/40"
-                  )}
-                >
-                  <div className={cn(aspectRatioClass, "w-full relative bg-black")}>
-                    {item.vimeoId ? (
-                      <iframe
-                        src={`https://player.vimeo.com/video/${item.vimeoId}?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0&muted=1&autopause=0`}
-                        className="absolute inset-0 w-full h-full scale-[1.01]"
-                        frameBorder="0"
-                        allow="autoplay; fullscreen"
-                        loading="lazy"
-                        title={item.title}
-                      ></iframe>
-                    ) : (
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
+              <Link key={item.id} href="/our-work" className="block group">
+                <article className="relative flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <div
+                    className={cn(
+                      "relative w-full overflow-hidden rounded-[2rem] bg-surface-muted border border-border/40 shadow-sm transition-all duration-500",
+                      "group-hover:shadow-2xl group-hover:shadow-primary/20 group-hover:-translate-y-2 group-hover:border-primary/40"
                     )}
-                    {/* Elegant Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity duration-500" />
+                  >
+                    <div className={cn(aspectRatioClass, "w-full relative bg-black")}>
+                      {item.vimeoId ? (
+                        <iframe
+                          src={`https://player.vimeo.com/video/${item.vimeoId}?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0&muted=1&autopause=0`}
+                          className="absolute inset-0 w-full h-full scale-[1.01]"
+                          frameBorder="0"
+                          allow="autoplay; fullscreen"
+                          loading="lazy"
+                          title={item.title}
+                        ></iframe>
+                      ) : (
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      )}
+                      
+                      {/* Elegant Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-500" />
 
-                    {/* High-Contrast Tags */}
-                    <div className="absolute bottom-8 left-8 flex flex-col gap-1">
-                      <span className="text-xs font-black uppercase tracking-[0.3em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                        {item.client}
-                      </span>
+                      {/* High-Contrast Tags */}
+                      <div className="absolute bottom-6 left-6 flex flex-col gap-1">
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                          {item.client}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="px-6 mt-8">
-                  <div className="group relative">
-                    <h3 className="text-2xl font-black leading-tight text-foreground transition-colors flex items-center gap-3">
+                  <div className="px-2 mt-6">
+                    <h3 className="text-lg font-black leading-tight text-foreground transition-colors flex items-center gap-3 group-hover:text-primary">
                       {item.title}
+                      <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                     </h3>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             )
           })}
         </div>

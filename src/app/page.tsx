@@ -11,6 +11,11 @@ import { LeadMagnetBanner } from "@/components/sections/LeadMagnetBanner"
 import { BlogCarousel } from "@/components/sections/BlogCarousel"
 import { ExitIntentPopup } from "@/components/ui/ExitPopup"
 
+export const metadata = {
+  title: "Premium Corporate Video Production Singapore | Jaidee & Ko",
+  description: "Specializing in corporate vision films and social-first content for B2B tech companies, NGOs, and founders. We turn complex narratives into high-impact visual storytelling.",
+}
+
 export default function Home() {
   return (
     <>
@@ -23,7 +28,6 @@ export default function Home() {
       <CaseStudyCarousel />
       <PortfolioGrid />
       <TestimonialsSection />
-      <BlogCarousel />
       <LeadMagnetBanner />
       
       <ExitIntentPopup />

@@ -12,8 +12,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Jaidee & Ko | Corporate Video Production & Social Content in Singapore",
-  description: "We create videos and social content that connect and amplify your voice. For B2B companies, NGOs, and founders in Singapore and Southeast Asia.",
+  title: "Jaidee & Ko | Premium Corporate Video & Social Content in Singapore",
+  description: "Capture expertise and build authority with premium corporate video production and social-first content. We empower B2B companies, NGOs, and founders in Singapore and Southeast Asia through strategic visual storytelling.",
 };
 
 export default function RootLayout({

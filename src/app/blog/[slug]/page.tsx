@@ -5,6 +5,18 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowLeft, Clock, User, Calendar, Share2 } from "lucide-react"
 
+import { Metadata } from "next"
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = blogPosts.find((p) => p.slug === slug)
+  
+  return {
+    title: `${post?.title || 'Insight'} | Jaidee & Ko`,
+    description: post?.excerpt || "Expert insights on B2B video marketing and social content strategy.",
+  }
+}
+
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,
