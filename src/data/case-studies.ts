@@ -11,10 +11,10 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "enterprise-sg",
+    slug: "young-founders-school",
     vimeoId: "1131310388",
-    title: "Corporate Vision 2025",
-    client: "Enterprise SG",
+    title: "Gala 2025",
+    client: "Young Founders School",
     category: "Corporate Branding",
     year: "2025",
     description: "A comprehensive brand film capturing the future-oriented vision of Singapore's enterprise landscape, designed to inspire stakeholders and communicate strategic roadmaps.",
@@ -24,10 +24,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "accenture",
+    slug: "green-chapter",
     vimeoId: "1131319086",
-    title: "Strategic Partnerships",
-    client: "Accenture",
+    title: "Little Explorers",
+    client: "Green Chapter",
     category: "Corporate Strategy",
     year: "2024",
     description: "High-end corporate narrative showcasing the power of collaborative innovation and strategic alignment in the global consulting space.",
@@ -37,10 +37,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "tech-summit",
+    slug: "enterprise-singapore",
     vimeoId: "1021466679",
-    title: "Innovation Summit Highlight",
-    client: "Tech Summit",
+    title: "Failure to Launch",
+    client: "Enterprise Singapore",
     category: "Event Production",
     year: "2024",
     description: "Dynamic event coverage that captures the energy, key themes, and breakthrough moments of one of Asia's premier technology gatherings.",
@@ -50,10 +50,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "meltwater",
+    slug: "accenture",
     vimeoId: "1021463357",
-    title: "Global Leadership Insights",
-    client: "Meltwater",
+    title: "Be You, Lead the New",
+    client: "Accenture",
     category: "Thought Leadership",
     year: "2024",
     description: "Authentic founder and executive profiles that humanize the brand and articulate complex SaaS value propositions through personal storytelling.",
@@ -63,10 +63,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "3-degrees",
+    slug: "uob-asset-management",
     vimeoId: "1021494730",
-    title: "The Founder's Journey",
-    client: "3 Degrees",
+    title: "UOB Asset Management Corp",
+    client: "UOB Asset Management",
     category: "Documentary",
     year: "2024",
     description: "A deeply personal look into the origin story and mission of 3 Degrees, bridging the gap between corporate goals and human passion.",
@@ -76,10 +76,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "uob-asset-management",
+    slug: "meltwater",
     vimeoId: "738471780",
-    title: "Sustainable Future",
-    client: "UOB Asset Management",
+    title: "Culture Day 2022",
+    client: "Meltwater",
     category: "Finance & ESG",
     year: "2023",
     description: "Visualizing the impact of sustainable investing and ESG initiatives through compelling B2B storytelling and data-driven narratives.",
@@ -89,10 +89,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "young-founders",
+    slug: "3-degrees",
     vimeoId: "1021450871",
-    title: "Community Impact",
-    client: "Young Founders",
+    title: "Charity Video",
+    client: "3 Degrees",
     category: "NGO Spotlight",
     year: "2024",
     description: "Shedding light on the next generation of changemakers, this case study explores the social fabric and drive behind Young Founders' initiatives.",
@@ -102,10 +102,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "standard-chartered",
+    slug: "wealth-gps",
     vimeoId: "1131316789",
-    title: "Digital Transformation",
-    client: "Standard Chartered",
+    title: "Gala 2025",
+    client: "Wealth GPS",
     category: "FinTech Innovation",
     year: "2024",
     description: "Communicating the complex journey of digital evolution in banking, making technological progress relatable and visionary.",
@@ -115,10 +115,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "singtel",
+    slug: "productivity-joy",
     vimeoId: "1131316295",
-    title: "Excellence in Motion",
-    client: "Singtel",
+    title: "Book Launch",
+    client: "Productivity Joy",
     category: "Enterprise Solutions",
     year: "2024",
     description: "Showcasing Singtel's commitment to seamless connectivity and enterprise excellence across the Asian market.",
@@ -128,10 +128,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "dbs-bank",
+    slug: "land-transport-authority",
     vimeoId: "1021465916",
-    title: "Future of Finance",
-    client: "DBS Bank",
+    title: "Active Mobility Bill",
+    client: "Land Transport Authority",
     category: "Banking Roadmap",
     year: "2024",
     description: "Visualizing the landscape of modern banking and the digital-first approach that defines DBS's leadership in Singapore.",
@@ -141,10 +141,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "wwf-singapore",
+    slug: "kaleoscopic-communications",
     vimeoId: "1021483669",
-    title: "Impact Storytelling",
-    client: "WWF Singapore",
+    title: "Open for Business Podcast",
+    client: "Kaleoscopic Communications",
     category: "Conservation",
     year: "2024",
     description: "Emotional and strategic visual content aimed at driving awareness and action for conservation efforts in the region.",
@@ -154,10 +154,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "sembcorp",
+    slug: "nie",
     vimeoId: "1021466316",
-    title: "Corporate Resilience",
-    client: "Sembcorp",
+    title: "Corporate Video",
+    client: "NIE",
     category: "Energy & Infrastructure",
     year: "2024",
     description: "A testament to industrial strength and strategic growth, highlighting Sembcorp's pivotal role in Singapore's infrastructure.",
@@ -167,10 +167,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "mediacorp",
+    slug: "ministry-of-manpower",
     vimeoId: "1021466066",
-    title: "Beyond the Screen",
-    client: "Mediacorp",
+    title: "Work Place Appreciation",
+    client: "Ministry of Manpower",
     category: "Media Evolution",
     year: "2024",
     description: "Exploring the future of content consumption and Mediacorp's evolution into a multi-platform media powerhouse.",
@@ -180,10 +180,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "singapore-airlines",
+    slug: "workforce-singapore",
     vimeoId: "1021467300",
-    title: "Global Reach",
-    client: "Singapore Airlines",
+    title: "Job Redesign",
+    client: "Workforce Singapore",
     category: "Hospitality & Travel",
     year: "2024",
     description: "Capturing the world-class service and global connectivity that makes Singapore Airlines a symbol of national pride and excellence.",
@@ -193,10 +193,10 @@ export const caseStudies: CaseStudy[] = [
     ]
   },
   {
-    slug: "jtc-corporation",
+    slug: "mentem",
     vimeoId: "1131318031",
-    title: "Innovation Hub",
-    client: "JTC Corporation",
+    title: "Banpu Testimonial Video",
+    client: "Mentem",
     category: "Industrial Development",
     year: "2024",
     description: "Showcasing JTC's transformative impact on Singapore's industrial landscape and its nurturing of future-forward innovation hubs.",

@@ -21,24 +21,24 @@ const portfolioItems: PortfolioItem[] = [
   // --- SOCIAL VIDEOS (9:16) ---
   {
     id: 1,
-    title: "Social Impact I",
-    client: "Jaidee & Ko",
+    title: "Founder's Story",
+    client: "3 Degrees",
     category: "social",
     vimeoId: "1020466051",
     slug: "/our-work/social-1"
   },
   {
     id: 2,
-    title: "Founder Perspectives",
-    client: "Innovate SG",
+    title: "Tin Pei Ling Visits",
+    client: "3 Degrees",
     category: "social",
     vimeoId: "1026056505",
     slug: "/our-work/social-2"
   },
   {
     id: 3,
-    title: "Vertical Storytelling",
-    client: "TechAsia",
+    title: "GSS All Days Sizzle Reel ",
+    client: "Meltwater",
     category: "social",
     vimeoId: "1021485785",
     slug: "/our-work/social-3"
@@ -224,7 +224,7 @@ export function PortfolioGrid() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setStatus("submitting")
-    
+
     const formData = new FormData(e.currentTarget)
     const data = {
       email: formData.get("email"),
@@ -243,7 +243,7 @@ export function PortfolioGrid() {
 
       if (response.ok) {
         setStatus("success")
-        ;(e.target as HTMLFormElement).reset()
+          ; (e.target as HTMLFormElement).reset()
         setTimeout(() => setStatus("idle"), 5000)
       } else {
         setStatus("idle")
@@ -256,8 +256,8 @@ export function PortfolioGrid() {
     }
   }
 
-  const filteredItems = filter === "all" 
-    ? portfolioItems 
+  const filteredItems = filter === "all"
+    ? portfolioItems
     : portfolioItems.filter(item => item.category === filter)
 
   // Use high-quality thumbnail mapping
@@ -289,7 +289,7 @@ export function PortfolioGrid() {
 
             return (
               <article key={item.id} className="relative flex flex-col group animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div 
+                <div
                   className={cn(
                     "relative w-full overflow-hidden rounded-[2.5rem] bg-surface-muted border border-border/40 shadow-sm transition-all duration-500",
                     "group-hover:shadow-2xl group-hover:shadow-primary/20 group-hover:-translate-y-2 group-hover:border-primary/40"
@@ -314,7 +314,7 @@ export function PortfolioGrid() {
                     )}
                     {/* Elegant Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity duration-500" />
-                    
+
                     {/* High-Contrast Tags */}
                     <div className="absolute bottom-8 left-8 flex flex-col gap-1">
                       <span className="text-xs font-black uppercase tracking-[0.3em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
@@ -323,11 +323,11 @@ export function PortfolioGrid() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="px-6 mt-8">
                   <div className="group relative">
                     <h3 className="text-2xl font-black leading-tight text-foreground transition-colors flex items-center gap-3">
-                        {item.title}
+                      {item.title}
                     </h3>
                   </div>
                 </div>
@@ -345,19 +345,19 @@ export function PortfolioGrid() {
             </Link>
           </Button>
         </div>
-        
+
         {/* Post-Portfolio Conversion - Glowing Theme Banner */}
         <div className="mt-24 sm:mt-32 w-full">
           <div className="relative rounded-3xl overflow-hidden py-16 px-6 sm:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 border border-border/50 shadow-sm bg-surface">
             {/* Soft Green Glow Background */}
             <div className="absolute inset-0 z-0">
-               <div
-                  className="absolute inset-0 z-0"
-                  style={{
-                    backgroundImage: `radial-gradient(circle at center, rgba(117, 185, 162, 0.25) 0%, transparent 70%)`,
-                    opacity: 1,
-                  }}
-                />
+              <div
+                className="absolute inset-0 z-0"
+                style={{
+                  backgroundImage: `radial-gradient(circle at center, rgba(117, 185, 162, 0.25) 0%, transparent 70%)`,
+                  opacity: 1,
+                }}
+              />
             </div>
 
             {/* Left Content */}
@@ -372,21 +372,21 @@ export function PortfolioGrid() {
 
             {/* Right Content (One-Line Form) */}
             <div className="relative z-10 w-full max-w-lg shrink-0">
-              <form 
+              <form
                 onSubmit={handleSubmit}
                 className="bg-background/80 backdrop-blur-md border border-border p-1.5 rounded-2xl shadow-xl flex items-center gap-2"
               >
                 <div className="flex-1 flex items-center gap-3 px-4 py-2">
                   <Mail className="w-5 h-5 text-primary shrink-0" />
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     name="email"
                     required
                     placeholder="Enter your work email"
                     className="w-full bg-transparent text-foreground placeholder-foreground/40 outline-none text-base font-medium"
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={status !== "idle"}
