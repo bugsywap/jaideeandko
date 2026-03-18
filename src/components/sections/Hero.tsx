@@ -17,7 +17,7 @@ const vimeoIds = [
 
 export function Hero() {
   return (
-    <div className="relative bg-background overflow-hidden pt-24 pb-16 md:pb-24">
+    <div className="relative bg-background overflow-hidden pt-40 pb-16 md:pb-24">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2 relative h-full">
 

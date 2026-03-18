@@ -17,10 +17,11 @@ export const caseStudies: CaseStudy[] = [
     client: "Young Founders School",
     category: "Corporate Branding",
     year: "2025",
-    description: "A comprehensive brand film capturing the future-oriented vision of Singapore's enterprise landscape, designed to inspire stakeholders and communicate strategic roadmaps.",
+    description: "Back for its second year, the Young Founders School Gala celebrated the impact of its supporters and donors. With results from 2024 proving their growth, YFS now aims to raise $500,000 to expand across Southeast Asia, India, and Africa.",
     gallery: [
-      { vimeoId: "1020466051", type: 'social' },
-      { vimeoId: "1026056505", type: 'social' }
+      { vimeoId: "1021479637", type: 'corporate' },
+      { vimeoId: "1131310388", type: 'corporate' },
+      { vimeoId: "1131305270", type: 'corporate' }
     ]
   },
   {
@@ -30,10 +31,13 @@ export const caseStudies: CaseStudy[] = [
     client: "Green Chapter",
     category: "Corporate Strategy",
     year: "2024",
-    description: "High-end corporate narrative showcasing the power of collaborative innovation and strategic alignment in the global consulting space.",
+    description: "Green Chapter launches a new series of videos promoting their Little Explorers guided nature explorations and terrarium workshops. Ready to explore?",
     gallery: [
-      { vimeoId: "1021485785", type: 'social' },
-      { vimeoId: "1021486218", type: 'social' }
+      { vimeoId: "1131319486", type: 'corporate' },
+      { vimeoId: "1131319400", type: 'corporate' },
+      { vimeoId: "1131319578", type: 'corporate' },
+      { vimeoId: "1131320700", type: 'corporate' },
+      { vimeoId: "1131320755", type: 'corporate' }
     ]
   },
   {
@@ -43,10 +47,10 @@ export const caseStudies: CaseStudy[] = [
     client: "Enterprise Singapore",
     category: "Event Production",
     year: "2024",
-    description: "Dynamic event coverage that captures the energy, key themes, and breakthrough moments of one of Asia's premier technology gatherings.",
+    description: "A fictional short film of first time F&B Founder struggling to launch his new cafe. Highlighting the relatable struggles of the industry and the shame of failure to friends.",
     gallery: [
-      { vimeoId: "1026056187", type: 'social' },
-      { vimeoId: "1026056303", type: 'social' }
+      { vimeoId: "1021468009", type: 'corporate' },
+      { vimeoId: "1021466720", type: 'corporate' }
     ]
   },
   {
@@ -56,10 +60,16 @@ export const caseStudies: CaseStudy[] = [
     client: "Accenture",
     category: "Thought Leadership",
     year: "2024",
-    description: "Authentic founder and executive profiles that humanize the brand and articulate complex SaaS value propositions through personal storytelling.",
+    description: "A recruitment series featuring the talents at Accenture Philippines and how their passions align with their careers. The series emphasizes the importance of employee branding in showcasing the unique contributions of each team member.",
     gallery: [
-      { vimeoId: "1021485735", type: 'social' },
-      { vimeoId: "1026056396", type: 'social' }
+      { vimeoId: "1021463525", type: 'corporate' },
+      { vimeoId: "1021463433", type: 'corporate' },
+      { vimeoId: "1021463571", type: 'corporate' },
+      { vimeoId: "1021463466", type: 'corporate' },
+      { vimeoId: "1021463501", type: 'corporate' },
+      { vimeoId: "1021463311", type: 'corporate' },
+      { vimeoId: "1021463389", type: 'corporate' },
+      { vimeoId: "1021463623", type: 'corporate' }
     ]
   },
   {
@@ -69,10 +79,9 @@ export const caseStudies: CaseStudy[] = [
     client: "UOB Asset Management",
     category: "Documentary",
     year: "2024",
-    description: "A deeply personal look into the origin story and mission of 3 Degrees, bridging the gap between corporate goals and human passion.",
+    description: "A corporate video showcasing UOB Asset Management’s commitment to building a sustainable future by offering everyday investors access to the issues that matter most to them",
     gallery: [
-      { vimeoId: "1020466051", type: 'social' },
-      { vimeoId: "1021486218", type: 'social' }
+
     ]
   },
   {
@@ -82,10 +91,13 @@ export const caseStudies: CaseStudy[] = [
     client: "Meltwater",
     category: "Finance & ESG",
     year: "2023",
-    description: "Visualizing the impact of sustainable investing and ESG initiatives through compelling B2B storytelling and data-driven narratives.",
+    description: "A ground-level look into Meltwater’s leadership, teams, and internal culture, capturing authentic moments from their 2022 Culture Day event in a rustic and genuine way.",
     gallery: [
-      { vimeoId: "1131310388", type: 'corporate' },
-      { vimeoId: "1131319086", type: 'corporate' }
+      { vimeoId: "1021486218", type: 'social' },
+      { vimeoId: "1021485735", type: 'social' },
+      { vimeoId: "1021485764", type: 'social' },
+      { vimeoId: "1021485785", type: 'social' },
+      { vimeoId: "1026056750", type: 'social' }
     ]
   },
   {
@@ -95,10 +107,15 @@ export const caseStudies: CaseStudy[] = [
     client: "3 Degrees",
     category: "NGO Spotlight",
     year: "2024",
-    description: "Shedding light on the next generation of changemakers, this case study explores the social fabric and drive behind Young Founders' initiatives.",
+    description: "A featured video about the ItsRainingRaincoats charity and their founders’ mission to support migrant workers in Singapore by bridging cultural gaps and fostering inclusivity within society.",
     gallery: [
-      { vimeoId: "1026056505", type: 'social' },
-      { vimeoId: "1026056303", type: 'social' }
+      { vimeoId: "1020466051", type: 'social' },
+      { vimeoId: "1026056303", type: 'social' },
+      { vimeoId: "1026056187", type: 'social' },
+      { vimeoId: "1026058372", type: 'social' },
+      { vimeoId: "1026056384", type: 'social' },
+      { vimeoId: "1026058040", type: 'social' },
+      { vimeoId: "1026056750", type: 'social' }
     ]
   },
   {
@@ -108,10 +125,9 @@ export const caseStudies: CaseStudy[] = [
     client: "Wealth GPS",
     category: "FinTech Innovation",
     year: "2024",
-    description: "Communicating the complex journey of digital evolution in banking, making technological progress relatable and visionary.",
+    description: "Wealth GPs marks their 2025 Gala Awards with gratitude and growth—celebrating success, reflecting on their journey, and opening doors for those seeking a second chance.",
     gallery: [
-      { vimeoId: "1021466679", type: 'corporate' },
-      { vimeoId: "1021463357", type: 'corporate' }
+
     ]
   },
   {
@@ -121,10 +137,9 @@ export const caseStudies: CaseStudy[] = [
     client: "Productivity Joy",
     category: "Enterprise Solutions",
     year: "2024",
-    description: "Showcasing Singtel's commitment to seamless connectivity and enterprise excellence across the Asian market.",
+    description: "Psychologist Simi Rayat debuts Productivity Joy, helping readers rediscover balance and joy in the rush of everyday life.",
     gallery: [
-      { vimeoId: "1021485785", type: 'social' },
-      { vimeoId: "1021494730", type: 'corporate' }
+
     ]
   },
   {
@@ -134,23 +149,25 @@ export const caseStudies: CaseStudy[] = [
     client: "Land Transport Authority",
     category: "Banking Roadmap",
     year: "2024",
-    description: "Visualizing the landscape of modern banking and the digital-first approach that defines DBS's leadership in Singapore.",
+    description: "LTA's Active Mobility Bill was introduced to provide safety guidelines for mobility devices and a healthier lifestyle.  ",
     gallery: [
-      { vimeoId: "738471780", type: 'corporate' },
-      { vimeoId: "1021450871", type: 'corporate' }
+
     ]
   },
   {
     slug: "kaleoscopic-communications",
     vimeoId: "1021483669",
-    title: "Open for Business Podcast",
+    title: "Kaleoscopic Communications - ANEXT Bank: Open For Business Podcast",
     client: "Kaleoscopic Communications",
     category: "Conservation",
     year: "2024",
-    description: "Emotional and strategic visual content aimed at driving awareness and action for conservation efforts in the region.",
+    description: "Kaleidoscopic, presents a new podcast in collaboration with ANEXT Bank, spotlighting the untold stories of Singapore’s entrepreneurs — and the real ways ANEXT has helped them grow their businesses.",
     gallery: [
-      { vimeoId: "1026056187", type: 'social' },
-      { vimeoId: "1026056396", type: 'social' }
+      { vimeoId: "1021483731", type: 'corporate' },
+      { vimeoId: "1021483755", type: 'corporate' },
+      { vimeoId: "1021483780", type: 'corporate' },
+      { vimeoId: "1131313558", type: 'corporate' },
+      { vimeoId: "1131313814", type: 'corporate' }
     ]
   },
   {
@@ -160,10 +177,9 @@ export const caseStudies: CaseStudy[] = [
     client: "NIE",
     category: "Energy & Infrastructure",
     year: "2024",
-    description: "A testament to industrial strength and strategic growth, highlighting Sembcorp's pivotal role in Singapore's infrastructure.",
+    description: "NIE is constantly evolving. It’s here that the educators of tomorrow learn to hone their craft, shaping and empowering the next generation of Singaporeans.",
     gallery: [
-      { vimeoId: "1131318031", type: 'corporate' },
-      { vimeoId: "1131316789", type: 'corporate' }
+
     ]
   },
   {
@@ -173,10 +189,9 @@ export const caseStudies: CaseStudy[] = [
     client: "Ministry of Manpower",
     category: "Media Evolution",
     year: "2024",
-    description: "Exploring the future of content consumption and Mediacorp's evolution into a multi-platform media powerhouse.",
+    description: "Inspired by true stories of Singaporeans at different life stages who faced retrenchment, and the MOM officers who helped them get back on their feet.",
     gallery: [
-      { vimeoId: "1131316295", type: 'corporate' },
-      { vimeoId: "1021465916", type: 'corporate' }
+
     ]
   },
   {
@@ -186,10 +201,11 @@ export const caseStudies: CaseStudy[] = [
     client: "Workforce Singapore",
     category: "Hospitality & Travel",
     year: "2024",
-    description: "Capturing the world-class service and global connectivity that makes Singapore Airlines a symbol of national pride and excellence.",
+    description: "A short film and case study project showcasing the challenges of retail and the real success stories behind Singaporean-led businesses.",
     gallery: [
-      { vimeoId: "1021483669", type: 'corporate' },
-      { vimeoId: "1021466316", type: 'corporate' }
+      { vimeoId: "1021467097", type: 'corporate' },
+      { vimeoId: "1021467186", type: 'corporate' },
+      { vimeoId: "1021467300", type: 'corporate' }
     ]
   },
   {
@@ -199,10 +215,9 @@ export const caseStudies: CaseStudy[] = [
     client: "Mentem",
     category: "Industrial Development",
     year: "2024",
-    description: "Showcasing JTC's transformative impact on Singapore's industrial landscape and its nurturing of future-forward innovation hubs.",
+    description: "A testimonial from Banpu, a leading Thai energy company, highlighting how Mentem helped design and deliver management enablement training for their team",
     gallery: [
-      { vimeoId: "1021466066", type: 'corporate' },
-      { vimeoId: "1021467300", type: 'corporate' }
+
     ]
   }
 ];

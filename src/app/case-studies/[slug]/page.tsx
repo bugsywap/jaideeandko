@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Play, ArrowLeft, ShieldCheck, Mail, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { QuickContact } from "@/components/sections/QuickContact"
+import { VimeoPlayer } from "@/components/ui/VimeoPlayer"
 
 export async function generateStaticParams() {
   return caseStudies.map((study) => ({
@@ -39,7 +40,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <p className="text-foreground/50 text-xs font-black uppercase tracking-[0.2em]">
               {study.client}
             </p>
-            <h1 className="text-4xl lg:text-6xl font-black tracking-tight text-foreground leading-[1.1]">
+            <h1 className="text-3xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1] line-clamp-3">
               {study.title}
             </h1>
             <p className="text-lg leading-relaxed text-foreground/70 max-w-xl">
@@ -77,28 +78,45 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {study.gallery.map((item, idx) => (
-              <div 
-                key={idx} 
-                className={`relative overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg group ${
-                  item.type === 'social' ? 'aspect-[9/16]' : 'aspect-video'
-                }`}
-              >
-                <iframe
-                  src={`https://player.vimeo.com/video/${item.vimeoId}?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0&muted=1`}
-                  className="absolute inset-0 w-full h-full scale-[1.01]"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                
-                <div className="absolute bottom-4 left-4">
-                  <Badge variant="outline" className="bg-black/60 backdrop-blur-md border-white/20 text-white text-[9px] font-bold uppercase tracking-widest px-2 py-0.5">
-                    {item.type === 'social' ? 'Social Content' : 'Corporate Film'}
-                  </Badge>
-                </div>
+          {/* Gallery Items */}
+          <div className="flex flex-col gap-12">
+            {/* Corporate Grid (3 Columns) */}
+            {study.gallery.filter(item => item.type === 'corporate').length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {study.gallery
+                  .filter(item => item.type === 'corporate')
+                  .map((item, idx) => (
+                    <div 
+                      key={`corp-${idx}`} 
+                      className="relative overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg aspect-video group"
+                    >
+                      <VimeoPlayer
+                        vimeoId={item.vimeoId}
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    </div>
+                  ))}
               </div>
-            ))}
+            )}
+
+            {/* Social Grid (4 Columns) */}
+            {study.gallery.filter(item => item.type === 'social').length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {study.gallery
+                  .filter(item => item.type === 'social')
+                  .map((item, idx) => (
+                    <div 
+                      key={`social-${idx}`} 
+                      className="relative overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg aspect-[9/16] group"
+                    >
+                      <VimeoPlayer
+                        vimeoId={item.vimeoId}
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    </div>
+                  ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
