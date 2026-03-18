@@ -6,14 +6,41 @@ import { Send } from "lucide-react"
 export function QuickContact() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle")
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setStatus("submitting")
-    // Mock simulation
-    setTimeout(() => {
-      setStatus("success")
-      ;(e.target as HTMLFormElement).reset()
-    }, 1200)
+    
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      interest: formData.get("interest"),
+      _subject: `New Lead from Website (Quick Contact): ${formData.get("name")}`,
+    }
+
+    try {
+      const response = await fetch("https://formspree.io/f/xvgzbgge", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (response.ok) {
+        setStatus("success")
+        ;(e.target as HTMLFormElement).reset()
+        setTimeout(() => setStatus("idle"), 5000)
+      } else {
+        setStatus("idle")
+        alert("Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      setStatus("idle")
+      alert("Something went wrong. Please try again.")
+    }
   }
 
   return (

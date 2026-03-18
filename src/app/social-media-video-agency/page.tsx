@@ -14,7 +14,7 @@ export default function SEO_SocialMediaAgency() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl lg:mx-0">
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl mb-6">
-              Strategic Social Media Video Agency
+              Strategic <span className="text-primary italic">Social Media Video</span> Agency
             </h1>
             <p className="text-lg leading-8 text-foreground/70">
               Attention is the new currency. We don't just film; we engineer short-form content designed to stop the scroll, educate your audience, and drive outbound leads directly to your B2B sales funnel.

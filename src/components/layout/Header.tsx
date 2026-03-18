@@ -1,8 +1,10 @@
 "use client"
 
-import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const navigation = [
   { name: 'About', href: '/about' },
@@ -11,96 +13,165 @@ const navigation = [
   { name: 'Our Process', href: '/our-process' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Blog', href: '/blog' },
-];
+]
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // Handle scroll for glassmorphism and size transition
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [mobileMenuOpen])
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-border transition-all">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header 
+      className={cn(
+        "fixed top-0 inset-x-0 z-[100] transition-all duration-500",
+        mobileMenuOpen ? "bg-background opacity-100 py-4" : (
+          scrolled 
+            ? "py-4 bg-background/60 backdrop-blur-xl border-b border-border/50 shadow-2xl shadow-black/20" 
+            : "py-6 bg-transparent"
+        )
+      )}
+    >
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8" aria-label="Global">
+        {/* Logo */}
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
+          <Link href="/" className="relative group transition-transform duration-300 hover:scale-105 active:scale-95">
             <span className="sr-only">Jaidee & Ko</span>
-            <img src="/img/jaideeko-png.webp" alt="Jaidee & Ko" className="h-8 w-auto" />
+            <img 
+              src="/img/jaideeko-png.webp" 
+              alt="Jaidee & Ko" 
+              className={cn("transition-all duration-500", scrolled ? "h-7" : "h-8")} 
+            />
           </Link>
         </div>
         
-        {/* Mobile menu button */}
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <span className="sr-only">Open main menu</span>
-            <Menu className="h-6 w-6" aria-hidden="true" />
-          </button>
-        </div>
-
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:gap-x-8">
+        <div className="hidden lg:flex lg:gap-x-1">
           {navigation.map((item) => (
-            <Link key={item.name} href={item.href} className="text-sm font-medium leading-6 hover:text-primary active:text-primary transition-colors">
+            <Link 
+              key={item.name} 
+              href={item.href} 
+              className="relative px-5 py-2 text-[13px] font-light uppercase tracking-[0.15em] text-foreground/70 hover:text-primary transition-colors group"
+            >
               {item.name}
+              <span className="absolute bottom-0 left-5 right-5 h-0.5 bg-primary scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
             </Link>
           ))}
         </div>
         
+        {/* CTA Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="/contact" className="text-sm font-semibold leading-6 bg-primary text-primary-foreground px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity">
-            Contact
+          <Link 
+            href="/contact" 
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-primary px-7 py-3 text-[12px] font-black uppercase tracking-widest text-primary-foreground transition-all hover:scale-105 active:scale-95 shadow-xl shadow-primary/20"
+          >
+            <span className="relative z-10">Start Project</span>
+            <ArrowRight className="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
+            <div className="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
           </Link>
+        </div>
+
+        {/* Mobile Menu Toggle */}
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="relative z-[110] -m-2.5 p-2.5 text-foreground transition-transform active:scale-90"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <span className="sr-only">Toggle menu</span>
+            <div className="flex flex-col gap-1.5 w-6 items-end">
+              <motion.span 
+                animate={mobileMenuOpen ? { rotate: 45, y: 8, width: "100%" } : { rotate: 0, y: 0, width: "100%" }}
+                className="h-0.5 bg-foreground rounded-full"
+              />
+              <motion.span 
+                animate={mobileMenuOpen ? { opacity: 0, x: 20 } : { opacity: 1, x: 0, width: "70%" }}
+                className="h-0.5 bg-foreground rounded-full"
+              />
+              <motion.span 
+                animate={mobileMenuOpen ? { rotate: -45, y: -8, width: "100%" } : { rotate: 0, y: 0, width: "40%" }}
+                className="h-0.5 bg-foreground rounded-full"
+              />
+            </div>
+          </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden" role="dialog" aria-modal="true">
-          <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
-          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-border">
-            <div className="flex items-center justify-between">
-              <Link href="/" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
-                <span className="sr-only">Jaidee & Ko</span>
-                <img src="/img/jaideeko-png.webp" alt="Jaidee & Ko" className="h-8 w-auto" />
-              </Link>
-              <button
-                type="button"
-                className="-m-2.5 rounded-md p-2.5 text-foreground"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className="sr-only">Close menu</span>
-                <X className="h-6 w-6" aria-hidden="true" />
-              </button>
-            </div>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-border">
-                <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[100] lg:hidden"
+          >
+            <div className="absolute inset-0 bg-background" />
+            
+            <div className="relative flex flex-col h-full px-8 pt-32 pb-12">
+              <div className="flex flex-col gap-6">
+                {navigation.map((item, i) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.05 }}
+                  >
                     <Link
-                      key={item.name}
                       href={item.href}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-surface hover:text-primary active:text-primary"
+                      className="text-4xl sm:text-5xl font-black tracking-tighter text-foreground hover:text-primary transition-colors flex items-center justify-between group"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
+                      <ArrowRight className="w-8 h-8 opacity-0 -translate-x-4 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
                     </Link>
-                  ))}
-                </div>
-                <div className="py-6">
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-12 border-t border-border/50">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
                   <Link
                     href="/contact"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-surface hover:text-primary active:text-primary"
+                    className="flex items-center justify-center w-full rounded-2xl bg-primary py-6 text-xl font-black uppercase tracking-widest text-primary-foreground shadow-2xl shadow-primary/20"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Contact
+                    Let's Talk
                   </Link>
-                </div>
+                  
+                  <div className="mt-12 flex justify-center gap-8">
+                    <a href="https://www.linkedin.com/company/jaidee-ko" target="_blank" rel="noopener noreferrer" className="text-[10px] font-black uppercase tracking-widest text-foreground/40 hover:text-primary transition-colors">LinkedIn</a>
+                    <a href="https://www.instagram.com/jaideeandko/" target="_blank" rel="noopener noreferrer" className="text-[10px] font-black uppercase tracking-widest text-foreground/40 hover:text-primary transition-colors">Instagram</a>
+                    <a href="https://tiktok.com/@jaideeandko" target="_blank" rel="noopener noreferrer" className="text-[10px] font-black uppercase tracking-widest text-foreground/40 hover:text-primary transition-colors">TikTok</a>
+                    <a href="https://www.youtube.com/@jaideeandko?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className="text-[10px] font-black uppercase tracking-widest text-foreground/40 hover:text-primary transition-colors">YouTube</a>
+                  </div>
+                </motion.div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
-  );
+  )
 }

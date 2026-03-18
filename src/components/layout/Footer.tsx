@@ -1,4 +1,20 @@
 import Link from 'next/link';
+import { Linkedin, Instagram, Youtube } from 'lucide-react';
+
+// Custom TikTok Icon as it's missing from smaller Lucide sets often
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 
 export function Footer() {
   return (
@@ -13,6 +29,40 @@ export function Footer() {
               <span className="sr-only">Jaidee & Ko</span>
               <img src="/img/jaideeko-png.webp" alt="Jaidee & Ko" className="h-10 w-auto" />
             </Link>
+            <div className="flex items-center gap-5">
+              <a 
+                href="https://www.linkedin.com/company/jaidee-ko" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-foreground/50 hover:text-primary transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://www.instagram.com/jaideeandko/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-foreground/50 hover:text-primary transition-colors"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://tiktok.com/@jaideeandko" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-foreground/50 hover:text-primary transition-colors"
+              >
+                <TikTokIcon className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@jaideeandko?sub_confirmation=1" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-foreground/50 hover:text-primary transition-colors"
+              >
+                <Youtube className="w-5 h-5" />
+              </a>
+            </div>
             <p className="text-sm leading-6 text-foreground/70 max-w-xs">
               Corporate video production and branded social content for businesses across Singapore and Southeast Asia.
             </p>

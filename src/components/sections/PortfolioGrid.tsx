@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Play, Mail, ArrowRight } from "lucide-react"
+import { Play, Mail, ArrowRight, Loader2 } from "lucide-react"
 
 interface PortfolioItem {
   id: number;
@@ -217,6 +217,42 @@ const categories = [
 export function PortfolioGrid() {
   const [filter, setFilter] = useState("all")
   const [activeId, setActiveId] = useState<number | null>(null)
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle")
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus("submitting")
+    
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      email: formData.get("email"),
+      _subject: `New Lead from Portfolio Bottom: ${formData.get("email")}`,
+    }
+
+    try {
+      const response = await fetch("https://formspree.io/f/xvgzbgge", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (response.ok) {
+        setStatus("success")
+        ;(e.target as HTMLFormElement).reset()
+        setTimeout(() => setStatus("idle"), 5000)
+      } else {
+        setStatus("idle")
+        alert("Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      setStatus("idle")
+      alert("Something went wrong. Please try again.")
+    }
+  }
 
   const filteredItems = filter === "all" 
     ? portfolioItems 
@@ -336,32 +372,45 @@ export function PortfolioGrid() {
               </p>
             </div>
 
-            {/* Right Content (Glassmorphism Form - Smaller) */}
-            <div className="relative z-10 w-full max-w-sm shrink-0">
-              <div className="bg-background/80 backdrop-blur-md border border-border p-2 sm:p-2.5 rounded-2xl shadow-xl flex flex-col sm:flex-row gap-2">
-                
-                {/* Input Container */}
-                <div className="flex-1 bg-surface rounded-xl p-2 sm:p-3 flex flex-col justify-center border border-border/50">
-                  <label className="flex items-center gap-1.5 text-foreground/70 text-[10px] font-bold mb-1 px-1 uppercase tracking-wider">
-                    <Mail className="w-3 h-3 text-primary" /> Work Email
-                  </label>
+            {/* Right Content (One-Line Form) */}
+            <div className="relative z-10 w-full max-w-lg shrink-0">
+              <form 
+                onSubmit={handleSubmit}
+                className="bg-background/80 backdrop-blur-md border border-border p-1.5 rounded-2xl shadow-xl flex items-center gap-2"
+              >
+                <div className="flex-1 flex items-center gap-3 px-4 py-2">
+                  <Mail className="w-5 h-5 text-primary shrink-0" />
                   <input 
                     type="email" 
-                    placeholder="hello@company.com"
-                    className="w-full bg-transparent text-foreground placeholder-foreground/40 px-1 py-0.5 outline-none text-sm font-medium"
+                    name="email"
+                    required
+                    placeholder="Enter your work email"
+                    className="w-full bg-transparent text-foreground placeholder-foreground/40 outline-none text-base font-medium"
                   />
                 </div>
                 
-                {/* Button */}
-                <Link
-                  href="/contact"
-                  className="rounded-xl bg-primary text-primary-foreground px-5 py-3 flex flex-col items-center justify-center gap-1 hover:bg-primary/90 transition-colors shrink-0 min-w-[100px]"
+                <button
+                  type="submit"
+                  disabled={status !== "idle"}
+                  className="rounded-xl bg-primary text-primary-foreground px-8 py-4 flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shrink-0 font-bold uppercase tracking-widest text-xs disabled:opacity-75 disabled:cursor-not-allowed"
                 >
-                  <span className="text-[10px] font-bold uppercase tracking-wider opacity-90">Book Call</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                
-              </div>
+                  {status === "submitting" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : status === "success" ? (
+                    "Sent!"
+                  ) : (
+                    <>
+                      Book Call
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+              </form>
+              {status === "success" && (
+                <p className="absolute top-full mt-2 left-4 text-[10px] text-primary font-bold uppercase tracking-widest">
+                  We'll be in touch shortly!
+                </p>
+              )}
             </div>
           </div>
         </div>

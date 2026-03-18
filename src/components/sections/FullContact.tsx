@@ -6,14 +6,44 @@ import { Send } from "lucide-react"
 export function FullContact() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle")
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setStatus("submitting")
-    // Mock simulation
-    setTimeout(() => {
-      setStatus("success")
-      ;(e.target as HTMLFormElement).reset()
-    }, 1200)
+    
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      firstName: formData.get("first-name"),
+      lastName: formData.get("last-name"),
+      company: formData.get("company"),
+      email: formData.get("email"),
+      industry: formData.get("industry"),
+      message: formData.get("message"),
+      _subject: `New Contact Form Submission: ${formData.get("first-name")} ${formData.get("last-name")}`,
+    }
+
+    try {
+      const response = await fetch("https://formspree.io/f/xvgzbgge", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (response.ok) {
+        setStatus("success")
+        ;(e.target as HTMLFormElement).reset()
+        setTimeout(() => setStatus("idle"), 5000)
+      } else {
+        setStatus("idle")
+        alert("Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      setStatus("idle")
+      alert("Something went wrong. Please try again.")
+    }
   }
 
   return (
@@ -137,7 +167,7 @@ export function FullContact() {
                 "Message Sent!"
               ) : (
                 <>
-                  Send My Enquiry
+                  Send Message
                   <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </>
               )}

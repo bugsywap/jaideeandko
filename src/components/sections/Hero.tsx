@@ -83,15 +83,15 @@ export function Hero() {
               </div>
               
               <div className="flex flex-row gap-4 mt-8">
-                <Button size="lg" className="h-16 px-10 gap-3 text-primary bg-transparent border-primary hover:bg-primary/10 font-bold transition-all duration-300 rounded-full" variant="outline" asChild>
-                  <Link href="#how-it-works">
-                    See How It Works <PhoneCall className="w-4 h-4" />
-                  </Link>
-                </Button>
                 <Button size="lg" className="h-16 px-10 gap-3 bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-xl shadow-primary/30 transition-all duration-300 transform hover:scale-105 rounded-full" asChild>
                   <Link href="/contact">
                     Let's Go <MoveRight className="w-4 h-4" />
                   </Link>
+                </Button>
+                <Button size="lg" className="h-16 px-10 gap-3 text-primary bg-transparent border-primary hover:bg-primary/10 font-bold transition-all duration-300 rounded-full" variant="outline" asChild>
+                  <a href="https://calendar.app.google/nmJKmi3iousxouhX6" target="_blank" rel="noopener noreferrer">
+                    See How It Works <PhoneCall className="w-4 h-4" />
+                  </a>
                 </Button>
               </div>
             </motion.div>

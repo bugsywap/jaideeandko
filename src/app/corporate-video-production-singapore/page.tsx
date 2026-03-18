@@ -15,7 +15,7 @@ export default function SEO_CorporateVideoSingapore() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl lg:mx-0">
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl mb-6">
-              Corporate Video Production in Singapore Let's make an impact.
+              Strategic <span className="text-primary italic">Corporate Video Production</span> in Singapore.
             </h1>
             <p className="text-lg leading-8 text-foreground/70">
               You don't just need a video; you need a strategic asset. From C-suite interviews to company culture showcases, we craft corporate videos designed to build social proof and articulate your exact value proposition to stakeholders across Asia.

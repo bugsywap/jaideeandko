@@ -39,10 +39,12 @@ export function TrustTicker() {
               <div key={`${client.name}-${i}`} className="flex flex-col items-center justify-center w-40 sm:w-48 shrink-0 gap-4 group">
                 <img 
                   src={client.src} 
-                  alt={`${client.name} logo`} 
+                  alt={`${client.name} - ${client.label} partner logo`} 
                   title={client.name}
                   className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
                   loading="lazy"
+                  width={160}
+                  height={48}
                 />
                 <span className="text-xs font-semibold text-foreground/70 uppercase tracking-wider text-center">
                   {client.label}

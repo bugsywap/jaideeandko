@@ -100,9 +100,11 @@ export default function ServicesPage() {
                     <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-lg border border-border z-10 bg-surface">
                       <img 
                         src={service.image} 
-                        alt={service.title} 
+                        alt={`${service.title} - Strategic storytelling and high-end production`} 
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                         loading="lazy"
+                        width={800}
+                        height={600}
                       />
                     </div>
                     

@@ -51,8 +51,11 @@ export default function AboutPage() {
               <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-border bg-muted relative group">
                 <img
                   src="/img/about-image.png"
-                  alt="Jaidee & Ko Team"
+                  alt="Gary Koay and the Jaidee & Ko team working on a video production set"
                   className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+                  width={800}
+                  height={1000}
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8 text-white">
@@ -181,8 +184,11 @@ export default function AboutPage() {
                 <div className="relative aspect-square rounded-full overflow-hidden border-[6px] border-primary/20 group-hover:border-primary/40 transition-all duration-500 mb-8 bg-muted shadow-2xl">
                   <img
                     src={member.image}
-                    alt={member.name}
+                    alt={`${member.name} - ${member.role} at Jaidee & Ko`}
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                    width={400}
+                    height={400}
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors" />
                 </div>
