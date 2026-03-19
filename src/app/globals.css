@@ -75,3 +75,12 @@ body {
 .mask-fade-x {
   mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
+
+/* Vimeo SDK Iframe Scaling */
+.vimeo-player-container iframe {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

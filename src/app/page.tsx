@@ -10,6 +10,7 @@ import { TestimonialsSection } from "@/components/sections/Testimonials"
 import { LeadMagnetBanner } from "@/components/sections/LeadMagnetBanner"
 import { BlogCarousel } from "@/components/sections/BlogCarousel"
 import { ExitIntentPopup } from "@/components/ui/ExitPopup"
+import { ScrollReveal } from "@/components/ui/ScrollReveal"
 
 export const metadata = {
   title: "Premium Corporate Video Production Singapore | Jaidee & Ko",
@@ -20,15 +21,27 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className="border-y border-border/50">
+      <ScrollReveal className="border-y border-border/50">
         <TrustTicker />
-      </div>
-      <ServicesSnapshot />
-      <SocialProof />
-      <CaseStudyCarousel />
-      <PortfolioGrid />
-      <TestimonialsSection />
-      <LeadMagnetBanner />
+      </ScrollReveal>
+      <ScrollReveal>
+        <ServicesSnapshot />
+      </ScrollReveal>
+      <ScrollReveal>
+        <SocialProof />
+      </ScrollReveal>
+      <ScrollReveal>
+        <CaseStudyCarousel />
+      </ScrollReveal>
+      <ScrollReveal>
+        <PortfolioGrid />
+      </ScrollReveal>
+      <ScrollReveal>
+        <TestimonialsSection />
+      </ScrollReveal>
+      <ScrollReveal>
+        <LeadMagnetBanner />
+      </ScrollReveal>
       
       <ExitIntentPopup />
     </>

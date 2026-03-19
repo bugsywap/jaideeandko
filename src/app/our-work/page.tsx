@@ -1,8 +1,7 @@
-"use client"
-
 import { FullPortfolioGrid } from "@/components/sections/FullPortfolioGrid"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
+import { ScrollReveal } from "@/components/ui/ScrollReveal"
 
 export default function PortfolioPage() {
   return (
@@ -15,29 +14,35 @@ export default function PortfolioPage() {
 
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 relative">
-            <Badge variant="outline" className="border-primary/50 text-primary bg-primary/5 px-5 py-2 text-xs font-black uppercase tracking-[0.3em]">
-              Selected Works
-            </Badge>
+            <ScrollReveal>
+              <Badge variant="outline" className="border-primary/50 text-primary bg-primary/5 px-5 py-2 text-xs font-black uppercase tracking-[0.3em]">
+                Selected Works
+              </Badge>
+            </ScrollReveal>
             
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-foreground leading-[0.9] drop-shadow-sm">
-              Work that <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary/60 italic">transforms.</span>
-            </h1>
+            <ScrollReveal delay={0.1}>
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-foreground leading-[0.9] drop-shadow-sm">
+                Work that <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary/60 italic">transforms.</span>
+              </h1>
+            </ScrollReveal>
             
-            <p className="text-lg md:text-xl leading-relaxed text-foreground/60 max-w-2xl font-medium tracking-tight">
-              We partner with global brands and small teams to turn complex narratives into approachable visual storytelling. Explore our collection of corporate visions and social impact.
-            </p>
+            <ScrollReveal delay={0.2}>
+              <p className="text-lg md:text-xl leading-relaxed text-foreground/60 max-w-2xl font-medium tracking-tight">
+                We partner with global brands and small teams to turn complex narratives into approachable visual storytelling. Explore our collection of corporate visions and social impact.
+              </p>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Grid Container */}
-      <section className="container mx-auto px-6 max-w-[1600px] pb-32">
+      <ScrollReveal className="container mx-auto px-6 max-w-[1600px] pb-32">
         <FullPortfolioGrid />
-      </section>
+      </ScrollReveal>
       
       {/* Bottom Conversion Banner */}
-      <section className="bg-surface/30 border-t border-border/50 py-32">
+      <ScrollReveal className="bg-surface/30 border-t border-border/50 py-32">
         <div className="container mx-auto px-6 max-w-5xl text-center">
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 italic text-foreground">
                 Ready to create <span className="text-primary italic">your</span> story?
@@ -54,7 +59,7 @@ export default function PortfolioPage() {
                 </a>
             </div>
         </div>
-      </section>
+      </ScrollReveal>
     </div>
   )
 }

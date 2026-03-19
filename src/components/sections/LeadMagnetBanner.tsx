@@ -16,10 +16,12 @@ export function LeadMagnetBanner() {
       name: formData.get("name"),
       email: formData.get("email"),
       _subject: `New Lead - Guide Download: ${formData.get("name")}`,
+      _cc: "gkoay@jaideeandko.com",
+      _template: "table"
     }
 
     try {
-      const response = await fetch("https://formspree.io/f/mqaeajje", {
+      const response = await fetch("https://formsubmit.co/ajax/admin@getnifty.xyz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

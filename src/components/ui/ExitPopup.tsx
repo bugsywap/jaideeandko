@@ -7,6 +7,8 @@ export function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [hasTriggered, setHasTriggered] = useState(false)
 
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle")
+
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0 && !hasTriggered) {
@@ -21,6 +23,42 @@ export function ExitIntentPopup() {
       document.removeEventListener("mouseleave", handleMouseLeave)
     }
   }, [hasTriggered])
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus("submitting")
+    
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      email: formData.get("email"),
+      _subject: `New Lead from Exit Popup: ${formData.get("email")}`,
+      _cc: "gkoay@jaideeandko.com",
+      _template: "table"
+    }
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/admin@getnifty.xyz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (response.ok) {
+        setStatus("success")
+        setTimeout(() => setIsOpen(false), 2000)
+      } else {
+        setStatus("idle")
+        alert("Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      setStatus("idle")
+      alert("Something went wrong. Please try again.")
+    }
+  }
 
   if (!isOpen) return null
 
@@ -54,26 +92,34 @@ export function ExitIntentPopup() {
                     </p>
                   </div>
                   
-                  <form className="mt-8">
+                  <form onSubmit={handleSubmit} className="mt-8">
                     <div className="flex flex-col gap-4">
                       <div>
                         <label htmlFor="modal-email" className="sr-only">Email address</label>
                         <input
-                          type="email"
-                          name="email"
-                          id="modal-email"
-                          className="block w-full rounded-md border-0 py-3 px-4 text-foreground bg-background shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-                          placeholder="Enter your email"
-                          required
+                           type="email"
+                           name="email"
+                           id="modal-email"
+                           className="block w-full rounded-md border-0 py-3 px-4 text-foreground bg-background shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                           placeholder="Enter your email"
+                           required
                         />
                       </div>
                       <button
-                        type="button"
-                        onClick={() => setIsOpen(false)}
-                        className="inline-flex w-full justify-center items-center gap-2 rounded-md bg-primary px-3 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-90 sm:w-auto transition-opacity"
+                        type="submit"
+                        disabled={status !== "idle"}
+                        className="inline-flex w-full justify-center items-center gap-2 rounded-md bg-primary px-3 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-90 sm:w-auto transition-opacity disabled:opacity-75"
                       >
-                        <Download className="w-4 h-4" />
-                        Send Me The Checklist
+                        {status === "submitting" ? (
+                          "Sending..."
+                        ) : status === "success" ? (
+                          "Sent!"
+                        ) : (
+                          <>
+                            <Download className="w-4 h-4" />
+                            Send Me The Checklist
+                          </>
+                        )}
                       </button>
                     </div>
                   </form>

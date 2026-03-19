@@ -19,10 +19,12 @@ export function FullContact() {
       industry: formData.get("industry"),
       message: formData.get("message"),
       _subject: `New Contact Form Submission: ${formData.get("first-name")} ${formData.get("last-name")}`,
+      _cc: "gkoay@jaideeandko.com",
+      _template: "table"
     }
 
     try {
-      const response = await fetch("https://formspree.io/f/mqaeajje", {
+      const response = await fetch("https://formsubmit.co/ajax/admin@getnifty.xyz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

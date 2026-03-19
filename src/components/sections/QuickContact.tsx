@@ -16,10 +16,12 @@ export function QuickContact() {
       email: formData.get("email"),
       interest: formData.get("interest"),
       _subject: `New Lead from Website (Quick Contact): ${formData.get("name")}`,
+      _cc: "gkoay@jaideeandko.com",
+      _template: "table"
     }
 
     try {
-      const response = await fetch("https://formspree.io/f/mqaeajje", {
+      const response = await fetch("https://formsubmit.co/ajax/admin@getnifty.xyz", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -16,6 +17,7 @@ const navigation = [
 ]
 
 export function Header() {
+  const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -63,16 +65,27 @@ export function Header() {
         
         {/* Desktop Navigation */}
         <div className="hidden lg:flex lg:gap-x-1">
-          {navigation.map((item) => (
-            <Link 
-              key={item.name} 
-              href={item.href} 
-              className="relative px-5 py-2 text-[13px] font-light uppercase tracking-[0.15em] text-foreground/70 hover:text-primary transition-colors group"
-            >
-              {item.name}
-              <span className="absolute bottom-0 left-5 right-5 h-0.5 bg-primary scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
-            </Link>
-          ))}
+          {navigation.map((item) => {
+            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+            return (
+              <Link 
+                key={item.name} 
+                href={item.href} 
+                className={cn(
+                  "relative px-5 py-2 text-[13px] font-light uppercase tracking-[0.15em] transition-colors group",
+                  isActive ? "text-primary" : "text-foreground/70 hover:text-primary"
+                )}
+              >
+                {item.name}
+                <span 
+                  className={cn(
+                    "absolute bottom-0 left-5 right-5 h-0.5 bg-primary transition-transform duration-300",
+                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  )} 
+                />
+              </Link>
+            )
+          })}
         </div>
         
         {/* CTA Button */}
@@ -127,23 +140,36 @@ export function Header() {
             
             <div className="relative flex flex-col h-full px-8 pt-32 pb-12">
               <div className="flex flex-col gap-6">
-                {navigation.map((item, i) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.05 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className="text-4xl sm:text-5xl font-black tracking-tighter text-foreground hover:text-primary transition-colors flex items-center justify-between group"
-                      onClick={() => setMobileMenuOpen(false)}
+                {navigation.map((item, i) => {
+                  const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.05 }}
                     >
-                      {item.name}
-                      <ArrowRight className="w-8 h-8 opacity-0 -translate-x-4 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          "text-4xl sm:text-5xl font-black tracking-tighter transition-colors flex items-center justify-between group",
+                          isActive ? "text-primary" : "text-foreground hover:text-primary"
+                        )}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                        <ArrowRight 
+                          className={cn(
+                            "w-8 h-8 transition-all",
+                            isActive 
+                              ? "opacity-100 translate-x-0" 
+                              : "opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0"
+                          )} 
+                        />
+                      </Link>
+                    </motion.div>
+                  )
+                })}
               </div>
 
               <div className="mt-auto pt-12 border-t border-border/50">

@@ -88,7 +88,7 @@ export function Hero() {
                 style={{ animationDuration: '30s' }}
               >
                 {[...vimeoIds, ...vimeoIds, ...vimeoIds].map((id, idx) => (
-                  <div key={idx} className="relative w-40 md:w-56 lg:w-64 aspect-[9/16] rounded-3xl overflow-hidden shrink-0 shadow-xl border border-border bg-black ring-1 ring-white/10 group">
+                  <div key={idx} className="relative w-40 md:w-56 lg:w-64 aspect-[9/16] rounded-3xl overflow-hidden shrink-0 shadow-xl border border-border bg-white/5 backdrop-blur-md ring-1 ring-white/10 group">
                     <iframe
                       src={`https://player.vimeo.com/video/${id}?background=1&autoplay=1&loop=1&byline=0&title=0&portrait=0&muted=1&autopause=0`}
                       className="absolute inset-0 w-full h-full scale-[1.05]"

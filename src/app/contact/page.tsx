@@ -1,11 +1,9 @@
+"use client"
+
 import { FullContact } from "@/components/sections/FullContact"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Mail, Clock } from "lucide-react"
-
-export const metadata = {
-  title: "Contact Us | Jaidee & Ko",
-  description: "Book your free strategy call today. We take on a limited number of projects per quarter to ensure premium quality.",
-}
+import { ScrollReveal } from "@/components/ui/ScrollReveal"
 
 export default function ContactPage() {
   return (
@@ -15,7 +13,7 @@ export default function ContactPage() {
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         
         {/* Header Section */}
-        <div className="mx-auto max-w-3xl text-center mb-16 sm:mb-24 lg:mb-32">
+        <ScrollReveal className="mx-auto max-w-3xl text-center mb-16 sm:mb-24 lg:mb-32">
           <Badge variant="outline" className="border-primary text-primary bg-primary/10 px-4 py-1 text-sm mb-6 inline-flex">
             Get in touch
           </Badge>
@@ -25,12 +23,12 @@ export default function ContactPage() {
           <p className="text-lg md:text-xl leading-relaxed text-foreground/70 max-w-2xl mx-auto">
             Whether you need a full corporate documentary or a month of social media content, let's explore how we can elevate your brand.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-12 gap-y-20 lg:grid-cols-5 relative z-10">
           
           {/* Contact Information Side */}
-          <div className="lg:col-span-2 space-y-8 flex flex-col justify-center">
+          <ScrollReveal direction="left" className="lg:col-span-2 space-y-8 flex flex-col justify-center">
             
             <div className="flex gap-x-6 p-6 rounded-2xl bg-surface border border-border transition-colors hover:border-primary/50 group">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 group-hover:bg-primary transition-colors">
@@ -66,13 +64,13 @@ export default function ContactPage() {
               </div>
             </div>
             
-          </div>
+          </ScrollReveal>
 
-          <div className="lg:col-span-3">
+          <ScrollReveal direction="right" className="lg:col-span-3">
             <div className="bg-surface rounded-3xl p-8 sm:p-10 border border-border shadow-2xl relative">
               <FullContact />
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </div>

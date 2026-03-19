@@ -1,50 +1,80 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState, useImperativeHandle, forwardRef } from "react"
 import Player from "@vimeo/player"
+import { cn } from "@/lib/utils"
 
 interface VimeoPlayerProps {
   vimeoId: string
   className?: string
 }
 
-export function VimeoPlayer({ vimeoId, className }: VimeoPlayerProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const playerRef = useRef<Player | null>(null)
+export interface VimeoPlayerRef {
+  play: () => void
+  pause: () => void
+}
 
-  useEffect(() => {
-    if (!containerRef.current) return
+export const VimeoPlayer = forwardRef<VimeoPlayerRef, VimeoPlayerProps>(
+  ({ vimeoId, className }, ref) => {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const playerRef = useRef<Player | null>(null)
+    const [isReady, setIsReady] = useState(false)
 
-    // Clean up previous player if it exists
-    if (playerRef.current) {
-      playerRef.current.destroy()
-    }
+    useEffect(() => {
+      if (!containerRef.current) return
 
-    playerRef.current = new Player(containerRef.current, {
-      id: parseInt(vimeoId),
-      autoplay: false,
-      byline: false,
-      title: false,
-      portrait: false,
-      responsive: true,
-    })
-
-    // Set initial volume to 50%
-    playerRef.current.setVolume(0.5).catch((error) => {
-      console.error("Error setting volume:", error)
-    })
-
-    return () => {
       if (playerRef.current) {
         playerRef.current.destroy()
       }
-    }
-  }, [vimeoId])
 
-  return (
-    <div 
-      ref={containerRef} 
-      className={className}
-    />
-  )
-}
+      const player = new Player(containerRef.current, {
+        id: parseInt(vimeoId),
+        autoplay: false,
+        loop: false,
+        background: false,
+        transparent: true,
+        muted: false, // Normal mode
+      })
+
+      playerRef.current = player
+
+      player.ready().then(() => {
+        setIsReady(true)
+      }).catch(() => setIsReady(true))
+
+      return () => {
+        if (playerRef.current) {
+          playerRef.current.destroy()
+        }
+      }
+    }, [vimeoId])
+
+    useImperativeHandle(ref, () => ({
+      play: () => {
+        if (playerRef.current) {
+          playerRef.current.play().catch((err) => {
+            console.warn("Manual play failed:", err)
+          })
+        }
+      },
+      pause: () => {
+        if (playerRef.current) {
+          playerRef.current.pause().catch(() => {})
+        }
+      }
+    }), [isReady])
+
+    return (
+      <div 
+        ref={containerRef} 
+        className={cn(
+          "vimeo-player-container w-full h-full transition-opacity duration-700",
+          isReady ? "opacity-100" : "opacity-0",
+          className
+        )}
+      />
+    )
+  }
+)
+
+VimeoPlayer.displayName = "VimeoPlayer"
