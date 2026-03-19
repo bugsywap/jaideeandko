@@ -233,7 +233,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
     }
   }
 
-  const thumbnailUrl = item.image || (item.vimeoId ? `https://vumbnail.com/${item.vimeoId}.jpg` : null)
+  const thumbnailUrl = item.image || (item.vimeoId ? `https://vumbnail.com/${item.vimeoId}_large.jpg` : null)
 
   return (
     <article className="relative flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 group/card">
@@ -243,13 +243,13 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
           "group-hover/card:shadow-2xl group-hover/card:shadow-primary/20 group-hover/card:-translate-y-2 group-hover/card:border-primary/40"
         )}
       >
-        <div className="aspect-[4/5] w-full relative bg-surface/10 backdrop-blur-2xl border border-border/10 flex items-center justify-center overflow-hidden">
+        <div className="aspect-[9/16] w-full relative bg-surface/10 backdrop-blur-2xl border border-border/10 flex items-center justify-center overflow-hidden">
           {thumbnailUrl && (
             <img 
               src={thumbnailUrl} 
               alt="" 
               className={cn(
-                "absolute inset-0 w-full h-full object-cover transition-opacity duration-700",
+                "absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700",
                 isPlaying ? "opacity-0" : "opacity-100"
               )} 
             />
@@ -264,35 +264,26 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
                   isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
                 )}
               >
-                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transition-transform duration-500 group-hover/btn:scale-110 shadow-2xl">
+                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transition-transform duration-300 group-hover/btn:scale-110 shadow-2xl">
                   {isPlaying ? (
-                    <div className="flex gap-1.5">
-                      <div className="w-1.5 h-6 bg-white rounded-full opacity-90 shadow-sm" />
-                      <div className="w-1.5 h-6 bg-white rounded-full opacity-90 shadow-sm" />
+                    <div className="flex gap-1">
+                      <div className="w-1 h-5 bg-white rounded-full opacity-90" />
+                      <div className="w-1 h-5 bg-white rounded-full opacity-90" />
                     </div>
                   ) : (
-                    <Play className="w-8 h-8 text-white fill-white ml-1 opacity-90 drop-shadow-sm" />
+                    <Play className="w-6 h-6 text-white fill-white ml-0.5 opacity-90 drop-shadow-sm" />
                   )}
                 </div>
               </button>
 
-              {item.category === "social" ? (
-                <div className="absolute inset-0 w-full h-full z-10">
-                  <VimeoPlayer
-                    ref={playerRef}
-                    vimeoId={item.vimeoId}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[142%]"
-                  />
-                </div>
-              ) : (
-                <div className="w-full aspect-video relative z-10">
-                  <VimeoPlayer
-                    ref={playerRef}
-                    vimeoId={item.vimeoId}
-                    className="absolute inset-0 w-full h-full rounded-xl shadow-lg"
-                  />
-                </div>
-              )}
+              {/* Vimeo fills the full 9:16 container */}
+              <div className="absolute inset-0 w-full h-full z-10">
+                <VimeoPlayer
+                  ref={playerRef}
+                  vimeoId={item.vimeoId}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[142%]"
+                />
+              </div>
             </>
           ) : null}
           

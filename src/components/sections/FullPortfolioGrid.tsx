@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useMemo, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { Play, Pause, ArrowRight, Filter, LayoutGrid, MonitorPlay, Smartphone, Calendar, Heart } from "lucide-react"
+import { Play, Filter, LayoutGrid, MonitorPlay, Smartphone, Calendar, Heart } from "lucide-react"
 import { VimeoPlayer, type VimeoPlayerRef } from "@/components/ui/VimeoPlayer"
 
 interface PortfolioItem {
@@ -214,94 +214,153 @@ const categories = [
   { id: "ngo", name: "NGO", icon: Heart },
 ]
 
-// --- Portfolio Card Sub-component ---
-function PortfolioCard({ item }: { item: PortfolioItem }) {
+// ─── Social (9:16) Card ───────────────────────────────────────────────────────
+function SocialCard({ item }: { item: PortfolioItem }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const playerRef = useRef<VimeoPlayerRef>(null)
-  
+
   const togglePlay = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    const nextState = !isPlaying
-    setIsPlaying(nextState)
-    
-    if (nextState) {
-      playerRef.current?.play()
-    } else {
-      playerRef.current?.pause()
-    }
+    const next = !isPlaying
+    setIsPlaying(next)
+    next ? playerRef.current?.play() : playerRef.current?.pause()
   }
 
-  const thumbnailUrl = item.image || (item.vimeoId ? `https://vumbnail.com/${item.vimeoId}.jpg` : null)
+  const thumbnailUrl = item.image || (item.vimeoId ? `https://vumbnail.com/${item.vimeoId}_large.jpg` : null)
 
   return (
     <article className="group relative flex flex-col">
-      <div className="relative w-full overflow-hidden rounded-[2rem] bg-surface/10 backdrop-blur-2xl border border-border/10 shadow-lg aspect-[4/5] flex items-center justify-center">
+      {/* 9:16 container */}
+      <div className="relative w-full overflow-hidden rounded-2xl bg-surface/10 backdrop-blur-2xl border border-border/10 shadow-lg" style={{ aspectRatio: "9/16" }}>
         {thumbnailUrl && (
-          <img 
-            src={thumbnailUrl} 
-            alt="" 
+          <img
+            src={thumbnailUrl}
+            alt=""
             className={cn(
-              "absolute inset-0 w-full h-full object-cover transition-opacity duration-700",
+              "absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700",
               isPlaying ? "opacity-0" : "opacity-100"
-            )} 
+            )}
           />
         )}
-        {item.vimeoId ? (
+
+        {item.vimeoId && (
           <>
-            {/* Play/Pause Overlay */}
-            <button 
+            <button
               onClick={togglePlay}
               className={cn(
                 "absolute inset-0 z-20 flex items-center justify-center transition-all duration-500 group/btn bg-black/0 hover:bg-black/10",
                 isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
               )}
             >
-              <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transition-transform duration-500 group-hover/btn:scale-110 shadow-2xl">
+              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transition-transform duration-300 group-hover/btn:scale-110 shadow-2xl">
                 {isPlaying ? (
-                  <div className="flex gap-1.5">
-                    <div className="w-1.5 h-6 bg-white rounded-full opacity-90 shadow-sm" />
-                    <div className="w-1.5 h-6 bg-white rounded-full opacity-90 shadow-sm" />
+                  <div className="flex gap-1">
+                    <div className="w-1 h-5 bg-white rounded-full opacity-90" />
+                    <div className="w-1 h-5 bg-white rounded-full opacity-90" />
                   </div>
                 ) : (
-                  <Play className="w-8 h-8 text-white fill-white ml-1 opacity-90 drop-shadow-sm" />
+                  <Play className="w-6 h-6 text-white fill-white ml-0.5 opacity-90" />
                 )}
               </div>
             </button>
 
-            {item.category === "social" ? (
-              <div className="absolute inset-0 w-full h-full z-10">
-                <VimeoPlayer
-                  ref={playerRef}
-                  vimeoId={item.vimeoId}
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[142%]"
-                />
-              </div>
-            ) : (
-              <div className="w-full aspect-video relative z-10 shadow-2xl">
-                <VimeoPlayer
-                  ref={playerRef}
-                  vimeoId={item.vimeoId}
-                  className="absolute inset-0 w-full h-full rounded-xl"
-                />
-              </div>
-            )}
+            {/* Vimeo fills the full 9:16 container */}
+            <div className="absolute inset-0 w-full h-full z-10">
+              <VimeoPlayer
+                ref={playerRef}
+                vimeoId={item.vimeoId}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[142%]"
+              />
+            </div>
           </>
-        ) : null}
-
-        {/* Base overlay for style consistency */}
+        )}
         <div className="absolute inset-0 bg-black/5 pointer-events-none" />
       </div>
 
-      <div className="mt-6 px-2">
-        <div className="flex items-center gap-2 mb-2">
-           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">
-            {item.client}
-          </span>
+      <div className="mt-3 px-1">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary/60">{item.client}</span>
           <span className="w-1 h-1 rounded-full bg-border" />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40 font-medium">
-            {item.category}
-          </span>
+          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-foreground/40">{item.category}</span>
+        </div>
+        <h3 className="text-sm font-bold tracking-tight text-foreground group-hover:text-primary transition-colors leading-tight">
+          {item.title}
+        </h3>
+      </div>
+    </article>
+  )
+}
+
+// ─── Corporate (16:9) Card ────────────────────────────────────────────────────
+function CorporateCard({ item }: { item: PortfolioItem }) {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const playerRef = useRef<VimeoPlayerRef>(null)
+
+  const togglePlay = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const next = !isPlaying
+    setIsPlaying(next)
+    next ? playerRef.current?.play() : playerRef.current?.pause()
+  }
+
+  const thumbnailUrl = item.image || (item.vimeoId ? `https://vumbnail.com/${item.vimeoId}_large.jpg` : null)
+
+  return (
+    <article className="group relative flex flex-col">
+      {/* 16:9 container */}
+      <div className="relative w-full overflow-hidden rounded-2xl bg-surface/10 backdrop-blur-2xl border border-border/10 shadow-lg aspect-video">
+        {thumbnailUrl && (
+          <img
+            src={thumbnailUrl}
+            alt=""
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700",
+              isPlaying ? "opacity-0" : "opacity-100"
+            )}
+          />
+        )}
+
+        {item.vimeoId && (
+          <>
+            <button
+              onClick={togglePlay}
+              className={cn(
+                "absolute inset-0 z-20 flex items-center justify-center transition-all duration-500 group/btn bg-black/0 hover:bg-black/10",
+                isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
+              )}
+            >
+              <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transition-transform duration-300 group-hover/btn:scale-110 shadow-2xl">
+                {isPlaying ? (
+                  <div className="flex gap-1.5">
+                    <div className="w-1.5 h-6 bg-white rounded-full opacity-90" />
+                    <div className="w-1.5 h-6 bg-white rounded-full opacity-90" />
+                  </div>
+                ) : (
+                  <Play className="w-8 h-8 text-white fill-white ml-1 opacity-90" />
+                )}
+              </div>
+            </button>
+
+            {/* Vimeo fills the full 16:9 container */}
+            <div className="absolute inset-0 w-full h-full z-10">
+              <VimeoPlayer
+                ref={playerRef}
+                vimeoId={item.vimeoId}
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </>
+        )}
+        <div className="absolute inset-0 bg-black/5 pointer-events-none" />
+      </div>
+
+      <div className="mt-4 px-1">
+        <div className="flex items-center gap-2 mb-1.5">
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">{item.client}</span>
+          <span className="w-1 h-1 rounded-full bg-border" />
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40">{item.category}</span>
         </div>
         <h3 className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
           {item.title}
@@ -311,6 +370,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
   )
 }
 
+// ─── Main Export ──────────────────────────────────────────────────────────────
 export function FullPortfolioGrid() {
   const [filter, setFilter] = useState("all")
 
@@ -318,9 +378,14 @@ export function FullPortfolioGrid() {
     filter === "all" ? portfolioItems : portfolioItems.filter(item => item.category === filter)
     , [filter])
 
+  const socialItems = filteredItems.filter(item => item.category === "social")
+  const wideItems = filteredItems.filter(item => item.category !== "social")
+
+  const showAll = filter === "all"
+
   return (
     <div className="w-full">
-      {/* Premium Filter System */}
+      {/* Filter Bar */}
       <div className="flex flex-col items-center mb-16 gap-8">
         <div className="flex items-center gap-3 text-foreground/40 text-xs font-black uppercase tracking-[0.2em]">
           <Filter className="w-4 h-4" />
@@ -336,16 +401,10 @@ export function FullPortfolioGrid() {
                 onClick={() => setFilter(cat.id)}
                 className={cn(
                   "flex items-center gap-3 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-500 relative overflow-hidden group",
-                  isActive
-                    ? "text-primary-foreground"
-                    : "text-foreground/60 hover:text-foreground"
+                  isActive ? "text-primary-foreground" : "text-foreground/60 hover:text-foreground"
                 )}
               >
-                {isActive && (
-                  <div
-                    className="absolute inset-0 bg-primary z-0"
-                  />
-                )}
+                {isActive && <div className="absolute inset-0 bg-primary z-0" />}
                 <Icon className={cn("w-4 h-4 relative z-10 transition-colors", isActive ? "text-primary-foreground" : "text-primary group-hover:scale-110")} />
                 <span className="relative z-10">{cat.name}</span>
               </button>
@@ -354,19 +413,55 @@ export function FullPortfolioGrid() {
         </div>
       </div>
 
-      {/* Modern Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-12">
-        {filteredItems.map((item) => (
-          <PortfolioCard key={item.id} item={item} />
-        ))}
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={filter}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          className="flex flex-col gap-20"
+        >
+          {/* ── Social: 9:16 – 4 columns ── */}
+          {socialItems.length > 0 && (
+            <section>
+              {showAll && (
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-foreground/30 mb-8">
+                  Social · 9:16 Vertical
+                </p>
+              )}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+                {socialItems.map(item => (
+                  <SocialCard key={item.id} item={item} />
+                ))}
+              </div>
+            </section>
+          )}
 
-      {/* Empty State */}
-      {filteredItems.length === 0 && (
-        <div className="py-32 text-center text-foreground/40 italic font-medium tracking-wide">
-          No projects found in this category. Check back soon for more work.
-        </div>
-      )}
+          {/* ── Corporate / Wide: 16:9 – 2 columns ── */}
+          {wideItems.length > 0 && (
+            <section>
+              {showAll && (
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-foreground/30 mb-8">
+                  Corporate · 16:9 Cinema
+                </p>
+              )}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
+                {wideItems.map(item => (
+                  <CorporateCard key={item.id} item={item} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Empty State */}
+          {filteredItems.length === 0 && (
+            <div className="py-32 text-center text-foreground/40 italic font-medium tracking-wide">
+              No projects found in this category. Check back soon for more work.
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </div>
   )
 }
