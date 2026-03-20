@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Play, Filter, LayoutGrid, MonitorPlay, Smartphone, Calendar, Heart } from "lucide-react"
 import { VimeoPlayer, type VimeoPlayerRef } from "@/components/ui/VimeoPlayer"
+import { useVimeoThumbnail } from "@/hooks/useVimeoThumbnail"
 
 interface PortfolioItem {
   id: number;
@@ -227,7 +228,7 @@ function SocialCard({ item }: { item: PortfolioItem }) {
     next ? playerRef.current?.play() : playerRef.current?.pause()
   }
 
-  const thumbnailUrl = item.image || (item.vimeoId ? `https://vumbnail.com/${item.vimeoId}_large.jpg` : null)
+  const thumbnailUrl = useVimeoThumbnail(item.vimeoId) ?? item.image ?? null
 
   return (
     <article className="group relative flex flex-col">
@@ -305,7 +306,7 @@ function CorporateCard({ item }: { item: PortfolioItem }) {
     next ? playerRef.current?.play() : playerRef.current?.pause()
   }
 
-  const thumbnailUrl = item.image || (item.vimeoId ? `https://vumbnail.com/${item.vimeoId}_large.jpg` : null)
+  const thumbnailUrl = useVimeoThumbnail(item.vimeoId) ?? item.image ?? null
 
   return (
     <article className="group relative flex flex-col">

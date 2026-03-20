@@ -3,9 +3,10 @@
 import { useState, useRef } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { Play, Pause, Mail, ArrowRight, Loader2 } from "lucide-react"
+import { Play, Mail, ArrowRight, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { VimeoPlayer, type VimeoPlayerRef } from "@/components/ui/VimeoPlayer"
+import { useVimeoThumbnail } from "@/hooks/useVimeoThumbnail"
 
 interface PortfolioItem {
   id: number;
@@ -233,7 +234,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
     }
   }
 
-  const thumbnailUrl = item.image || (item.vimeoId ? `https://vumbnail.com/${item.vimeoId}_large.jpg` : null)
+  const thumbnailUrl = useVimeoThumbnail(item.vimeoId) ?? item.image ?? null
 
   return (
     <article className="relative flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 group/card">
