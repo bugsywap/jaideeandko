@@ -15,7 +15,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1131310388",
     title: "Gala 2025",
     client: "Young Founders School",
-    category: "Corporate Branding",
+    category: "Corporate Event",
     year: "2025",
     description: "Back for its second year, the Young Founders School Gala celebrated the impact of its supporters and donors. With results from 2024 proving their growth, YFS now aims to raise $500,000 to expand across Southeast Asia, India, and Africa.",
     gallery: [
@@ -29,7 +29,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1131319086",
     title: "Little Explorers",
     client: "Green Chapter",
-    category: "Corporate Strategy",
+    category: "Founder’s Story",
     year: "2024",
     description: "Green Chapter launches a new series of videos promoting their Little Explorers guided nature explorations and terrarium workshops. Ready to explore?",
     gallery: [
@@ -45,7 +45,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021466679",
     title: "Failure to Launch",
     client: "Enterprise Singapore",
-    category: "Event Production",
+    category: "Corporate Short Film",
     year: "2024",
     description: "A fictional short film of first time F&B Founder struggling to launch his new cafe. Highlighting the relatable struggles of the industry and the shame of failure to friends.",
     gallery: [
@@ -58,7 +58,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021463357",
     title: "Be You, Lead the New",
     client: "Accenture",
-    category: "Thought Leadership",
+    category: "Employee Branding",
     year: "2024",
     description: "A recruitment series featuring the talents at Accenture Philippines and how their passions align with their careers. The series emphasizes the importance of employee branding in showcasing the unique contributions of each team member.",
     gallery: [
@@ -77,7 +77,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021494730",
     title: "UOB Asset Management Corp",
     client: "UOB Asset Management",
-    category: "Documentary",
+    category: "Corporate Video",
     year: "2024",
     description: "A corporate video showcasing UOB Asset Management’s commitment to building a sustainable future by offering everyday investors access to the issues that matter most to them",
     gallery: [
@@ -89,7 +89,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "738471780",
     title: "Culture Day 2022",
     client: "Meltwater",
-    category: "Finance & ESG",
+    category: "Employee Branding",
     year: "2023",
     description: "A ground-level look into Meltwater’s leadership, teams, and internal culture, capturing authentic moments from their 2022 Culture Day event in a rustic and genuine way.",
     gallery: [
@@ -105,7 +105,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021450871",
     title: "Charity Video",
     client: "3 Degrees",
-    category: "NGO Spotlight",
+    category: "Non-Profit Founder’s Story",
     year: "2024",
     description: "A featured video about the ItsRainingRaincoats charity and their founders’ mission to support migrant workers in Singapore by bridging cultural gaps and fostering inclusivity within society.",
     gallery: [
@@ -123,7 +123,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1131316789",
     title: "Gala 2025",
     client: "Wealth GPS",
-    category: "FinTech Innovation",
+    category: "Corporate Events",
     year: "2024",
     description: "Wealth GPs marks their 2025 Gala Awards with gratitude and growth, celebrating success, reflecting on their journey, and opening doors for those seeking a second chance.",
     gallery: [
@@ -135,7 +135,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1131316295",
     title: "Book Launch",
     client: "Productivity Joy",
-    category: "Enterprise Solutions",
+    category: "Book Launch Event",
     year: "2024",
     description: "Psychologist Simi Rayat debuts Productivity Joy, helping readers rediscover balance and joy in the rush of everyday life.",
     gallery: [
@@ -147,7 +147,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021465916",
     title: "Active Mobility Bill",
     client: "Land Transport Authority",
-    category: "Banking Roadmap",
+    category: "Government PSA",
     year: "2024",
     description: "LTA's Active Mobility Bill was introduced to provide safety guidelines for mobility devices and a healthier lifestyle.  ",
     gallery: [
@@ -159,7 +159,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021483669",
     title: "Kaleoscopic Communications - ANEXT Bank: Open For Business Podcast",
     client: "Kaleoscopic Communications",
-    category: "Conservation",
+    category: "Podcast Series",
     year: "2024",
     description: "Kaleidoscopic, presents a new podcast in collaboration with ANEXT Bank, spotlighting the untold stories of Singapore’s entrepreneurs, and the real ways ANEXT has helped them grow their businesses.",
     gallery: [
@@ -175,7 +175,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021466316",
     title: "Corporate Video",
     client: "NIE",
-    category: "Energy & Infrastructure",
+    category: "Corporate Video",
     year: "2024",
     description: "NIE is constantly evolving. It’s here that the educators of tomorrow learn to hone their craft, shaping and empowering the next generation of Singaporeans.",
     gallery: [
@@ -187,7 +187,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021466066",
     title: "Work Place Appreciation",
     client: "Ministry of Manpower",
-    category: "Media Evolution",
+    category: "Government Communications",
     year: "2024",
     description: "Inspired by true stories of Singaporeans at different life stages who faced retrenchment, and the MOM officers who helped them get back on their feet.",
     gallery: [
@@ -199,7 +199,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1021467300",
     title: "Job Redesign",
     client: "Workforce Singapore",
-    category: "Hospitality & Travel",
+    category: "Corporate Video",
     year: "2024",
     description: "A short film and case study project showcasing the challenges of retail and the real success stories behind Singaporean-led businesses.",
     gallery: [
@@ -213,7 +213,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1131318031",
     title: "Banpu Testimonial Video",
     client: "Mentem",
-    category: "Industrial Development",
+    category: "Testimonials",
     year: "2024",
     description: "A testimonial from Banpu, a leading Thai energy company, highlighting how Mentem helped design and deliver management enablement training for their team",
     gallery: [

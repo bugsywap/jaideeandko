@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export function SocialProof() {
   const [isPlaying, setIsPlaying] = useState(false)
-  const vimeoId = "1017530489"
+  const vimeoId = "1178920781"
 
   return (
     <section className="py-20 lg:py-24 bg-background overflow-hidden relative border-b border-border/50">
@@ -21,9 +21,9 @@ export function SocialProof() {
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Side: Video Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -32,11 +32,11 @@ export function SocialProof() {
           >
             {/* Visual Frame Decorator */}
             <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
-            
+
             <div className="relative aspect-video rounded-3xl overflow-hidden bg-surface border border-border/50 shadow-2xl z-10">
               <AnimatePresence mode="wait">
                 {!isPlaying ? (
-                  <motion.div 
+                  <motion.div
                     key="thumbnail"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -44,16 +44,16 @@ export function SocialProof() {
                     className="absolute inset-0 z-20 cursor-pointer group/thumb"
                     onClick={() => setIsPlaying(true)}
                   >
-                    <img 
-                      src={`https://vumbnail.com/${vimeoId}.jpg?width=1280`} 
-                      alt="Social Proof Video" 
+                    <img
+                      src={`https://vumbnail.com/${vimeoId}.jpg?width=1280`}
+                      alt="Social Proof Video"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover/thumb:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/30 group-hover/thumb:bg-black/40 transition-colors" />
-                    
+
                     {/* Premium Play Button (Smaller) */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div 
+                      <motion.div
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                         className="relative"
@@ -73,7 +73,7 @@ export function SocialProof() {
                     </div>
                   </motion.div>
                 ) : (
-                  <motion.div 
+                  <motion.div
                     key="video"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -99,7 +99,7 @@ export function SocialProof() {
               transition={{ duration: 0.6 }}
             >
               <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-4">
-                Strategic Impact
+                Latest Work Spotlight
               </Badge>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground leading-tight mb-4">
                 Build Your <span className="text-primary italic">Social Proof</span>
@@ -116,7 +116,7 @@ export function SocialProof() {
               <p className="text-base leading-relaxed text-foreground/70">
                 Organizations often find it challenging to communicate their corporate narratives in a relatable manner, leading to a disconnect with their audience and missed opportunities for advocacy and sales.
               </p>
-              
+
               <div className="p-5 rounded-xl bg-surface border border-primary/10 shadow-sm relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-primary" />
                 <p className="text-sm leading-relaxed text-foreground/80">

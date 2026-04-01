@@ -1,22 +1,6 @@
 "use client"
 
 import * as React from "react"
-<<<<<<< HEAD
-import { QuickContact } from "@/components/sections/QuickContact"
-import { Pricing } from "@/components/ui/pricing-cards"
-import { Badge } from "@/components/ui/badge"
-import { Video, Share2, Users, CalendarDays, CheckCircle2, ArrowRight } from "lucide-react"
-import Link from "next/link"
-import { ScrollReveal } from "@/components/ui/ScrollReveal"
-
-const services = [
-  {
-    id: "corporate",
-    title: "Corporate & Brand Videos",
-    description: "High-end visual storytelling that communicates your corporate narrative. We craft videos that build trust, authority, and social proof with your stakeholders.",
-    icon: Video,
-    image: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80&w=800",
-=======
 import { Badge } from "@/components/ui/badge"
 import { Video, Share2, Users, CalendarDays, PenTool, Code2, BookOpen, Mic, Radio, MessageSquare, Briefcase, CheckCircle2, ArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -30,7 +14,6 @@ const allServices = [
     description: "High-end visual storytelling that communicates your corporate narrative. We craft videos that build trust, authority, and social proof with your stakeholders, seamlessly communicating your message to your ideal audience.",
     icon: Video,
     image: "/img/corpo-brand.jpg",
->>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
     features: [
       "Company overviews & manifesto videos",
       "Product & service explainers",
@@ -40,15 +23,9 @@ const allServices = [
   {
     id: "social",
     title: "Social Media Content",
-<<<<<<< HEAD
-    description: "Short-form, engaging, and highly shareable content designed specifically algorithms on LinkedIn, Instagram, and TikTok to maximize organic reach.",
-    icon: Share2,
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
-=======
     description: "Short-form, engaging, and highly shareable content explicitly crafted to take advantage of algorithms on LinkedIn, Instagram, and TikTok to maximize your organic reach.",
     icon: Share2,
     image: "/img/soc-med.jpg",
->>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
     features: [
       "Short-form reels & TikToks",
       "Bite-sized thought leadership clips",
@@ -58,19 +35,11 @@ const allServices = [
   {
     id: "founder",
     title: "Founder Story Videos",
-<<<<<<< HEAD
-    description: "Humanize your brand with authentic documentary-style profiles that capture your leadership's vision, origin story, and deeply held passion.",
-    icon: Users,
-    image: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&q=80&w=800",
-    features: [
-      "Documentary-style interviews",
-=======
     description: "Humanize your brand with authentic documentary-style profiles that capture your leadership's vision, origin story, and deeply held passion behind the business.",
     icon: Users,
     image: "/img/founder-story.JPG",
     features: [
       "Documentary-style narrative interviews",
->>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
       "Behind-the-scenes deep dives",
       "Visionary roadmap & culture videos"
     ]
@@ -80,14 +49,6 @@ const allServices = [
     title: "Event Coverage",
     description: "Dynamic highlight reels and keynotes that extend the lifespan and impact of your physical events, turning a one-day gathering into long-term marketing collateral.",
     icon: CalendarDays,
-<<<<<<< HEAD
-    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800",
-    features: [
-      "High-energy event highlight reels",
-      "Multi-cam keynote recordings",
-      "On-site attendee testimonials"
-    ]
-=======
     image: "/img/event-coverage.jpg",
     features: [
       "High-energy event highlight reels",
@@ -134,7 +95,7 @@ const allServices = [
   {
     id: "brand",
     title: "Digitization of Brand Guidelines",
-    description: "Transform your static, outdated brand manuals into a dynamic, AI-powered online depository ensuring seamless brand consistency across all vendors and internal teams.",
+    description: "Transform your static, outdated brand manuals into a dynamic, AI-powered online depository ensuring brand consistency across all vendors and internal teams.",
     icon: BookOpen,
     image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=1200",
     features: [
@@ -178,63 +139,11 @@ const allServices = [
       "Creative team & vendor management",
       "Quarterly KPI oversight & optimization"
     ]
->>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
   }
 ]
 
 export default function ServicesPage() {
   return (
-<<<<<<< HEAD
-    <div className="bg-background min-h-[80vh] flex items-center justify-center pt-32 pb-16 overflow-hidden relative">
-      {/* Background Glow */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
-          style={{
-            background: "radial-gradient(circle at center, rgba(117, 185, 162, 0.1) 0%, transparent 70%)",
-            filter: "blur(80px)",
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <ScrollReveal className="flex flex-col items-center text-center max-w-2xl mx-auto gap-8 transition-all">
-          <Badge variant="outline" className="border-primary text-primary bg-primary/10 px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em]">
-            System Update
-          </Badge>
-          
-          <div className="space-y-4">
-            <h1 className="text-5xl sm:text-7xl font-black tracking-tighter text-foreground leading-[1.1]">
-              Services Under <span className="text-primary italic">Maintenance.</span>
-            </h1>
-            <p className="text-xl md:text-2xl leading-relaxed text-foreground/70 font-medium">
-              We're currently refining our service packages to better serve your visual storytelling needs. We'll be back shortly with a more powerful offering.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-6 mt-4">
-            <Link 
-              href="/" 
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-primary px-8 py-4 text-sm font-black uppercase tracking-widest text-primary-foreground transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-primary/20"
-            >
-              Back to Home
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            
-            <Link 
-              href="/contact" 
-              className="px-8 py-4 text-sm font-black uppercase tracking-widest text-foreground hover:text-primary transition-colors border-2 border-border hover:border-primary rounded-full"
-            >
-              Contact Us
-            </Link>
-          </div>
-
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/30 mt-12">
-            Estimated Uptime: Q2 2026
-          </p>
-        </ScrollReveal>
-      </div>
-=======
     <div className="bg-background min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden border-b border-border text-center flex flex-col items-center">
@@ -273,7 +182,7 @@ export default function ServicesPage() {
 
               return (
                 <ScrollReveal 
-                  key={service.id} 
+                   key={service.id} 
                   className={`flex flex-col gap-12 lg:gap-24 items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
                 >
                   {/* Image Block */}
@@ -340,7 +249,6 @@ export default function ServicesPage() {
 
       {/* CTA Section */}
       <QuickContact />
->>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
     </div>
   )
 }

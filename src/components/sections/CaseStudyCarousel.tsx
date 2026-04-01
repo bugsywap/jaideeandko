@@ -8,8 +8,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { caseStudies } from "@/data/case-studies"
 
-<<<<<<< HEAD
-=======
 const clientLogoMap: Record<string, string> = {
   "Young Founders School": "/img/sch1.png",
   "3 Degrees": "/img/3-deg.png",
@@ -27,7 +25,6 @@ const clientLogoMap: Record<string, string> = {
   "Workforce Singapore": "/img/wsg.png",
   "Mentem": "/img/mentum NSW.png",
 }
->>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
 export function CaseStudyCarousel() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -166,11 +163,6 @@ export function CaseStudyCarousel() {
                   {/* Card Content */}
                   <div className="flex flex-col gap-3 px-2">
                     <div>
-<<<<<<< HEAD
-                      <p className="text-foreground/50 text-[10px] font-black uppercase tracking-tighter mb-1">
-                        {study.client}
-                      </p>
-=======
                       {clientLogoMap[study.client] ? (
                         <div className="flex items-center justify-start h-6 md:h-7 mb-2">
                           <img 
@@ -185,7 +177,6 @@ export function CaseStudyCarousel() {
                           {study.client}
                         </p>
                       )}
->>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
                       <h3 className="text-foreground text-lg font-bold tracking-tight line-clamp-1">
                         {study.title}
                       </h3>
