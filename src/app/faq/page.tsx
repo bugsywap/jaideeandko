@@ -1,93 +1,234 @@
+"use client"
+
+import { useState } from "react"
 import { QuickContact } from "@/components/sections/QuickContact"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ScrollReveal } from "@/components/ui/ScrollReveal"
+import { motion, AnimatePresence } from "framer-motion"
+import { Plus, Minus } from "lucide-react"
 
-export const metadata = {
-  title: "Frequently Asked Questions | Jaidee & Ko",
-  description: "Find answers about pricing, turnaround times, and our video production process in Singapore.",
-}
-
-const faqs = [
+const faqCategories = [
   {
-    question: "1. What services do you offer & what are the costs?",
-    answer: "Our creative services include: \n\n- Social Video Production\n- Corporate Video Production\n- Branded Content Creation\n- Film Production (including development, pre-production, filming, post-production, and social media management)\n\nPricing is tailored to each project's unique requirements. Our services start from $1.5k and can range up to $200k+ for extensive, high-end solutions.\n\nFor a personalized quote, we recommend getting in touch to discuss your specific needs and goals."
+    category: "Working With Us",
+    faqs: [
+      {
+        question: "What types of clients do you work with?",
+        answer: (
+          <div className="space-y-4">
+            <p>We work with businesses of all sizes - from funded startups and growing SMEs to established enterprises and large organisations. Our clients span B2B, NGOs, non-profits, government agencies, and beyond.</p>
+            <p>What matters more than category is intent. Our best work happens with clients who have a story worth telling and the conviction to tell it well. If you're impact-driven - if what you do genuinely means something to the people you serve - we'll do our best work for you.</p>
+          </div>
+        )
+      },
+      {
+        question: "How do I know if we're a good fit?",
+        answer: (
+           <div className="space-y-4">
+             <p>We work best with clients who have a defined goal, a realistic budget, and openness to creative collaboration. If your brief is still forming, reach out - we can help shape it together.</p>
+             <p>We are likely not the right fit if: the project has no meaningful lead time, the budget is under S$1,500, or the creative direction is fully locked before any discovery has taken place.</p>
+             <div className="italic text-primary border-l-2 border-primary/50 pl-4 py-1 font-semibold text-[1.1rem]">A good brief is a shared one. We invest in yours.</div>
+           </div>
+        )
+      },
+      {
+        question: "How far in advance should I reach out?",
+        answer: "Lead time depends on scope. A focused social content shoot can be planned in two to three weeks. A multi-video corporate series typically needs four to eight weeks of preparation. The earlier you reach out, the more strategic value we can build into the engagement."
+      },
+      {
+        question: "Do you travel outside Singapore for shoots?",
+        answer: "Yes, upon request. We're based in Singapore but travel regionally and internationally for the right project. Travel logistics and associated costs are scoped transparently into the project quote."
+      },
+      {
+        question: "Can we be involved in the creative process?",
+        answer: "Collaboration is built into how we work. Your knowledge of your audience, culture, and constraints is irreplaceable - we can't replicate that through research alone. What we ask in return is trust in the creative and strategic framework we establish together. The best results come from clients who are engaged, not controlling."
+      },
+      {
+        question: "Do you do pro bono work?",
+        answer: "Selectively. We occasionally feature organisations we believe have a story worth telling - these are produced from Jaidee & Ko's creative perspective and shared with our audience. You're welcome to use and distribute the content freely. Fully pro bono engagements - where we work entirely to your brief - are considered case by case based on cause alignment and current capacity."
+      }
+    ]
   },
   {
-    question: "2. What types of clients do you work with?",
-    answer: "We focus on B2B businesses, industry leaders, NGOs, and non-profits, particularly those that often work behind the scenes but deserve to be seen. Our specialty is helping these organizations tell their stories in a way that feels genuine and impactful. We create approachable corporate videos that inspire advocacy and effectively communicate our clients' missions and values."
+    category: "Pricing & Payments",
+    faqs: [
+      {
+        question: "What do your services cost?",
+        answer: (
+          <div className="space-y-4">
+            <p>Most projects are quoted individually based on scope, crew, and deliverables. For repeatable formats - event coverage, property walkthroughs, and similar - we offer fixed rate cards that are priced clearly and move faster.</p>
+            <p>For series work, the first instalment costs more to establish the creative framework. Subsequent pieces are arranged at a reduced rate.</p>
+            <div className="italic text-primary border-l-2 border-primary/50 pl-4 py-1 font-semibold text-[1.1rem]">Minimum engagement: S$1,500</div>
+          </div>
+        )
+      },
+      {
+        question: "What is your payment structure?",
+        answer: (
+          <p>Our standard structure is <strong className="text-foreground">50% upon project confirmation</strong> and <strong className="text-foreground">50% upon final delivery</strong>. For longer or milestone-based engagements, alternative schedules can be agreed during onboarding. Production does not commence until the initial payment is received.</p>
+        )
+      },
+      {
+        question: "Do you offer retainers or ongoing partnerships?",
+        answer: "Yes. For clients with consistent content needs, we structure ongoing partnerships around volume and cadence. Retainer engagements typically deliver stronger output and better value than one-off projects - we become an extension of your team rather than a vendor you brief from scratch each time."
+      }
+    ]
   },
   {
-    question: "3. What equipment do you use for filming?",
-    answer: "We utilize high-quality, industry-standard equipment including cameras, lighting, and sound gear."
+    category: "Production & Delivery",
+    faqs: [
+      {
+        question: "How long does a typical project take?",
+        answer: "Timelines are set per project. A social content package may turn around in two to three weeks from shoot to delivery. A fully produced corporate video with strategy and scripting typically runs four to six weeks. A clear production schedule is established at the outset - no moving targets."
+      },
+      {
+        question: "How many revision rounds are included?",
+        answer: (
+          <p><strong className="text-foreground">Two rounds of revisions</strong> are included as standard across all projects. Additional rounds can be arranged at an agreed rate. In our experience, two rounds are sufficient when the brief and concept are well-established before production begins - which is why we invest heavily in discovery and strategy upfront.</p>
+        )
+      },
+      {
+        question: "What formats will my final assets be delivered in?",
+        answer: "Assets are delivered in formats optimised for your intended channels - broadcast specs, social platform ratios (16:9, 9:16, 1:1), or web delivery. Required formats are confirmed during onboarding so there's no re-exporting at handover."
+      },
+      {
+        question: "What's the difference between fully curated and social-style video?",
+        answer: (
+          <div className="space-y-4">
+            <p><strong className="text-foreground">Fully curated video</strong> is crafted for precision - polished, scripted, designed for high-stakes marketing or brand positioning.</p>
+            <p><strong className="text-foreground">Social-style video</strong> is intentionally more immediate and raw, built for authenticity on platforms where audiences have learned to distrust over-production.</p>
+            <p>Both serve a strategic purpose. We advise on which approach fits your goal - not which one costs more.</p>
+          </div>
+        )
+      },
+      {
+        question: "What equipment do you use?",
+        answer: "We use professional, industry-standard cameras, lighting, and audio equipment scaled to the needs of each project. For a consultation shoot we bring a lean, unobtrusive kit. For a flagship production we bring the full crew. The right tool for the right job - not the most impressive kit for the sake of it."
+      }
+    ]
   },
   {
-    question: "4. What’s fully curated video vs ‘social-style’ video?",
-    answer: "A fully curated video is typically more polished and designed for high-end marketing, while a social-style video is more raw, honest, and real. We believe social-style content connects more authentically with modern audiences."
-  },
-  {
-    question: "5. Is there a minimum commitment for content development?",
-    answer: "To successfully perform organically on socials we offer and encourage a longer working relationship with our partners but also offer per project based pricing too."
-  },
-  {
-    question: "6. Do you do pro bono work?",
-    answer: "Yes and no. We’re open to featuring businesses if we believe there’s a story worth telling for our audience. In these cases, the video is created from Jaidee & Ko’s perspective, and you’re welcome to share and use it for your own promotion. Fully pro bono work is considered on a case-by-case basis."
-  },
-  {
-    question: "7. Can we be involved in the creative process?",
-    answer: "Yes! We encourage collaboration. While we handle the technical and creative aspects, we value your input and want to ensure the final product reflects your vision and goals."
-  },
-  {
-    question: "8. How can I get a quote for my project?",
-    answer: "To receive a quote, please fill out the contact form on our website or book a call with us to discuss your project in detail."
+    category: "Rights & Working Methods",
+    faqs: [
+      {
+        question: "Who owns the footage and final assets after delivery?",
+        answer: (
+          <div className="space-y-4">
+             <p>Ownership is defined per contract. In most engagements, the client holds full rights to the final delivered assets. Raw footage and project files may be retained by Jaidee & Ko unless a full raw transfer is agreed and scoped into the project. We discuss this clearly during onboarding - there is no ambiguity at handover.</p>
+             <div className="italic text-primary border-l-2 border-primary/50 pl-4 py-1 font-semibold text-[1.1rem]">Ownership terms are always confirmed in writing before production begins.</div>
+          </div>
+        )
+      },
+      {
+        question: "Do you use AI in your work?",
+        answer: (
+          <div className="space-y-4">
+            <p>Yes - deliberately and transparently. We use AI tools across strategy, scripting, research, and elements of post-production. These tools accelerate the thinking work, not replace it. Every creative decision is made and reviewed by our team.</p>
+            <p>We don't use AI to cut corners. We use it to spend more of our human time on what actually matters: the quality of the idea and the integrity of the execution.</p>
+          </div>
+        )
+      }
+    ]
   }
 ]
 
+function FaqItem({ question, answer }: { question: string, answer: React.ReactNode }) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <div 
+      className="border-b border-border/60 py-8 last:border-0 group cursor-pointer" 
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      <div className="flex justify-between items-start gap-6">
+        <h3 className={`text-xl md:text-2xl font-bold tracking-tight transition-colors duration-300 leading-snug pt-1 ${isOpen ? 'text-primary' : 'text-foreground group-hover:text-primary/80'}`}>
+          {question}
+        </h3>
+        <motion.div 
+          animate={{ rotate: isOpen ? 180 : 0 }} 
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className={`shrink-0 w-12 h-12 rounded-full border flex items-center justify-center transition-all ${isOpen ? 'border-primary/30 bg-primary/10' : 'border-border group-hover:border-primary/50 group-hover:bg-primary/5'}`}
+        >
+          {isOpen ? <Minus className="w-5 h-5 text-primary" /> : <Plus className="w-5 h-5 text-foreground/60 group-hover:text-primary" />}
+        </motion.div>
+      </div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: "anticipate" }}
+            className="overflow-hidden"
+          >
+            <div className="pt-6 pb-2 text-[1.1rem] text-foreground/70 leading-relaxed font-medium">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 export default function FAQPage() {
   return (
-    <div className="bg-background pt-32 pb-16 overflow-hidden">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <div className="container mx-auto px-6 max-w-7xl mb-16 lg:mb-24">
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto gap-6 sm:mt-12 relative z-10">
-          <Badge variant="outline" className="border-primary text-primary bg-primary/10 px-4 py-1 text-sm">
+      <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden border-b border-border/50">
+        <div className="absolute inset-0 bg-primary/5 -skew-y-2 transform -z-10 origin-bottom-left" />
+        <ScrollReveal className="container mx-auto px-6 max-w-5xl relative z-10 text-center flex flex-col items-center">
+          <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest mb-8">
             Knowledge Base
           </Badge>
-          <h1 className="text-5xl sm:text-7xl font-bold tracking-tighter text-foreground leading-[1.1]">
-            Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">Questions.</span>
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-foreground uppercase leading-[1.05]">
+            Frequently Asked <br />
+            <span className="text-primary italic">Questions</span>
           </h1>
-          <p className="text-xl md:text-2xl leading-relaxed text-foreground/70 mt-4 max-w-2xl">
-            Everything you need to know about our process, pricing, and how we deliver high-performing visual assets.
+          <p className="mt-8 text-xl md:text-2xl leading-relaxed text-foreground/70 font-medium max-w-2xl">
+            Everything you need to know about working with us, pricing, production, and rights.
           </p>
-        </div>
-      </div>
+        </ScrollReveal>
+      </section>
 
-      <div className="relative">
-        <div className="absolute inset-0 bg-surface/50 -skew-y-2 transform -z-10 origin-top-right border-y border-border/50" />
-        <div className="container mx-auto px-6 max-w-7xl py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-            {faqs.map((faq, index) => (
-              <Card key={index} className="bg-background border-border overflow-hidden hover:border-primary/50 transition-colors duration-300">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-foreground leading-snug">
-                    {faq.question}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-foreground/70 leading-relaxed text-lg">
-                    {faq.answer}
-                  </p>
-                </CardContent>
-              </Card>
+      {/* FAQ Categories Section */}
+      <section className="bg-background py-20 lg:py-32">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="flex flex-col gap-24 lg:gap-32">
+            {faqCategories.map((cat, idx) => (
+              <ScrollReveal key={idx} delay={0.1}>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+                  
+                  {/* Category Title (Sticky over scroll) */}
+                  <div className="lg:col-span-4 lg:sticky top-32">
+                    <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Category {idx + 1}</span>
+                    <h2 className="text-3xl lg:text-4xl font-black uppercase tracking-tight text-foreground leading-none">
+                      {cat.category}
+                    </h2>
+                  </div>
+                  
+                  {/* Accordion List */}
+                  <div className="lg:col-span-8">
+                    <div className="bg-surface/50 rounded-[2.5rem] p-8 md:p-12 border border-border/60 shadow-lg">
+                      {cat.faqs.map((faq, i) => (
+                        <FaqItem key={i} question={faq.question} answer={faq.answer} />
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
+      {/* Footer Contact CTA */}
       <section className="mt-16 lg:mt-32 relative">
         <div className="absolute inset-0 bg-primary/5 -skew-y-2 transform -z-10 origin-bottom-left" />
         <div className="container mx-auto px-6 max-w-7xl pt-16 pb-8">
           <div className="mb-12 text-center">
              <h2 className="text-3xl font-bold text-foreground mb-4">Still have questions?</h2>
-             <p className="text-lg text-foreground/70 max-w-xl mx-auto">We're here to help. Drop us a message below and our team will get back to you within 24 hours.</p>
+             <p className="text-lg text-foreground/70 max-w-xl mx-auto font-medium">We're here to help. Drop us a message below and our team will get back to you within 24 hours.</p>
           </div>
           <QuickContact />
         </div>
@@ -95,3 +236,4 @@ export default function FAQPage() {
     </div>
   )
 }
+

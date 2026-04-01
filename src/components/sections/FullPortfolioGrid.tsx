@@ -204,6 +204,22 @@ const portfolioItems: PortfolioItem[] = [
     category: "corporate",
     vimeoId: "1131318031",
     slug: "/our-work/corp-15"
+  },
+  {
+    id: 24,
+    title: "Brand Narrative",
+    client: "Meltwater",
+    category: "corporate",
+    vimeoId: "890946553",
+    slug: "/our-work/corp-16"
+  },
+  {
+    id: 25,
+    title: "Global Story",
+    client: "Meltwater",
+    category: "corporate",
+    vimeoId: "738471829",
+    slug: "/our-work/corp-17"
   }
 ]
 

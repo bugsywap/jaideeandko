@@ -58,8 +58,8 @@ const allServices = [
   },
   {
     id: "seo",
-    title: "SEO Article & Blog Creation",
-    description: "Dominating search engines takes more than algorithms—it takes powerful writing. We provide targeted, heavily researched, and elegantly crafted blog articles designed specifically to hit your audience's intent.",
+    title: "Written Editorial & Blog Content",
+    description: "Dominating search engines takes more than algorithms-it takes powerful writing. We provide targeted, heavily researched, and elegantly crafted blog articles designed specifically to hit your audience's intent.",
     icon: PenTool,
     image: "https://images.unsplash.com/photo-1455390582262-044cdead2708?auto=format&fit=crop&q=80&w=1200",
     features: [
@@ -121,7 +121,7 @@ const allServices = [
     title: "Communication Consultations",
     description: "Expert public relations and strategic consulting to help executive teams shape their narrative, handle press seamlessly, and gracefully navigate their public messaging frameworks.",
     icon: MessageSquare,
-    image: "https://images.unsplash.com/photo-1556761175-5973eafb046e?auto=format&fit=crop&q=80&w=1200",
+    image: "/img/communication-consultation.png",
     features: [
       "Crisis management playbook creation",
       "Executive media training & mock interviews",

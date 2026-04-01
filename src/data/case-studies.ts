@@ -97,7 +97,9 @@ export const caseStudies: CaseStudy[] = [
       { vimeoId: "1021485735", type: 'social' },
       { vimeoId: "1021485764", type: 'social' },
       { vimeoId: "1021485785", type: 'social' },
-      { vimeoId: "1026056750", type: 'social' }
+      { vimeoId: "1026056750", type: 'social' },
+      { vimeoId: "890946553", type: 'corporate' },
+      { vimeoId: "738471829", type: 'corporate' }
     ]
   },
   {
