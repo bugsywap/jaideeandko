@@ -101,32 +101,37 @@ export default function AboutPage() {
       <section className="py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <ScrollReveal>
+            <ScrollReveal className="h-full">
               <motion.div
                 whileHover={{ y: -10 }}
-                className="p-10 lg:p-14 rounded-[2.5rem] bg-surface border border-border shadow-xl hover:border-primary/30 transition-all group"
+                className="p-10 lg:p-14 rounded-[2.5rem] bg-surface border border-border shadow-xl hover:border-primary/30 transition-all group h-full"
               >
                 <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
                   <Target className="w-8 h-8" />
                 </div>
                 <h3 className="text-3xl font-black mb-6">Our Mission</h3>
-                <p className="text-lg text-foreground/70 leading-relaxed">
-                  To help businesses and industry leaders get noticed through creative video production and content marketing. We’re here to help small teams with big dreams become the impact they want to see in the world.
-                </p>
+                <div className="space-y-4">
+                  <p className="text-lg text-foreground/70 leading-relaxed">
+                    To help businesses and industry leaders communicate with clarity, build trust, and earn attention in a noisy digital world.
+                  </p>
+                  <p className="text-lg text-foreground/70 leading-relaxed">
+                    We combine strategic communications with content creation to turn what you do into stories people understand, believe in, and act on.
+                  </p>
+                </div>
               </motion.div>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.1}>
+            <ScrollReveal delay={0.1} className="h-full">
               <motion.div
                 whileHover={{ y: -10 }}
-                className="p-10 lg:p-14 rounded-[2.5rem] bg-surface border border-border shadow-xl hover:border-primary/30 transition-all group"
+                className="p-10 lg:p-14 rounded-[2.5rem] bg-surface border border-border shadow-xl hover:border-primary/30 transition-all group h-full"
               >
                 <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
                   <Sparkles className="w-8 h-8" />
                 </div>
                 <h3 className="text-3xl font-black mb-6">Our Vision</h3>
                 <p className="text-lg text-foreground/70 leading-relaxed">
-                  To elevate the incredible work happening around the world that is too often overlooked, from essential services to innovative organizations making real-world impact. We aim to shift perceptions through visibility.
+                  To redefine how businesses show up in the world, where visibility is built on substance, not noise, and credibility is earned through honest storytelling.
                 </p>
               </motion.div>
             </ScrollReveal>

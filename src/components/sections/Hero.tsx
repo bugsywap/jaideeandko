@@ -42,8 +42,8 @@ export function Hero() {
                 transition={{ delay: 0.4, duration: 0.8 }}
                 className="text-4xl md:text-5xl lg:text-6xl tracking-tighter text-left font-black text-foreground leading-[1.0]"
               >
-                <span className="block">Corporate Video &</span>
-                <span className="text-primary italic block">Social Content</span>
+                <span className="block">Strategic Corporate Communications &</span>
+                <span className="text-primary italic block">Video Development</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -51,7 +51,7 @@ export function Hero() {
                 transition={{ delay: 0.6, duration: 0.8 }}
                 className="text-lg leading-relaxed tracking-tight text-foreground/70 max-w-md text-left mt-2"
               >
-                For B2B companies, NGOs, and founders in Singapore. We turn complex narratives into approachable visual storytelling.
+                For B2B companies, NGOs, and founders. We turn complex ideas into clear, trusted narratives that drive visibility and opportunity.
               </motion.p>
             </div>
 
