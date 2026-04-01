@@ -16,9 +16,9 @@ export function ScrollReveal({
   children,
   delay = 0,
   direction = "up",
-  duration = 0.6,
+  duration = 0.45,
   className = "",
-  distance = 30,
+  distance = 24,
 }: ScrollRevealProps) {
   const getInitialProps = () => {
     switch (direction) {
@@ -56,15 +56,17 @@ export function ScrollReveal({
     <motion.div
       initial={getInitialProps()}
       whileInView={getAnimateProps()}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-20px" }}
       transition={{
         duration: duration,
         delay: delay,
-        ease: [0.21, 0.47, 0.32, 0.98], // Premium quint ease
+        ease: "easeOut",
       }}
       className={className}
+      style={{ willChange: "opacity, transform" }}
     >
       {children}
     </motion.div>
   );
 }
+
