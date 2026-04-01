@@ -8,7 +8,7 @@ const services = [
     description: "High-end visual storytelling that communicates your corporate narrative and builds social proof with stakeholders.",
     icon: Video,
     href: "/services#corporate",
-    image: "/img/1.png",
+    image: "/img/corpo-brand.jpg",
     className: "relative overflow-hidden rounded-2xl h-full lg:col-span-2 p-8 aspect-square lg:aspect-auto flex justify-between flex-col border border-transparent shadow-sm group hover:shadow-xl transition-all cursor-pointer",
   },
   {
@@ -16,7 +16,7 @@ const services = [
     description: "Short-form, engaging, and highly shareable content designed specifically for LinkedIn, Instagram, and TikTok.",
     icon: Share2,
     href: "/services#social",
-    image: "/img/2.png",
+    image: "/img/soc-med.jpg",
     className: "relative overflow-hidden rounded-2xl aspect-square p-8 flex justify-between flex-col border border-transparent shadow-sm group hover:shadow-xl transition-all cursor-pointer",
   },
   {
@@ -24,7 +24,7 @@ const services = [
     description: "Humanize your brand with authentic documentary-style profiles that capture your leadership's vision and passion.",
     icon: Users,
     href: "/services#founder",
-    image: "/img/3.png",
+    image: "/img/founder-story.JPG",
     className: "relative overflow-hidden rounded-2xl aspect-square p-8 flex justify-between flex-col border border-transparent shadow-sm group hover:shadow-xl transition-all cursor-pointer",
   },
   {
@@ -32,7 +32,7 @@ const services = [
     description: "Dynamic highlight reels and keynotes that extend the lifespan and impact of your physical events.",
     icon: CalendarDays,
     href: "/services#event",
-    image: "/img/4.png",
+    image: "/img/event-coverage.jpg",
     className: "relative overflow-hidden rounded-2xl h-full lg:col-span-2 p-8 aspect-square lg:aspect-auto flex justify-between flex-col border border-transparent shadow-sm group hover:shadow-xl transition-all cursor-pointer",
   },
 ]
