@@ -8,6 +8,26 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { caseStudies } from "@/data/case-studies"
 
+<<<<<<< HEAD
+=======
+const clientLogoMap: Record<string, string> = {
+  "Young Founders School": "/img/sch1.png",
+  "3 Degrees": "/img/3-deg.png",
+  "Green Chapter": "/img/GClogo_No Background.png",
+  "Enterprise Singapore": "/img/es_1ceXgYdj.png",
+  "Accenture": "/img/accenture-2.png",
+  "UOB Asset Management": "/img/uob_e.png",
+  "Meltwater": "/img/meltwa.png",
+  "Wealth GPS": "/img/Wealth GPS.png",
+  "Productivity Joy": "/img/productivity.png",
+  "Land Transport Authority": "/img/land-transport-authority.png",
+  "Kaleoscopic Communications": "/img/anext_bank1.png",
+  "NIE": "/img/NIE.png",
+  "Ministry of Manpower": "/img/mom.png",
+  "Workforce Singapore": "/img/wsg.png",
+  "Mentem": "/img/mentum NSW.png",
+}
+>>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
 export function CaseStudyCarousel() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -146,9 +166,26 @@ export function CaseStudyCarousel() {
                   {/* Card Content */}
                   <div className="flex flex-col gap-3 px-2">
                     <div>
+<<<<<<< HEAD
                       <p className="text-foreground/50 text-[10px] font-black uppercase tracking-tighter mb-1">
                         {study.client}
                       </p>
+=======
+                      {clientLogoMap[study.client] ? (
+                        <div className="flex items-center justify-start h-6 md:h-7 mb-2">
+                          <img 
+                            src={clientLogoMap[study.client]} 
+                            alt={`${study.client} logo`}
+                            className="h-full w-auto object-contain object-left"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <p className="text-foreground/50 text-[10px] font-black uppercase tracking-tighter mb-1">
+                          {study.client}
+                        </p>
+                      )}
+>>>>>>> a607bf3a4aff2eb6abe5c634f4ef1ef8e1a283b2
                       <h3 className="text-foreground text-lg font-bold tracking-tight line-clamp-1">
                         {study.title}
                       </h3>
