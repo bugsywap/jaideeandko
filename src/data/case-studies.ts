@@ -11,6 +11,16 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: "aia-recruitment-event-2026",
+    vimeoId: "1178920781",
+    title: "AIA Recruitment Event 2026",
+    client: "AIA",
+    category: "Recruitment Video",
+    year: "2026",
+    description: "We partnered with AIA to capture the energy and ambition behind their 2026 Recruitment Event, bringing to life the people, purpose, and opportunities that define the brand.",
+    gallery: []
+  },
+  {
     slug: "young-founders-school",
     vimeoId: "1131310388",
     title: "Gala 2025",

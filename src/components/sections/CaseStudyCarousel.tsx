@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { caseStudies } from "@/data/case-studies"
 
 const clientLogoMap: Record<string, string> = {
+  "AIA": "/img/AIA.png",
   "Young Founders School": "/img/sch1.png",
   "3 Degrees": "/img/3-deg.png",
   "Green Chapter": "/img/GClogo_No Background.png",

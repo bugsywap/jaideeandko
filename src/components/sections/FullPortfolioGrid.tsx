@@ -86,6 +86,14 @@ const portfolioItems: PortfolioItem[] = [
 
   // --- CORPORATE VIDEOS (16:9) ---
   {
+    id: 26,
+    title: "AIA Recruitment Event 2026",
+    client: "AIA",
+    category: "corporate",
+    vimeoId: "1178920781",
+    slug: "/case-studies/aia-recruitment-event-2026"
+  },
+  {
     id: 9,
     title: "Corporate Vision 2025",
     client: "Enterprise SG",
