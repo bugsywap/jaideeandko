@@ -32,8 +32,13 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
+              className="mb-2"
             >
-              <Badge variant="outline" className="border-primary text-primary bg-primary/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase">Jaidee & Ko</Badge>
+              <img 
+                src="/img/fav.png" 
+                alt="Jaidee & Ko" 
+                className="w-14 h-14 object-contain" 
+              />
             </motion.div>
             <div className="flex gap-4 flex-col">
               <motion.h1
