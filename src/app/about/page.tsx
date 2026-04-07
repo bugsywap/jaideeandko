@@ -152,7 +152,7 @@ export default function AboutPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground leading-tight">
-              The Team <span className="text-primary italic">Behind it All</span>
+              The Man <span className="text-primary italic">Behind it All</span>
             </h2>
           </ScrollReveal>
         </div>
@@ -226,6 +226,58 @@ export default function AboutPage() {
               </ScrollReveal>
             </div>
             
+          </div>
+        </div>
+      </section>
+
+      {/* Passion Projects Section */}
+      <section className="py-24 lg:py-32 bg-background relative border-t border-border/50 overflow-hidden">
+        {/* Background Decorative */}
+        <div className="absolute left-0 top-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+        
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-col items-center text-center mb-16 lg:mb-24">
+            <ScrollReveal>
+              <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 px-4 py-1.5 text-xs font-black uppercase tracking-widest mb-6">
+                Beyond the Brief
+              </Badge>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-tight mb-6">
+                Passion <span className="text-primary italic">Projects</span>
+              </h2>
+              <p className="text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+                Creative explorations and personal endeavors that fuel our inspiration, hone our craft, and push the boundaries of visual storytelling.
+              </p>
+            </ScrollReveal>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            {[
+              "1131379087",
+              "1131379400",
+              "1131381969",
+              "1131377804"
+            ].map((id, index) => (
+              <ScrollReveal key={id} delay={0.1 * index} className="h-full">
+                <div className="group relative h-full">
+                  {/* Hover Glow */}
+                  <div className="absolute -inset-4 bg-primary/10 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 -z-10" />
+                  
+                  {/* Video Container */}
+                  <div className="relative w-full rounded-[2.5rem] bg-black shadow-2xl border border-border/50 group-hover:border-primary/30 transition-colors duration-500 overflow-hidden aspect-video">
+                    <iframe 
+                      src={`https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0&color=75b9a2`}
+                      title={`Passion Project Video ${index + 1}`}
+                      className="absolute top-0 left-0 w-full h-full" 
+                      frameBorder="0" 
+                      allow="autoplay; fullscreen; picture-in-picture" 
+                      allowFullScreen 
+                    />
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
