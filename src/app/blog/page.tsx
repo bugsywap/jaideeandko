@@ -8,7 +8,7 @@ export default async function BlogPage() {
   const posts = await getPosts();
 
   return (
-    <div className="bg-background pt-32 pb-16 overflow-hidden">
+    <div className="bg-background overflow-hidden">
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 border-b border-border/50">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-primary/5 rounded-[100%] blur-[120px] pointer-events-none -z-10" />
