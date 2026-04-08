@@ -1,0 +1,187 @@
+[
+  {
+    "name": "stage",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": "Stage",
+        "kind": "ENUM"
+      }
+    }
+  },
+  {
+    "name": "documentInStages",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": null,
+        "kind": "LIST"
+      }
+    }
+  },
+  {
+    "name": "publishedAt",
+    "type": {
+      "name": "DateTime",
+      "kind": "SCALAR",
+      "ofType": null
+    }
+  },
+  {
+    "name": "updatedAt",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": "DateTime",
+        "kind": "SCALAR"
+      }
+    }
+  },
+  {
+    "name": "createdAt",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": "DateTime",
+        "kind": "SCALAR"
+      }
+    }
+  },
+  {
+    "name": "id",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": "ID",
+        "kind": "SCALAR"
+      }
+    }
+  },
+  {
+    "name": "title",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": "String",
+        "kind": "SCALAR"
+      }
+    }
+  },
+  {
+    "name": "slug",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": "String",
+        "kind": "SCALAR"
+      }
+    }
+  },
+  {
+    "name": "date",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": "Date",
+        "kind": "SCALAR"
+      }
+    }
+  },
+  {
+    "name": "excerpt",
+    "type": {
+      "name": "String",
+      "kind": "SCALAR",
+      "ofType": null
+    }
+  },
+  {
+    "name": "content",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": "PostContentRichText",
+        "kind": "OBJECT"
+      }
+    }
+  },
+  {
+    "name": "seoOverride",
+    "type": {
+      "name": "SeoOverride",
+      "kind": "OBJECT",
+      "ofType": null
+    }
+  },
+  {
+    "name": "publishedBy",
+    "type": {
+      "name": "User",
+      "kind": "OBJECT",
+      "ofType": null
+    }
+  },
+  {
+    "name": "updatedBy",
+    "type": {
+      "name": "User",
+      "kind": "OBJECT",
+      "ofType": null
+    }
+  },
+  {
+    "name": "createdBy",
+    "type": {
+      "name": "User",
+      "kind": "OBJECT",
+      "ofType": null
+    }
+  },
+  {
+    "name": "coverImage",
+    "type": {
+      "name": "Asset",
+      "kind": "OBJECT",
+      "ofType": null
+    }
+  },
+  {
+    "name": "author",
+    "type": {
+      "name": "Author",
+      "kind": "OBJECT",
+      "ofType": null
+    }
+  },
+  {
+    "name": "scheduledIn",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": null,
+        "kind": "LIST"
+      }
+    }
+  },
+  {
+    "name": "history",
+    "type": {
+      "name": null,
+      "kind": "NON_NULL",
+      "ofType": {
+        "name": null,
+        "kind": "LIST"
+      }
+    }
+  }
+]
