@@ -24,7 +24,7 @@ export const VimeoPlayer = forwardRef<VimeoPlayerRef, VimeoPlayerProps>(
       if (!containerRef.current) return
 
       if (playerRef.current) {
-        playerRef.current.destroy().catch(() => {})
+        playerRef.current = null;
       }
 
       const player = new Player(containerRef.current, {
@@ -44,7 +44,10 @@ export const VimeoPlayer = forwardRef<VimeoPlayerRef, VimeoPlayerProps>(
 
       return () => {
         if (playerRef.current) {
-          playerRef.current.destroy().catch(() => {})
+          // Do not call .destroy() as it triggers a race condition in the vimeo/player 
+          // postMessage listener during rapid Next.js unmounting, causing a hard crash.
+          // React DOM unmounting perfectly handles dropping the iframe anyway.
+          playerRef.current = null;
         }
       }
     }, [vimeoId])

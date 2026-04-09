@@ -57,7 +57,7 @@ export function CaseStudyCarousel() {
   }
 
   return (
-    <section className="py-24 bg-surface/30 border-b border-border/50 overflow-hidden">
+    <section id="case-studies" className="py-24 bg-surface/30 border-b border-border/50 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="max-w-2xl">
