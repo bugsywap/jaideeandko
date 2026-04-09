@@ -182,6 +182,10 @@ export function CaseStudyCarousel() {
                         {study.title}
                       </h3>
                     </div>
+
+                    <p className="text-foreground/70 text-sm line-clamp-2 leading-relaxed">
+                      {study.description}
+                    </p>
                     
                     <Link 
                       href={`/case-studies/${study.slug}`}

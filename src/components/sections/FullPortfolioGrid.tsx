@@ -11,7 +11,9 @@ interface PortfolioItem {
   id: number;
   title: string;
   client: string;
-  category: string;
+  primaryCategory: string;
+  secondaryCategory: string;
+  format: "social" | "corporate";
   vimeoId?: string;
   image?: string;
   slug: string;
@@ -23,7 +25,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 1,
     title: "Social Impact I",
     client: "3 Degrees",
-    category: "social",
+    primaryCategory: "mission-driven",
+    secondaryCategory: "Social Impact",
+    format: "social",
     vimeoId: "1020466051",
     slug: "/our-work/social-1"
   },
@@ -31,7 +35,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 2,
     title: "Founder Perspectives",
     client: "Innovate SG",
-    category: "social",
+    primaryCategory: "corporates",
+    secondaryCategory: "Corporate",
+    format: "social",
     vimeoId: "1026056505",
     slug: "/our-work/social-2"
   },
@@ -39,7 +45,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 3,
     title: "Vertical Storytelling",
     client: "TechAsia",
-    category: "social",
+    primaryCategory: "corporates",
+    secondaryCategory: "B2B",
+    format: "social",
     vimeoId: "1021485785",
     slug: "/our-work/social-3"
   },
@@ -47,7 +55,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 4,
     title: "Brand Engagement",
     client: "Global Finance",
-    category: "social",
+    primaryCategory: "corporates",
+    secondaryCategory: "Financial",
+    format: "social",
     vimeoId: "1021486218",
     slug: "/our-work/social-4"
   },
@@ -55,7 +65,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 5,
     title: "Creative Reel",
     client: "Creative Hub",
-    category: "social",
+    primaryCategory: "corporates",
+    secondaryCategory: "Corporate",
+    format: "social",
     vimeoId: "1026056187",
     slug: "/our-work/social-5"
   },
@@ -63,7 +75,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 6,
     title: "NGO Spotlight",
     client: "NGO Connect",
-    category: "social",
+    primaryCategory: "mission-driven",
+    secondaryCategory: "NGOs",
+    format: "social",
     vimeoId: "1026056303",
     slug: "/our-work/social-6"
   },
@@ -71,7 +85,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 7,
     title: "Momentum",
     client: "Venture Partners",
-    category: "social",
+    primaryCategory: "corporates",
+    secondaryCategory: "Financial",
+    format: "social",
     vimeoId: "1021485735",
     slug: "/our-work/social-7"
   },
@@ -79,7 +95,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 8,
     title: "Visual Narrative",
     client: "Story Haus",
-    category: "social",
+    primaryCategory: "corporates",
+    secondaryCategory: "B2B",
+    format: "social",
     vimeoId: "1026056396",
     slug: "/our-work/social-8"
   },
@@ -89,7 +107,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 26,
     title: "AIA Recruitment Event 2026",
     client: "AIA",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Financial",
+    format: "corporate",
     vimeoId: "1178920781",
     slug: "/case-studies/aia-recruitment-event-2026"
   },
@@ -97,7 +117,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 9,
     title: "Corporate Vision 2025",
     client: "Enterprise SG",
-    category: "corporate",
+    primaryCategory: "government",
+    secondaryCategory: "Agencies",
+    format: "corporate",
     vimeoId: "1131310388",
     slug: "/our-work/corp-1"
   },
@@ -105,7 +127,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 10,
     title: "Strategic Partnerships",
     client: "Accenture",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "B2B",
+    format: "corporate",
     vimeoId: "1131319086",
     slug: "/our-work/corp-2"
   },
@@ -113,7 +137,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 11,
     title: "Innovation Summit",
     client: "Tech Summit",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "B2B",
+    format: "corporate",
     vimeoId: "1021466679",
     slug: "/our-work/corp-3"
   },
@@ -121,7 +147,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 12,
     title: "Global Leadership",
     client: "Meltwater",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Corporate",
+    format: "corporate",
     vimeoId: "1021463357",
     slug: "/our-work/corp-4"
   },
@@ -129,7 +157,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 13,
     title: "Founder Journey",
     client: "3 Degrees",
-    category: "corporate",
+    primaryCategory: "mission-driven",
+    secondaryCategory: "NGOs",
+    format: "corporate",
     vimeoId: "1021494730",
     slug: "/our-work/corp-5"
   },
@@ -137,7 +167,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 14,
     title: "Sustainable Future",
     client: "UOB Asset Management",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Financial",
+    format: "corporate",
     vimeoId: "738471780",
     slug: "/our-work/corp-6"
   },
@@ -145,7 +177,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 15,
     title: "Community Impact",
     client: "Young Founders",
-    category: "corporate",
+    primaryCategory: "mission-driven",
+    secondaryCategory: "Non-Profits",
+    format: "corporate",
     vimeoId: "1021450871",
     slug: "/our-work/corp-7"
   },
@@ -153,7 +187,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 16,
     title: "Digital Transformation",
     client: "Standard Chartered",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Financial",
+    format: "corporate",
     vimeoId: "1131316789",
     slug: "/our-work/corp-8"
   },
@@ -161,7 +197,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 17,
     title: "Excellence in Motion",
     client: "Singtel",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Corporate",
+    format: "corporate",
     vimeoId: "1131316295",
     slug: "/our-work/corp-9"
   },
@@ -169,7 +207,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 18,
     title: "Future of Finance",
     client: "DBS Bank",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Financial",
+    format: "corporate",
     vimeoId: "1021465916",
     slug: "/our-work/corp-10"
   },
@@ -177,7 +217,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 19,
     title: "Impact Storytelling",
     client: "WWF Singapore",
-    category: "corporate",
+    primaryCategory: "mission-driven",
+    secondaryCategory: "NGOs",
+    format: "corporate",
     vimeoId: "1021483669",
     slug: "/our-work/corp-11"
   },
@@ -185,7 +227,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 20,
     title: "Corporate Resilience",
     client: "Sembcorp",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Corporate",
+    format: "corporate",
     vimeoId: "1021466316",
     slug: "/our-work/corp-12"
   },
@@ -193,7 +237,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 21,
     title: "Beyond the Screen",
     client: "Mediacorp",
-    category: "corporate",
+    primaryCategory: "government",
+    secondaryCategory: "Comm Campaigns",
+    format: "corporate",
     vimeoId: "1021466066",
     slug: "/our-work/corp-13"
   },
@@ -201,7 +247,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 22,
     title: "Global Reach",
     client: "Singapore Airlines",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Corporate",
+    format: "corporate",
     vimeoId: "1021467300",
     slug: "/our-work/corp-14"
   },
@@ -209,7 +257,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 23,
     title: "Innovation Hub",
     client: "JTC Corporation",
-    category: "corporate",
+    primaryCategory: "government",
+    secondaryCategory: "Agencies",
+    format: "corporate",
     vimeoId: "1131318031",
     slug: "/our-work/corp-15"
   },
@@ -217,7 +267,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 24,
     title: "Brand Narrative",
     client: "Meltwater",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "B2B",
+    format: "corporate",
     vimeoId: "890946553",
     slug: "/our-work/corp-16"
   },
@@ -225,18 +277,19 @@ const portfolioItems: PortfolioItem[] = [
     id: 25,
     title: "Global Story",
     client: "Meltwater",
-    category: "corporate",
+    primaryCategory: "corporates",
+    secondaryCategory: "Corporate",
+    format: "corporate",
     vimeoId: "738471829",
     slug: "/our-work/corp-17"
   }
 ]
 
 const categories = [
-  { id: "all", name: "All Work", icon: LayoutGrid },
-  { id: "corporate", name: "Corporate Video", icon: MonitorPlay },
-  { id: "social", name: "Social Video", icon: Smartphone },
-  { id: "event", name: "Event", icon: Calendar },
-  { id: "ngo", name: "NGO", icon: Heart },
+  { id: "all", name: "Collections", icon: LayoutGrid },
+  { id: "corporates", name: "Corporates & Industry Leaders", icon: MonitorPlay },
+  { id: "government", name: "Government & Public Sector", icon: Calendar },
+  { id: "mission-driven", name: "Mission-Driven Organisations", icon: Heart },
 ]
 
 // ─── Social (9:16) Card ───────────────────────────────────────────────────────
@@ -307,7 +360,7 @@ function SocialCard({ item }: { item: PortfolioItem }) {
         <div className="flex items-center gap-2 mb-1">
           <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary/60">{item.client}</span>
           <span className="w-1 h-1 rounded-full bg-border" />
-          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-foreground/40">{item.category}</span>
+          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-foreground/40">{item.secondaryCategory}</span>
         </div>
         <h3 className="text-sm font-bold tracking-tight text-foreground group-hover:text-primary transition-colors leading-tight">
           {item.title}
@@ -385,7 +438,7 @@ function CorporateCard({ item }: { item: PortfolioItem }) {
         <div className="flex items-center gap-2 mb-1.5">
           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">{item.client}</span>
           <span className="w-1 h-1 rounded-full bg-border" />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40">{item.category}</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40">{item.secondaryCategory}</span>
         </div>
         <h3 className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
           {item.title}
@@ -400,11 +453,11 @@ export function FullPortfolioGrid() {
   const [filter, setFilter] = useState("all")
 
   const filteredItems = useMemo(() =>
-    filter === "all" ? portfolioItems : portfolioItems.filter(item => item.category === filter)
+    filter === "all" ? portfolioItems : portfolioItems.filter(item => item.primaryCategory === filter)
     , [filter])
 
-  const socialItems = filteredItems.filter(item => item.category === "social")
-  const wideItems = filteredItems.filter(item => item.category !== "social")
+  const socialItems = filteredItems.filter(item => item.format === "social")
+  const wideItems = filteredItems.filter(item => item.format !== "social")
 
   const showAll = filter === "all"
 

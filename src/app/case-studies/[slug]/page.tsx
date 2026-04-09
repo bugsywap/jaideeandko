@@ -23,6 +23,25 @@ export async function generateStaticParams() {
   }))
 }
 
+const clientDetails: Record<string, { label: string, image: string }> = {
+  "AIA": { label: "Global Insurance Provider", image: "/img/AIA.png" },
+  "Young Founders School": { label: "Non-Profit", image: "/img/sch1.png" },
+  "3 Degrees": { label: "Social Tech Platform", image: "/img/3-deg.png" },
+  "Green Chapter": { label: "Corporate Client", image: "/img/GClogo_No Background.png" },
+  "Enterprise Singapore": { label: "Government Agency", image: "/img/es_1ceXgYdj.png" },
+  "Accenture": { label: "Global Consulting", image: "/img/accenture-2.png" },
+  "UOB Asset Management": { label: "Financial Institution", image: "/img/uob_e.png" },
+  "Meltwater": { label: "Global SaaS Company", image: "/img/meltwa.png" },
+  "Wealth GPS": { label: "Financial Advisory", image: "/img/Wealth GPS.png" },
+  "Productivity Joy": { label: "Consulting Agency", image: "/img/productivity.png" },
+  "Land Transport Authority": { label: "Government Agency", image: "/img/land-transport-authority.png" },
+  "Kaleoscopic Communications": { label: "Digital Bank", image: "/img/anext_bank1.png" },
+  "NIE": { label: "Educational Institute", image: "/img/NIE.png" },
+  "Ministry of Manpower": { label: "Government Agency", image: "/img/mom.png" },
+  "Workforce Singapore": { label: "Government Agency", image: "/img/wsg.png" },
+  "Mentem": { label: "B2B Agency", image: "/img/mentum NSW.png" }
+}
+
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const study = caseStudies.find((s) => s.slug === slug)
@@ -30,6 +49,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   if (!study) {
     notFound()
   }
+
+  const details = clientDetails[study.client]
 
   return (
     <div className="bg-background pt-32 pb-16 overflow-hidden">
@@ -46,14 +67,28 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 flex flex-col gap-6">
             <Badge variant="outline" className="w-fit border-primary/30 text-primary bg-primary/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
-              {study.category} • {study.year}
+              {details?.label || study.category}
             </Badge>
-            <p className="text-foreground/50 text-xs font-black uppercase tracking-[0.2em]">
-              {study.client}
-            </p>
-            <h1 className="text-3xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1] line-clamp-3">
-              {study.title}
-            </h1>
+            <div className="flex items-start justify-between gap-6 w-full">
+              <div className="flex flex-col gap-2">
+                <p className="text-foreground/50 text-xs font-black uppercase tracking-[0.2em]">
+                  {study.client}
+                </p>
+                <h1 className="text-3xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1] line-clamp-3">
+                  {study.title}
+                </h1>
+              </div>
+              
+              {details?.image && (
+                <div className="shrink-0 flex items-center">
+                  <img 
+                    src={details.image} 
+                    alt={`${study.client} logo`}
+                    className="h-12 sm:h-16 lg:h-20 w-auto max-w-[140px] object-contain object-right" 
+                  />
+                </div>
+              )}
+            </div>
             <p className="text-lg leading-relaxed text-foreground/70 max-w-xl">
               {study.description}
             </p>

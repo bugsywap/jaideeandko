@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { Star } from "lucide-react"
 
 export interface TestimonialAuthor {
   name: string
@@ -34,15 +35,29 @@ export function TestimonialCard({
         className
       )}
     >
-      <div className="flex flex-col items-start bg-background/50 rounded-lg">
-        <h3 className="text-base font-bold text-foreground leading-tight">
-          {author.name}
-        </h3>
-        <p className="text-sm font-medium text-primary">
-          {author.handle}
-        </p>
+      <div className="flex items-center gap-4 mb-4">
+        {author.avatar && (
+          <img 
+            src={author.avatar} 
+            alt={author.name} 
+            className="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-full object-cover border border-border shadow-sm"
+          />
+        )}
+        <div className="flex flex-col items-start">
+          <h3 className="text-base font-bold text-foreground leading-tight">
+            {author.name}
+          </h3>
+          <p className="text-xs sm:text-sm font-medium text-primary line-clamp-1">
+            {author.handle}
+          </p>
+        </div>
       </div>
-      <p className="mt-6 text-base leading-relaxed text-foreground/80 font-medium italic">
+      <div className="flex gap-1 mb-4">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" />
+        ))}
+      </div>
+      <p className="text-sm sm:text-base leading-relaxed text-foreground/80 font-medium italic">
         "{text}"
       </p>
     </Card>

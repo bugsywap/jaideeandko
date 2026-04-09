@@ -9,29 +9,25 @@ const testimonials = [
     author: {
       name: "Zubair Timol",
       handle: "VP of Culture - Meltwater",
+      avatar: "/img/testimonial-img/Zubir Timol.jpeg"
     },
-    text: "Jaidee &Ko always look at content from a lifestyle standpoint, and that's the energy we want for our brand. Their approach is non-linear; they take risks, and the end product is much stronger as a result. Their dedication to finding the right stories has made them our go-to partner for filming and content creation in Asia."
+    text: "Jaidee & Ko always look at content from a lifestyle standpoint, and that's the energy we want for our brand. Their approach is non-linear; they take risks, and the end product is much stronger as a result. What I love most about them is their commitment to living up to their own standards. Their dedication to finding the right stories has made them our go-to partner for filming and content creation in Asia."
   },
   {
     author: {
       name: "Kelvin Tjia",
-      handle: "Founder - 3 Degrees App",
+      handle: "Founder - 3 Degrees",
+      avatar: "/img/testimonial-img/Kelvin Tjia.jpeg"
     },
-    text: "Since partnering with Jaidee & Ko, our content has truly come to life... This approach has not only boosted engagement but also significantly expanded our client base at 3 Degrees, making a real difference in our visibility and reach."
+    text: "Since partnering with Jaidee & Ko, our content has truly come to life. Although working with charities can be challenging, their team expertly distilled each story into powerful short-form social media content. This approach has not only boosted engagement but also significantly expanded our client base at 3 Degrees, making a real difference in our visibility and reach."
   },
   {
     author: {
-      name: "Anonymous",
-      handle: "Marketing Director - B2B SaaS",
+      name: "Roland Seah",
+      handle: "Co-Founder - Green Chapter",
+      avatar: "/img/testimonial-img/Roland Seah.png"
     },
-    text: "Our LinkedIn views increased 4x within 3 months. They distilled complex stories into powerful content and managed the entire process flawlessly from start to finish."
-  },
-  {
-    author: {
-      name: "Event Coordinator",
-      handle: "Social Impact NGO",
-    },
-    text: "The team captured the exact essence of our gala. We've seen a 30% increase in donor engagement just by sharing the highlight reel they produced."
+    text: "The video gave us something professional to point people to, a proper depiction of what we do and what to expect. But honestly, what I didn't expect was how the production process itself helped us figure out how to structure the programme. We went in blur blur, not sure how to present it, and came out more certain. That clarity was a bonus I didn't see coming."
   }
 ]
 

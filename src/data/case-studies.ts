@@ -15,7 +15,7 @@ export const caseStudies: CaseStudy[] = [
     vimeoId: "1178920781",
     title: "AIA Recruitment Event 2026",
     client: "AIA",
-    category: "Recruitment Video",
+    category: "Secondary Category",
     year: "2026",
     description: "We partnered with AIA to capture the energy and ambition behind their 2026 Recruitment Event, bringing to life the people, purpose, and opportunities that define the brand.",
     gallery: []

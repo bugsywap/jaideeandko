@@ -24,7 +24,7 @@ export const VimeoPlayer = forwardRef<VimeoPlayerRef, VimeoPlayerProps>(
       if (!containerRef.current) return
 
       if (playerRef.current) {
-        playerRef.current.destroy()
+        playerRef.current.destroy().catch(() => {})
       }
 
       const player = new Player(containerRef.current, {
@@ -44,7 +44,7 @@ export const VimeoPlayer = forwardRef<VimeoPlayerRef, VimeoPlayerProps>(
 
       return () => {
         if (playerRef.current) {
-          playerRef.current.destroy()
+          playerRef.current.destroy().catch(() => {})
         }
       }
     }, [vimeoId])

@@ -140,87 +140,116 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-24 bg-surface border-t border-border/50 overflow-hidden relative">
+      <section className="py-24 bg-background border-t border-border/50 overflow-hidden relative">
         {/* Ambient Glow */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] pointer-events-none -z-10 rounded-full" />
 
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center mb-20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center mb-16 lg:mb-20">
           <ScrollReveal>
             <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 px-4 py-1.5 text-xs font-black uppercase tracking-widest mb-6">
               Meet the Heart
             </Badge>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground leading-tight">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground leading-[1.1]">
               The Man <span className="text-primary italic">Behind it All</span>
             </h2>
           </ScrollReveal>
         </div>
 
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
             
-            {/* Founder Profile - Left */}
-            <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-              <ScrollReveal className="w-full max-w-sm mx-auto lg:mx-0 group">
-                <div className="relative aspect-square rounded-full overflow-hidden border-[8px] border-primary/10 group-hover:border-primary/30 transition-all duration-700 mb-8 bg-muted shadow-2xl mx-auto lg:mx-0 w-full max-w-[320px]">
-                  <img
-                    src="/img/1.png"
-                    alt="Gary Koay - Founder | Creative Director at Jaidee & Ko"
-                    className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110"
-                    width={400}
-                    height={400}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors duration-700" />
-                </div>
-
-                <div className="flex flex-col gap-3 relative z-10">
-                  <h3 className="text-4xl font-black text-foreground tracking-tight group-hover:text-primary transition-colors duration-500">Gary Koay</h3>
-                  <p className="text-sm font-black text-foreground/50 uppercase tracking-[0.2em]">Founder | Creative Director</p>
-
-                  <div className="mt-5 py-6 border-t border-border/50">
-                    <p className="text-xs font-black uppercase tracking-widest text-foreground/40 mb-2">Unrealistic Desire</p>
-                    <p className="text-lg font-bold text-foreground/80">To communicate with animals</p>
+            {/* Founder Profile - Left Bento Card */}
+            <div className="lg:col-span-5 w-full">
+              <ScrollReveal className="h-full">
+                <div className="h-full flex flex-col p-8 sm:p-10 rounded-[2.5rem] bg-surface border border-border shadow-2xl relative overflow-hidden group">
+                  {/* Glowing Accent */}
+                  <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-primary/10 blur-[80px] rounded-full transform translate-x-1/2 -translate-y-1/3 transition-all duration-700 group-hover:bg-primary/20" />
+                  
+                  <div className="flex flex-col sm:flex-row lg:flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center gap-8 relative z-10 flex-grow">
+                    
+                    {/* Dynamic Avatar Ring */}
+                    <div className="relative w-48 h-48 sm:w-40 sm:h-40 lg:w-56 lg:h-56 shrink-0">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/40 to-transparent animate-spin-slow opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+                      <div className="absolute inset-1.5 rounded-full overflow-hidden border-2 border-background bg-muted">
+                        <img
+                          src="/img/1.png"
+                          alt="Gary Koay - Founder & Creative Director"
+                          className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-3xl lg:text-4xl font-black text-foreground tracking-tight group-hover:text-primary transition-colors duration-500">Gary Koay</h3>
+                      <p className="text-sm font-black text-primary uppercase tracking-[0.2em]">Founder | Creative Director</p>
+                      <p className="text-foreground/70 leading-relaxed font-medium mt-2">
+                        A visual storyteller obsessed with transforming brand philosophies into sincere, cinematic narratives that actually move people.
+                      </p>
+                    </div>
                   </div>
 
-                  <a
-                    href="https://www.linkedin.com/in/gkoay/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:scale-105 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 mt-2 mx-auto lg:mx-0"
-                    aria-label="Connect with Gary on LinkedIn"
-                  >
-                    <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
-                  </a>
+                  <div className="mt-10 pt-8 border-t border-border/50 flex flex-col sm:flex-row justify-between items-center gap-6 relative z-10">
+                    <div className="text-center sm:text-left">
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40 mb-2">Unrealistic Desire</p>
+                      <p className="text-lg font-bold text-foreground italic flex items-center justify-center sm:justify-start gap-2">
+                        "To communicate with animals"
+                      </p>
+                    </div>
+                    <a
+                      href="https://www.linkedin.com/in/gkoay/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 shrink-0 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:bg-primary hover:text-primary-foreground hover:scale-110 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
+                      aria-label="Connect with Gary on LinkedIn"
+                    >
+                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </ScrollReveal>
             </div>
 
-            {/* Video Showcase - Right */}
-            <div className="lg:col-span-7 w-full relative">
-              <ScrollReveal delay={0.2} direction="right">
+            {/* Video Showcase - Right Bento Card */}
+            <div className="lg:col-span-7 w-full h-full relative">
+              <ScrollReveal delay={0.2} className="h-full">
                 
-                <div className="relative w-full rounded-[2.5rem] bg-black shadow-2xl border border-border/50 group overflow-visible aspect-video z-20">
+                <div className="h-full rounded-[2.5rem] bg-surface flex flex-col shadow-2xl border border-border group overflow-hidden relative z-20">
                   {/* Decorative Glow */}
-                  <div className="absolute inset-0 rounded-[2.5rem] bg-primary/20 blur-xl scale-105 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 -z-10" />
+                  <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none transition-colors duration-1000 group-hover:bg-primary/20" />
                   
-                  <div className="w-full h-full rounded-[2.5rem] overflow-hidden relative z-10 bg-black/90">
-                    <iframe 
-                      src="https://player.vimeo.com/video/1017530489?title=0&byline=0&portrait=0&color=75b9a2" 
-                      className="absolute top-0 left-0 w-full h-full" 
-                      frameBorder="0" 
-                      allow="autoplay; fullscreen; picture-in-picture" 
-                      allowFullScreen 
-                    />
+                  {/* Card Header Content */}
+                  <div className="p-8 sm:p-10 pb-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 relative z-10 shrink-0">
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-2 w-2 rounded-full bg-primary relative">
+                          <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
+                        </span>
+                        <span className="text-[10px] font-black tracking-[0.2em] uppercase text-primary">Director's Cut</span>
+                      </div>
+                      <h4 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">Showreel 2024</h4>
+                      <p className="text-foreground/60 font-medium text-base sm:text-lg max-w-sm">
+                        A cinematic glimpse into the visual impact we create for our partners globally.
+                      </p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="mt-8 text-center lg:text-left flex flex-col gap-2 relative z-10">
-                  <h4 className="text-2xl font-black text-foreground tracking-tight">Showreel 2024</h4>
-                  <p className="text-foreground/60 font-medium">A glimpse into the visual impact we create for our partners.</p>
+                  
+                  {/* Video Player */}
+                  <div className="w-full relative z-10 flex-grow px-4 pb-4 sm:px-8 sm:pb-8 flex flex-col">
+                    <div className="relative w-full h-full min-h-[250px] sm:min-h-[300px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black shadow-inner border border-white/5 group-hover:shadow-[0_0_30px_-10px_rgba(117,185,162,0.3)] transition-all duration-700 aspect-video md:aspect-auto">
+                      <iframe 
+                        src="https://player.vimeo.com/video/1017530489?title=0&byline=0&portrait=0&color=75b9a2" 
+                        className="absolute inset-0 w-full h-full" 
+                        frameBorder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowFullScreen 
+                      />
+                    </div>
+                  </div>
                 </div>
 
               </ScrollReveal>
