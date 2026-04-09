@@ -92,6 +92,29 @@ export default function ProcessPage() {
         </ScrollReveal>
       </section>
 
+      {/* End-to-End Flow Summary */}
+      <section className="bg-surface py-24 border-b border-border/50">
+        <ScrollReveal className="container mx-auto px-6 max-w-7xl">
+          <h4 className="text-sm font-black uppercase tracking-[0.2em] text-foreground/40 mb-8 text-center md:text-left">
+            End-To-End Flow
+          </h4>
+          
+          <div className="flex flex-col md:flex-row gap-4 md:gap-2 lg:gap-4 justify-between items-center bg-background p-6 rounded-[2rem] border border-border/60 shadow-lg">
+            {stages.map((stage, idx) => (
+              <div key={stage.number} className="flex items-center gap-4 shrink-0 w-full md:w-auto justify-center md:justify-start">
+                <span className="text-foreground font-black text-xs lg:text-sm uppercase tracking-widest whitespace-nowrap flex items-center group cursor-default">
+                  <span className="text-primary mr-2 transition-colors">{stage.number}</span>
+                  <span className="group-hover:text-primary transition-colors">{stage.title}</span>
+                </span>
+                {idx < stages.length - 1 && (
+                  <ArrowRight className="w-4 h-4 text-border rotate-90 md:rotate-0 hidden md:block" />
+                )}
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      </section>
+
       {/* Stages Section */}
       <section className="bg-background">
         <div className="container mx-auto px-6 max-w-7xl">
@@ -146,29 +169,6 @@ export default function ProcessPage() {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* End-to-End Flow Summary */}
-      <section className="bg-surface py-24 border-b border-border/50">
-        <ScrollReveal className="container mx-auto px-6 max-w-7xl">
-          <h4 className="text-sm font-black uppercase tracking-[0.2em] text-foreground/40 mb-8 text-center md:text-left">
-            End-To-End Flow
-          </h4>
-          
-          <div className="flex flex-col md:flex-row gap-4 md:gap-2 lg:gap-4 justify-between items-center bg-background p-6 rounded-[2rem] border border-border/60 shadow-lg">
-            {stages.map((stage, idx) => (
-              <div key={stage.number} className="flex items-center gap-4 shrink-0 w-full md:w-auto justify-center md:justify-start">
-                <span className="text-foreground font-black text-xs lg:text-sm uppercase tracking-widest whitespace-nowrap flex items-center group cursor-default">
-                  <span className="text-primary mr-2 transition-colors">{stage.number}</span>
-                  <span className="group-hover:text-primary transition-colors">{stage.title}</span>
-                </span>
-                {idx < stages.length - 1 && (
-                  <ArrowRight className="w-4 h-4 text-border rotate-90 md:rotate-0 hidden md:block" />
-                )}
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
       </section>
 
       {/* Footer CTA */}
