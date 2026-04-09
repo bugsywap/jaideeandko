@@ -120,7 +120,7 @@ export function ServicesSnapshot() {
               transition={{ delay: 0.1, duration: 0.8 }}
               className="text-4xl md:text-5xl lg:text-7xl tracking-tighter font-black text-foreground uppercase leading-[1.0]"
             >
-              Bridge the Gap with <span className="text-primary italic">Strategic Clarity</span>
+              What <span className="text-primary italic">We Do</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -129,7 +129,7 @@ export function ServicesSnapshot() {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-lg md:text-xl leading-relaxed text-foreground/70 font-medium mt-2 text-left"
             >
-              We partner with forward-thinking organisations to fast-track ideas, capture expertise, and turn what you do into <span className="text-foreground font-bold">stories people understand, believe in, and act on.</span>
+              We work with forward-thinking organisations to fast-track ideas, capture expertise, and turn what they do into <span className="text-foreground font-bold">stories people understand, trust, and act on.</span>
             </motion.p>
           </div>
           

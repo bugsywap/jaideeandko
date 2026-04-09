@@ -186,7 +186,7 @@ export default function ServicesPage() {
                   className={`flex flex-col gap-12 lg:gap-24 items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
                 >
                   {/* Image Block */}
-                  <div className="w-full lg:w-1/2" id={service.id}>
+                  <div className="w-full lg:w-1/2 scroll-mt-32 lg:scroll-mt-48" id={service.id}>
                     <div className="relative aspect-[4/3] w-full rounded-[2.5rem] overflow-hidden shadow-2xl group border border-border/50 bg-black">
                       <img 
                         src={service.image} 

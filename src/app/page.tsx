@@ -33,9 +33,7 @@ export default function Home() {
       <ScrollReveal>
         <CaseStudyCarousel />
       </ScrollReveal>
-      <ScrollReveal>
-        <PortfolioGrid />
-      </ScrollReveal>
+
       <ScrollReveal>
         <TestimonialsSection />
       </ScrollReveal>

@@ -72,8 +72,8 @@ export function TestimonialsSection({ className }: { className?: string }) {
           </div>
 
           {/* Fade Overlays */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/4 sm:w-1/3 bg-gradient-to-r from-background to-transparent md:block z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/4 sm:w-1/3 bg-gradient-to-l from-background to-transparent md:block z-10" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-16 sm:w-32 bg-gradient-to-r from-background/90 to-transparent md:block z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-16 sm:w-32 bg-gradient-to-l from-background/90 to-transparent md:block z-10" />
         </div>
       </div>
     </section>

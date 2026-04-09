@@ -1,5 +1,5 @@
 export const clients = [
-  { name: '3 Degrees', label: 'Sustainability Consulting', src: '/img/3-deg.png' },
+  { name: '3 Degrees', label: 'Social Tech Platform', src: '/img/3-deg.png' },
   { name: 'GC Logo', label: 'Corporate Client', src: '/img/GClogo_No Background.png' },
   { name: 'NIE', label: 'Educational Institute', src: '/img/NIE.png' },
   { name: 'V1', label: 'Technology Partner', src: '/img/V1_White.png' },
@@ -13,7 +13,7 @@ export const clients = [
   { name: 'Mentum', label: 'B2B Agency', src: '/img/mentum NSW.png' },
   { name: 'MOM', label: 'Government Agency', src: '/img/mom.png' },
   { name: 'Productivity', label: 'Consulting Agency', src: '/img/productivity.png' },
-  { name: 'SCH', label: 'Public Healthcare', src: '/img/sch1.png' },
+  { name: 'Young Founder School', label: 'Non-Profit', src: '/img/sch1.png' },
   { name: 'UOB', label: 'Financial Institution', src: '/img/uob_e.png' },
   { name: 'WSG', label: 'Government Agency', src: '/img/wsg.png' },
 ]

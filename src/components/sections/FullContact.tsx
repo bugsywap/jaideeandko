@@ -51,7 +51,7 @@ export function FullContact() {
   return (
     <div className="bg-background">
       <div className="mx-auto max-w-xl lg:max-w-4xl">
-        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-center">Let's talk about your brand</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-center">Let's Chat</h2>
         <p className="mt-2 text-lg leading-8 text-foreground/70 text-center">
           We typically respond within 1 business day. No pushy sales calls.
         </p>

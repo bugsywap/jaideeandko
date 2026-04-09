@@ -32,12 +32,12 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="mb-2"
+              className="-mb-2"
             >
               <img 
-                src="/img/fav.png" 
-                alt="Jaidee & Ko" 
-                className="w-14 h-14 object-contain" 
+                src="/img/jaidee-badge.png" 
+                alt="Jaidee & Ko Badge" 
+                className="w-16 md:w-20 h-auto object-contain drop-shadow-lg hover:scale-105 transition-transform duration-500" 
               />
             </motion.div>
             <div className="flex gap-4 flex-col">
@@ -47,7 +47,7 @@ export function Hero() {
                 transition={{ delay: 0.4, duration: 0.8 }}
                 className="text-4xl md:text-5xl lg:text-6xl tracking-tighter text-left font-black text-foreground leading-[1.0]"
               >
-                <span className="block">Strategic Corporate Communications &</span>
+                <span className="block">Strategic Communications &</span>
                 <span className="text-primary italic block">Video Development</span>
               </motion.h1>
               <motion.p

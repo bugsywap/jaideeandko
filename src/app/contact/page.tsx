@@ -2,7 +2,7 @@
 
 import { FullContact } from "@/components/sections/FullContact"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Mail, Clock } from "lucide-react"
+import { MapPin, Mail, Clock, Phone } from "lucide-react"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
 
 export default function ContactPage() {
@@ -36,10 +36,22 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="text-lg font-bold leading-7 text-foreground">HQ</h3>
-                <p className="mt-2 text-foreground/70 leading-relaxed">Singapore<br />Southeast Asia</p>
+                <p className="mt-2 text-foreground/70 leading-relaxed">34 South Bridge Rd, #03-01,<br />Singapore, 058668</p>
               </div>
             </div>
             
+            <div className="flex gap-x-6 p-6 rounded-2xl bg-surface border border-border transition-colors hover:border-primary/50 group">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 group-hover:bg-primary transition-colors">
+                <Phone className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold leading-7 text-foreground">Phone</h3>
+                <p className="mt-2 text-foreground/70 leading-relaxed">
+                  <a href="tel:+6589766151" className="hover:text-primary transition-colors">+65 8976 6151</a>
+                </p>
+              </div>
+            </div>
+
             <div className="flex gap-x-6 p-6 rounded-2xl bg-surface border border-border transition-colors hover:border-primary/50 group">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 group-hover:bg-primary transition-colors">
                 <Mail className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
