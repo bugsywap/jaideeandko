@@ -132,14 +132,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 {study.gallery
                   .filter(item => item.type === 'corporate')
                   .map((item, idx) => (
-                    <div 
-                      key={`corp-${idx}`} 
-                      className="relative overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg aspect-video group"
-                    >
-                      <VimeoPlayer
-                        vimeoId={item.vimeoId}
-                        className="absolute inset-0 w-full h-full"
-                      />
+                    <div key={`corp-${idx}`} className="flex flex-col gap-4 group">
+                      <div className="relative overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg aspect-video isolate w-full">
+                        <VimeoPlayer
+                          vimeoId={item.vimeoId}
+                          className="absolute inset-0 w-full h-full"
+                        />
+                      </div>
+                      <div className="px-1">
+                        <h4 className="text-foreground font-bold tracking-tight mb-1">{item.title}</h4>
+                        <p className="text-sm text-foreground/60 leading-relaxed">{item.description}</p>
+                      </div>
                     </div>
                   ))}
               </div>
@@ -151,14 +154,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 {study.gallery
                   .filter(item => item.type === 'social')
                   .map((item, idx) => (
-                    <div 
-                      key={`social-${idx}`} 
-                      className="relative overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg aspect-[9/16] group"
-                    >
-                      <VimeoPlayer
-                        vimeoId={item.vimeoId}
-                        className="absolute inset-0 w-full h-full"
-                      />
+                    <div key={`social-${idx}`} className="flex flex-col gap-4 group">
+                      <div className="relative overflow-hidden rounded-2xl bg-black border border-border/50 shadow-lg aspect-[9/16] isolate w-full">
+                        <VimeoPlayer
+                          vimeoId={item.vimeoId}
+                          className="absolute inset-0 w-full h-full"
+                        />
+                      </div>
+                      <div className="px-1">
+                        <h4 className="text-foreground font-bold tracking-tight mb-1">{item.title}</h4>
+                        <p className="text-sm text-foreground/60 leading-relaxed">{item.description}</p>
+                      </div>
                     </div>
                   ))}
               </div>
