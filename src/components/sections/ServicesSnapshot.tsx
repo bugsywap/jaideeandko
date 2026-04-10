@@ -11,7 +11,7 @@ const services = [
     description: "High-end visual storytelling that communicates your corporate narrative and builds social proof with stakeholders.",
     icon: Video,
     href: "/services#corporate",
-    image: "/img/corpo-brand.jpg",
+    image: "/img/corpo-brand.webp",
     className: "md:col-span-2 md:row-span-2",
   },
   {
@@ -19,7 +19,7 @@ const services = [
     description: "Short-form, highly shareable content explicitly designed for LinkedIn, Instagram, and TikTok algorithms.",
     icon: Share2,
     href: "/services#social",
-    image: "/img/soc-med.jpg",
+    image: "/img/soc-med.webp",
     className: "md:col-span-1 md:row-span-2",
   },
   {
@@ -27,7 +27,7 @@ const services = [
     description: "Expert PR and strategic consulting to shape your narrative and public profile.",
     icon: MessageSquare,
     href: "/services#consulting",
-    image: "/img/communication-consultation.png",
+    image: "/img/communication-consultation.webp",
     className: "md:col-span-1 md:row-span-1",
   },
   {
@@ -35,7 +35,7 @@ const services = [
     description: "Authentic documentary-style profiles capturing your true vision.",
     icon: Users,
     href: "/services#founder",
-    image: "/img/founder-story.JPG",
+    image: "/img/founder-story.webp",
     className: "md:col-span-1 md:row-span-1",
   },
   {
@@ -43,7 +43,7 @@ const services = [
     description: "Modern, responsive platforms to serve as your premium digital storefront.",
     icon: Code2,
     href: "/services#web",
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=60&fm=webp&w=800",
     className: "md:col-span-1 md:row-span-2",
   },
   {
@@ -51,7 +51,7 @@ const services = [
     description: "Boost organic visibility with targeted, high-value written content tailored to search intent.",
     icon: PenTool,
     href: "/services#seo",
-    image: "https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&q=60&fm=webp&w=800",
     className: "md:col-span-2 md:row-span-1",
   },
   {
@@ -59,7 +59,7 @@ const services = [
     description: "Full-service visual podcasting from studio setup to post editing.",
     icon: Mic,
     href: "/services#podcast",
-    image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=1200",
+    image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=60&fm=webp&w=1200",
     className: "md:col-span-1 md:row-span-1",
   },
   {
@@ -67,7 +67,7 @@ const services = [
     description: "Dynamic highlight reels extending your physical events.",
     icon: CalendarDays,
     href: "/services#event",
-    image: "/img/event-coverage.jpg",
+    image: "/img/event-coverage.webp",
     className: "md:col-span-1 md:row-span-1",
   },
   {
@@ -75,7 +75,7 @@ const services = [
     description: "Transform static manuals into dynamic, AI-powered online depositories ensuring brand consistency.",
     icon: BookOpen,
     href: "/services#brand",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=60&fm=webp&w=800",
     className: "md:col-span-2 md:row-span-2",
   },
   {
@@ -83,7 +83,7 @@ const services = [
     description: "Multi-cam setups connecting your hybrid town halls to a global audience.",
     icon: Radio,
     href: "/services#live",
-    image: "https://images.unsplash.com/photo-1516397281156-ca07cf9746fc?auto=format&fit=crop&q=80&w=1200",
+    image: "https://images.unsplash.com/photo-1516397281156-ca07cf9746fc?auto=format&fit=crop&q=60&fm=webp&w=1200",
     className: "md:col-span-1 md:row-span-1",
   },
   {
@@ -134,23 +134,25 @@ export function ServicesSnapshot() {
           </div>
           
           {/* Benton Masonry Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 grid-flow-row-dense gap-4 md:gap-6 auto-rows-[280px]">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8 }}
+            className="grid grid-cols-1 md:grid-cols-4 grid-flow-row-dense gap-4 md:gap-6 auto-rows-[280px]"
+          >
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, scale: 0.98 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ delay: index * 0.05, duration: 0.6, ease: "easeOut" }}
                 className={`group ${service.className}`}
               >
                 <Link href={service.href} className="relative block w-full h-full overflow-hidden rounded-[2.5rem] border border-border/40 bg-black group-hover:border-primary/40 transition-all duration-700 shadow-xl">
                   {/* Background Image & Overlay */}
-                  <div className="absolute inset-0 z-0 transition-transform duration-1000 group-hover:scale-110">
+                  <div className="absolute inset-0 z-0 transition-transform duration-700 transform-gpu group-hover:scale-105 will-change-transform">
                     <img 
                       src={service.image} 
                       alt={service.title} 
-                      className="w-full h-full object-cover transition-all duration-700 opacity-60 group-hover:opacity-50" 
+                      className="w-full h-full object-cover transition-opacity duration-700 opacity-60 group-hover:opacity-50" 
                       loading="lazy" 
                     />
                     {/* Primary Color Accent Overlay */}
@@ -181,11 +183,11 @@ export function ServicesSnapshot() {
                   </div>
 
                   {/* Subtle Shimmer */}
-                  <div className="absolute inset-0 z-40 pointer-events-none bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                  <div className="absolute inset-0 z-40 pointer-events-none bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </Link>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
 
         </div>
       </div>

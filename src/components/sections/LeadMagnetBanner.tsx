@@ -33,6 +33,15 @@ export function LeadMagnetBanner() {
       if (response.ok) {
         setStatus("success")
         ;(e.target as HTMLFormElement).reset()
+        
+        // Trigger automatic resource download
+        const a = document.createElement('a');
+        a.href = "/5_Videos_Every_B2B_Needs_Roadmap.pdf";
+        a.download = "5_Videos_Every_B2B_Needs_Roadmap.pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
         setTimeout(() => setStatus("idle"), 5000)
       } else {
         setStatus("idle")
@@ -114,7 +123,7 @@ export function LeadMagnetBanner() {
                     name="name"
                     id="lm-name"
                     className="block w-full rounded-2xl border-border/50 bg-background/50 px-5 py-4 text-foreground placeholder-foreground/30 focus:border-primary focus:ring-primary/20 transition-all text-sm font-medium"
-                    placeholder="Gary Koay"
+                    placeholder="John Doe"
                     required
                   />
                 </div>
@@ -126,7 +135,7 @@ export function LeadMagnetBanner() {
                     name="email"
                     id="lm-email"
                     className="block w-full rounded-2xl border-border/50 bg-background/50 px-5 py-4 text-foreground placeholder-foreground/30 focus:border-primary focus:ring-primary/20 transition-all text-sm font-medium"
-                    placeholder="gary@jaideeandko.com"
+                    placeholder="johndoe@email.com"
                     required
                   />
                 </div>

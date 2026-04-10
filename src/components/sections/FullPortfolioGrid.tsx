@@ -1,475 +1,153 @@
 "use client"
 
-import { useState, useMemo, useRef } from "react"
+import { useState, useMemo } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { Play, Filter, LayoutGrid, MonitorPlay, Smartphone, Calendar, Heart } from "lucide-react"
-import { VimeoPlayer, type VimeoPlayerRef } from "@/components/ui/VimeoPlayer"
-import { useVimeoThumbnail } from "@/hooks/useVimeoThumbnail"
+import { Play, Filter, LayoutGrid, MonitorPlay, Calendar, Heart, ArrowRight } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
+import { caseStudies } from "@/data/case-studies"
+import type { CaseStudy } from "@/data/case-studies"
 
-interface PortfolioItem {
-  id: number;
-  title: string;
-  client: string;
-  primaryCategory: string;
-  secondaryCategory: string;
-  format: "social" | "corporate";
-  vimeoId?: string;
-  image?: string;
-  slug: string;
+const clientLogoMap: Record<string, string> = {
+  "AIA": "/img/AIA.png",
+  "Young Founders School": "/img/sch1.png",
+  "3 Degrees": "/img/3-deg.png",
+  "Green Chapter": "/img/GClogo_No Background.png",
+  "Enterprise Singapore": "/img/es_1ceXgYdj.png",
+  "Accenture": "/img/accenture-2.png",
+  "UOB Asset Management": "/img/uob_e.png",
+  "Meltwater": "/img/meltwa.png",
+  "Wealth GPS": "/img/Wealth GPS.png",
+  "Productivity Joy": "/img/productivity.png",
+  "Land Transport Authority": "/img/land-transport-authority.png",
+  "Kaleoscopic Communications": "/img/anext_bank1.png",
+  "NIE": "/img/NIE.png",
+  "Ministry of Manpower": "/img/mom.png",
+  "Workforce Singapore": "/img/wsg.png",
+  "Mentem": "/img/mentum NSW.png",
 }
 
-const portfolioItems: PortfolioItem[] = [
-  // --- SOCIAL VIDEOS (9:16) ---
-  {
-    id: 1,
-    title: "Social Impact I",
-    client: "3 Degrees",
-    primaryCategory: "mission-driven",
-    secondaryCategory: "Social Impact",
-    format: "social",
-    vimeoId: "1020466051",
-    slug: "/our-work/social-1"
-  },
-  {
-    id: 2,
-    title: "Founder Perspectives",
-    client: "Innovate SG",
-    primaryCategory: "corporates",
-    secondaryCategory: "Corporate",
-    format: "social",
-    vimeoId: "1026056505",
-    slug: "/our-work/social-2"
-  },
-  {
-    id: 3,
-    title: "Vertical Storytelling",
-    client: "TechAsia",
-    primaryCategory: "corporates",
-    secondaryCategory: "B2B",
-    format: "social",
-    vimeoId: "1021485785",
-    slug: "/our-work/social-3"
-  },
-  {
-    id: 4,
-    title: "Brand Engagement",
-    client: "Global Finance",
-    primaryCategory: "corporates",
-    secondaryCategory: "Financial",
-    format: "social",
-    vimeoId: "1021486218",
-    slug: "/our-work/social-4"
-  },
-  {
-    id: 5,
-    title: "Creative Reel",
-    client: "Creative Hub",
-    primaryCategory: "corporates",
-    secondaryCategory: "Corporate",
-    format: "social",
-    vimeoId: "1026056187",
-    slug: "/our-work/social-5"
-  },
-  {
-    id: 6,
-    title: "NGO Spotlight",
-    client: "NGO Connect",
-    primaryCategory: "mission-driven",
-    secondaryCategory: "NGOs",
-    format: "social",
-    vimeoId: "1026056303",
-    slug: "/our-work/social-6"
-  },
-  {
-    id: 7,
-    title: "Momentum",
-    client: "Venture Partners",
-    primaryCategory: "corporates",
-    secondaryCategory: "Financial",
-    format: "social",
-    vimeoId: "1021485735",
-    slug: "/our-work/social-7"
-  },
-  {
-    id: 8,
-    title: "Visual Narrative",
-    client: "Story Haus",
-    primaryCategory: "corporates",
-    secondaryCategory: "B2B",
-    format: "social",
-    vimeoId: "1026056396",
-    slug: "/our-work/social-8"
-  },
-
-  // --- CORPORATE VIDEOS (16:9) ---
-  {
-    id: 26,
-    title: "AIA Recruitment Event 2026",
-    client: "AIA",
-    primaryCategory: "corporates",
-    secondaryCategory: "Financial",
-    format: "corporate",
-    vimeoId: "1178920781",
-    slug: "/case-studies/aia-recruitment-event-2026"
-  },
-  {
-    id: 9,
-    title: "Corporate Vision 2025",
-    client: "Enterprise SG",
-    primaryCategory: "government",
-    secondaryCategory: "Agencies",
-    format: "corporate",
-    vimeoId: "1131310388",
-    slug: "/our-work/corp-1"
-  },
-  {
-    id: 10,
-    title: "Strategic Partnerships",
-    client: "Accenture",
-    primaryCategory: "corporates",
-    secondaryCategory: "B2B",
-    format: "corporate",
-    vimeoId: "1131319086",
-    slug: "/our-work/corp-2"
-  },
-  {
-    id: 11,
-    title: "Innovation Summit",
-    client: "Tech Summit",
-    primaryCategory: "corporates",
-    secondaryCategory: "B2B",
-    format: "corporate",
-    vimeoId: "1021466679",
-    slug: "/our-work/corp-3"
-  },
-  {
-    id: 12,
-    title: "Global Leadership",
-    client: "Meltwater",
-    primaryCategory: "corporates",
-    secondaryCategory: "Corporate",
-    format: "corporate",
-    vimeoId: "1021463357",
-    slug: "/our-work/corp-4"
-  },
-  {
-    id: 13,
-    title: "Founder Journey",
-    client: "3 Degrees",
-    primaryCategory: "mission-driven",
-    secondaryCategory: "NGOs",
-    format: "corporate",
-    vimeoId: "1021494730",
-    slug: "/our-work/corp-5"
-  },
-  {
-    id: 14,
-    title: "Sustainable Future",
-    client: "UOB Asset Management",
-    primaryCategory: "corporates",
-    secondaryCategory: "Financial",
-    format: "corporate",
-    vimeoId: "738471780",
-    slug: "/our-work/corp-6"
-  },
-  {
-    id: 15,
-    title: "Community Impact",
-    client: "Young Founders",
-    primaryCategory: "mission-driven",
-    secondaryCategory: "Non-Profits",
-    format: "corporate",
-    vimeoId: "1021450871",
-    slug: "/our-work/corp-7"
-  },
-  {
-    id: 16,
-    title: "Digital Transformation",
-    client: "Standard Chartered",
-    primaryCategory: "corporates",
-    secondaryCategory: "Financial",
-    format: "corporate",
-    vimeoId: "1131316789",
-    slug: "/our-work/corp-8"
-  },
-  {
-    id: 17,
-    title: "Excellence in Motion",
-    client: "Singtel",
-    primaryCategory: "corporates",
-    secondaryCategory: "Corporate",
-    format: "corporate",
-    vimeoId: "1131316295",
-    slug: "/our-work/corp-9"
-  },
-  {
-    id: 18,
-    title: "Future of Finance",
-    client: "DBS Bank",
-    primaryCategory: "corporates",
-    secondaryCategory: "Financial",
-    format: "corporate",
-    vimeoId: "1021465916",
-    slug: "/our-work/corp-10"
-  },
-  {
-    id: 19,
-    title: "Impact Storytelling",
-    client: "WWF Singapore",
-    primaryCategory: "mission-driven",
-    secondaryCategory: "NGOs",
-    format: "corporate",
-    vimeoId: "1021483669",
-    slug: "/our-work/corp-11"
-  },
-  {
-    id: 20,
-    title: "Corporate Resilience",
-    client: "Sembcorp",
-    primaryCategory: "corporates",
-    secondaryCategory: "Corporate",
-    format: "corporate",
-    vimeoId: "1021466316",
-    slug: "/our-work/corp-12"
-  },
-  {
-    id: 21,
-    title: "Beyond the Screen",
-    client: "Mediacorp",
-    primaryCategory: "government",
-    secondaryCategory: "Comm Campaigns",
-    format: "corporate",
-    vimeoId: "1021466066",
-    slug: "/our-work/corp-13"
-  },
-  {
-    id: 22,
-    title: "Global Reach",
-    client: "Singapore Airlines",
-    primaryCategory: "corporates",
-    secondaryCategory: "Corporate",
-    format: "corporate",
-    vimeoId: "1021467300",
-    slug: "/our-work/corp-14"
-  },
-  {
-    id: 23,
-    title: "Innovation Hub",
-    client: "JTC Corporation",
-    primaryCategory: "government",
-    secondaryCategory: "Agencies",
-    format: "corporate",
-    vimeoId: "1131318031",
-    slug: "/our-work/corp-15"
-  },
-  {
-    id: 24,
-    title: "Brand Narrative",
-    client: "Meltwater",
-    primaryCategory: "corporates",
-    secondaryCategory: "B2B",
-    format: "corporate",
-    vimeoId: "890946553",
-    slug: "/our-work/corp-16"
-  },
-  {
-    id: 25,
-    title: "Global Story",
-    client: "Meltwater",
-    primaryCategory: "corporates",
-    secondaryCategory: "Corporate",
-    format: "corporate",
-    vimeoId: "738471829",
-    slug: "/our-work/corp-17"
-  }
-]
+const getFilterCategory = (client: string) => {
+  const govt = ["Enterprise Singapore", "Land Transport Authority", "NIE", "Ministry of Manpower", "Workforce Singapore"];
+  const mission = ["Young Founders School", "3 Degrees", "Green Chapter"];
+  if (govt.includes(client)) return "government";
+  if (mission.includes(client)) return "mission-driven";
+  return "corporates";
+}
 
 const categories = [
-  { id: "all", name: "Collections", icon: LayoutGrid },
-  { id: "corporates", name: "Corporates & Industry Leaders", icon: MonitorPlay },
-  { id: "government", name: "Government & Public Sector", icon: Calendar },
-  { id: "mission-driven", name: "Mission-Driven Organisations", icon: Heart },
+  { id: "all", name: "All Work", icon: LayoutGrid },
+  { id: "corporates", name: "Corporates & Industry", icon: MonitorPlay },
+  { id: "government", name: "Government & Public", icon: Calendar },
+  { id: "mission-driven", name: "Mission-Driven", icon: Heart },
 ]
 
-// ─── Social (9:16) Card ───────────────────────────────────────────────────────
-function SocialCard({ item }: { item: PortfolioItem }) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const playerRef = useRef<VimeoPlayerRef>(null)
-
-  const togglePlay = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    const next = !isPlaying
-    setIsPlaying(next)
-    next ? playerRef.current?.play() : playerRef.current?.pause()
-  }
-
-  const thumbnailUrl = useVimeoThumbnail(item.vimeoId) ?? item.image ?? null
-
+function CaseStudyCard({ study }: { study: CaseStudy }) {
+  // Directly linking to the case study page
   return (
-    <article className="group relative flex flex-col">
-      {/* 9:16 container */}
-      <div className="relative w-full overflow-hidden rounded-2xl bg-surface/10 backdrop-blur-2xl border border-border/10 shadow-lg" style={{ aspectRatio: "9/16" }}>
-        {thumbnailUrl && (
-          <img
-            src={thumbnailUrl}
-            alt=""
-            className={cn(
-              "absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700",
-              isPlaying ? "opacity-0" : "opacity-100"
-            )}
-          />
-        )}
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
+      className="group/card flex flex-col gap-4 h-full"
+    >
+      <Link href={`/case-studies/${study.slug}`} className="block relative aspect-video rounded-2xl overflow-hidden bg-black border border-border/50 shadow-lg cursor-pointer">
+        {/* Thumbnail Preview */}
+        <img 
+          src={`https://vumbnail.com/${study.vimeoId}.jpg?width=1280`} 
+          alt={study.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/40 group-hover/card:bg-black/20 transition-colors" />
+        
+        {/* Play Button Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white scale-90 group-hover/card:scale-100 transition-transform duration-300 shadow-2xl">
+            <Play className="w-5 h-5 fill-current ml-1" />
+          </div>
+        </div>
 
-        {item.vimeoId && (
-          <>
-            <button
-              onClick={togglePlay}
-              className={cn(
-                "absolute inset-0 z-20 flex items-center justify-center transition-all duration-500 group/btn bg-black/0 hover:bg-black/10",
-                isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
-              )}
-            >
-              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transition-transform duration-300 group-hover/btn:scale-110 shadow-2xl">
-                {isPlaying ? (
-                  <div className="flex gap-1">
-                    <div className="w-1 h-5 bg-white rounded-full opacity-90" />
-                    <div className="w-1 h-5 bg-white rounded-full opacity-90" />
-                  </div>
-                ) : (
-                  <Play className="w-6 h-6 text-white fill-white ml-0.5 opacity-90" />
-                )}
-              </div>
-            </button>
+        {/* Category Tag */}
+        <div className="absolute top-4 left-4">
+          <Badge className="bg-primary/90 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 border-none shadow-xl">
+            {study.category}
+          </Badge>
+        </div>
+      </Link>
 
-            {/* Vimeo fills the full 9:16 container */}
-            <div className="absolute inset-0 w-full h-full z-10">
-              <VimeoPlayer
-                ref={playerRef}
-                vimeoId={item.vimeoId}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[142%]"
+      {/* Card Content */}
+      <div className="flex flex-col gap-3 px-2 flex-grow">
+        <div>
+          {clientLogoMap[study.client] ? (
+            <div className="flex items-center justify-start h-6 md:h-7 mb-2">
+              <img 
+                src={clientLogoMap[study.client]} 
+                alt={`${study.client} logo`}
+                className="h-full w-auto object-contain object-left"
+                loading="lazy"
               />
             </div>
-          </>
-        )}
-        <div className="absolute inset-0 bg-black/5 pointer-events-none" />
-      </div>
-
-      <div className="mt-3 px-1">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary/60">{item.client}</span>
-          <span className="w-1 h-1 rounded-full bg-border" />
-          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-foreground/40">{item.secondaryCategory}</span>
+          ) : (
+            <p className="text-foreground/50 text-[10px] font-black uppercase tracking-tighter mb-1">
+              {study.client}
+            </p>
+          )}
+          <Link href={`/case-studies/${study.slug}`} className="hover:text-primary transition-colors block">
+            <h3 className="text-foreground text-lg md:text-xl font-bold tracking-tight line-clamp-2">
+              {study.title}
+            </h3>
+          </Link>
         </div>
-        <h3 className="text-sm font-bold tracking-tight text-foreground group-hover:text-primary transition-colors leading-tight">
-          {item.title}
-        </h3>
+
+        <p className="text-foreground/70 text-sm line-clamp-3 leading-relaxed">
+          {study.description}
+        </p>
+        
+        <div className="mt-auto pt-4">
+          <Link 
+            href={`/case-studies/${study.slug}`}
+            className="inline-flex items-center text-primary text-xs font-bold gap-1.5 hover:gap-2 transition-all uppercase tracking-wider group/link"
+          >
+            Read more 
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
-    </article>
+    </motion.div>
   )
 }
 
-// ─── Corporate (16:9) Card ────────────────────────────────────────────────────
-function CorporateCard({ item }: { item: PortfolioItem }) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const playerRef = useRef<VimeoPlayerRef>(null)
-
-  const togglePlay = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    const next = !isPlaying
-    setIsPlaying(next)
-    next ? playerRef.current?.play() : playerRef.current?.pause()
-  }
-
-  const thumbnailUrl = useVimeoThumbnail(item.vimeoId) ?? item.image ?? null
-
-  return (
-    <article className="group relative flex flex-col">
-      {/* 16:9 container */}
-      <div className="relative w-full overflow-hidden rounded-2xl bg-surface/10 backdrop-blur-2xl border border-border/10 shadow-lg aspect-video">
-        {thumbnailUrl && (
-          <img
-            src={thumbnailUrl}
-            alt=""
-            className={cn(
-              "absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700",
-              isPlaying ? "opacity-0" : "opacity-100"
-            )}
-          />
-        )}
-
-        {item.vimeoId && (
-          <>
-            <button
-              onClick={togglePlay}
-              className={cn(
-                "absolute inset-0 z-20 flex items-center justify-center transition-all duration-500 group/btn bg-black/0 hover:bg-black/10",
-                isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
-              )}
-            >
-              <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center transition-transform duration-300 group-hover/btn:scale-110 shadow-2xl">
-                {isPlaying ? (
-                  <div className="flex gap-1.5">
-                    <div className="w-1.5 h-6 bg-white rounded-full opacity-90" />
-                    <div className="w-1.5 h-6 bg-white rounded-full opacity-90" />
-                  </div>
-                ) : (
-                  <Play className="w-8 h-8 text-white fill-white ml-1 opacity-90" />
-                )}
-              </div>
-            </button>
-
-            {/* Vimeo fills the full 16:9 container */}
-            <div className="absolute inset-0 w-full h-full z-10">
-              <VimeoPlayer
-                ref={playerRef}
-                vimeoId={item.vimeoId}
-                className="absolute inset-0 w-full h-full"
-              />
-            </div>
-          </>
-        )}
-        <div className="absolute inset-0 bg-black/5 pointer-events-none" />
-      </div>
-
-      <div className="mt-4 px-1">
-        <div className="flex items-center gap-2 mb-1.5">
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60">{item.client}</span>
-          <span className="w-1 h-1 rounded-full bg-border" />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/40">{item.secondaryCategory}</span>
-        </div>
-        <h3 className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-          {item.title}
-        </h3>
-      </div>
-    </article>
-  )
-}
-
-// ─── Main Export ──────────────────────────────────────────────────────────────
 export function FullPortfolioGrid() {
   const [filter, setFilter] = useState("all")
 
+  // Generate mapped cases with their internal filter
+  const mappedStudies = useMemo(() => {
+    return caseStudies.map(study => ({
+      ...study,
+      internalFilter: getFilterCategory(study.client)
+    }))
+  }, [])
+
   const filteredItems = useMemo(() =>
-    filter === "all" ? portfolioItems : portfolioItems.filter(item => item.primaryCategory === filter)
-    , [filter])
-
-  const socialItems = filteredItems.filter(item => item.format === "social")
-  const wideItems = filteredItems.filter(item => item.format !== "social")
-
-  const showAll = filter === "all"
+    filter === "all" ? mappedStudies : mappedStudies.filter(item => item.internalFilter === filter)
+  , [filter, mappedStudies])
 
   return (
-    <div className="w-full">
-      {/* Filter Bar */}
-      <div className="flex flex-col items-center mb-16 gap-8">
-        <div className="flex items-center gap-3 text-foreground/40 text-xs font-black uppercase tracking-[0.2em]">
+    <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+      
+      {/* Sticky Left Sidebar */}
+      <div className="w-full lg:w-64 shrink-0 lg:sticky lg:top-32 flex flex-col gap-6 z-10 bg-background/80 backdrop-blur-3xl p-6 lg:p-8 rounded-[2.5rem] border border-border/50 shadow-2xl">
+        <div className="flex items-center gap-3 text-foreground/50 text-[10px] font-black uppercase tracking-[0.2em] mb-2 pb-6 border-b border-border/50">
           <Filter className="w-4 h-4" />
-          Filter by category
+          Filter Collection
         </div>
-        <div className="flex flex-wrap justify-center gap-3 p-2 bg-surface/50 backdrop-blur-xl border border-border/50 rounded-full shadow-2xl">
+        
+        <div className="flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 no-scrollbar snap-x">
           {categories.map((cat) => {
             const Icon = cat.icon
             const isActive = filter === cat.id
@@ -478,68 +156,48 @@ export function FullPortfolioGrid() {
                 key={cat.id}
                 onClick={() => setFilter(cat.id)}
                 className={cn(
-                  "flex items-center gap-3 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-500 relative overflow-hidden group",
-                  isActive ? "text-primary-foreground" : "text-foreground/60 hover:text-foreground"
+                  "flex items-center gap-3 px-4 py-3.5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest transition-all duration-300 relative overflow-hidden group w-full text-left shrink-0 sm:shrink snap-start",
+                  isActive ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105" : "bg-surface text-foreground/90 border border-border/50 hover:border-primary/50 hover:text-foreground hover:bg-white/5"
                 )}
               >
-                {isActive && <div className="absolute inset-0 bg-primary z-0" />}
-                <Icon className={cn("w-4 h-4 relative z-10 transition-colors", isActive ? "text-primary-foreground" : "text-primary group-hover:scale-110")} />
-                <span className="relative z-10">{cat.name}</span>
+                <Icon className={cn("w-3.5 h-3.5 shrink-0 transition-colors", isActive ? "text-primary-foreground" : "text-primary group-hover:scale-110")} />
+                <span className="relative z-10 whitespace-normal leading-tight">{cat.name}</span>
               </button>
             )
           })}
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={filter}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          className="flex flex-col gap-20"
-        >
-          {/* ── Social: 9:16 – 4 columns ── */}
-          {socialItems.length > 0 && (
-            <section>
-              {showAll && (
-                <p className="text-xs font-black uppercase tracking-[0.3em] text-foreground/30 mb-8">
-                  Social · 9:16 Vertical
-                </p>
-              )}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-                {socialItems.map(item => (
-                  <SocialCard key={item.id} item={item} />
-                ))}
-              </div>
-            </section>
+      {/* Main Grid Content */}
+      <div className="flex-1 min-w-0 w-full">
+        <AnimatePresence mode="popLayout">
+          {filteredItems.length > 0 ? (
+            <motion.div
+              key={filter}
+              layout
+              className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12"
+            >
+              {filteredItems.map(study => (
+                <CaseStudyCard key={study.slug} study={study} />
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div 
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-32 flex flex-col items-center justify-center text-center border border-dashed border-border/50 rounded-[3rem] bg-surface/10"
+            >
+              <LayoutGrid className="w-12 h-12 text-border mb-6" />
+              <p className="text-foreground/50 text-lg font-medium tracking-wide max-w-sm">
+                No case studies found for this category. Check back soon for more work.
+              </p>
+            </motion.div>
           )}
-
-          {/* ── Corporate / Wide: 16:9 – 2 columns ── */}
-          {wideItems.length > 0 && (
-            <section>
-              {showAll && (
-                <p className="text-xs font-black uppercase tracking-[0.3em] text-foreground/30 mb-8">
-                  Corporate · 16:9 Cinema
-                </p>
-              )}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
-                {wideItems.map(item => (
-                  <CorporateCard key={item.id} item={item} />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Empty State */}
-          {filteredItems.length === 0 && (
-            <div className="py-32 text-center text-foreground/40 italic font-medium tracking-wide">
-              No projects found in this category. Check back soon for more work.
-            </div>
-          )}
-        </motion.div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
+      
     </div>
   )
 }

@@ -94,7 +94,7 @@ export function Header() {
             href="/contact" 
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-primary px-7 py-3 text-[12px] font-black uppercase tracking-widest text-primary-foreground transition-all hover:scale-105 active:scale-95 shadow-xl shadow-primary/20"
           >
-            <span className="relative z-10">Start Project</span>
+            <span className="relative z-10">Contact Us</span>
             <ArrowRight className="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
             <div className="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
           </Link>
