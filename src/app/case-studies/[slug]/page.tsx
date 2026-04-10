@@ -4,6 +4,7 @@ import { caseStudies } from "@/data/case-studies"
 import { Badge } from "@/components/ui/badge"
 import { Play, ArrowLeft, ShieldCheck, Mail, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 import { QuickContact } from "@/components/sections/QuickContact"
 import { VimeoPlayer } from "@/components/ui/VimeoPlayer"
 
@@ -35,7 +36,7 @@ const clientDetails: Record<string, { label: string, image: string }> = {
   "Wealth GPS": { label: "Financial Advisory", image: "/img/Wealth GPS.png" },
   "Productivity Joy": { label: "Consulting Agency", image: "/img/productivity.png" },
   "Land Transport Authority": { label: "Government Agency", image: "/img/land-transport-authority.png" },
-  "Kaleoscopic Communications": { label: "Digital Bank", image: "/img/anext_bank1.png" },
+  "Kaleoscopic Communications": { label: "Digital Bank", image: "/img/V1_White.webp" },
   "NIE": { label: "Educational Institute", image: "/img/NIE.png" },
   "Ministry of Manpower": { label: "Government Agency", image: "/img/mom.png" },
   "Workforce Singapore": { label: "Government Agency", image: "/img/wsg.png" },
@@ -51,6 +52,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   }
 
   const details = clientDetails[study.client]
+  const isKaleoscopic = study.slug === "kaleoscopic-communications"
 
   return (
     <div className="bg-background pt-32 pb-16 overflow-hidden">
@@ -65,26 +67,25 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          <div className={cn("flex flex-col gap-6 w-full", isKaleoscopic ? "lg:col-span-6" : "lg:col-span-5")}>
             <Badge variant="outline" className="w-fit border-primary/30 text-primary bg-primary/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
               {details?.label || study.category}
             </Badge>
-            <div className="flex items-start justify-between gap-6 w-full">
-              <div className="flex flex-col gap-2">
+            <div className="flex flex-col sm:flex-row items-start justify-between gap-6 w-full">
+              <div className="flex flex-col gap-3 w-full min-w-0">
                 <p className="text-foreground/50 text-xs font-black uppercase tracking-[0.2em]">
                   {study.client}
                 </p>
-                <h1 className="text-3xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1] line-clamp-3">
+                <h1 className={cn("font-black tracking-tight text-foreground leading-[1.1] break-words", isKaleoscopic ? "text-2xl lg:text-3xl" : "text-3xl lg:text-5xl")}>
                   {study.title}
                 </h1>
               </div>
-              
               {details?.image && (
-                <div className="shrink-0 flex items-center">
+                <div className="shrink-0 flex items-center sm:pt-2">
                   <img 
                     src={details.image} 
                     alt={`${study.client} logo`}
-                    className="h-12 sm:h-16 lg:h-20 w-auto max-w-[140px] object-contain object-right" 
+                    className="h-10 sm:h-14 lg:h-16 w-auto max-w-[150px] object-contain object-right" 
                   />
                 </div>
               )}
@@ -100,7 +101,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </div>
           </div>
 
-          <div className="lg:col-span-7">
+          <div className={cn("", isKaleoscopic ? "lg:col-span-6 w-full ml-auto" : "lg:col-span-7")}>
             <div className="relative aspect-video rounded-3xl overflow-hidden bg-black border border-border shadow-2xl z-10 group">
               <iframe
                 src={`https://player.vimeo.com/video/${study.vimeoId}?autoplay=0&byline=0&title=0&portrait=0`}

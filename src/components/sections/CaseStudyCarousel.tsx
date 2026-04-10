@@ -20,7 +20,7 @@ const clientLogoMap: Record<string, string> = {
   "Wealth GPS": "/img/Wealth GPS.png",
   "Productivity Joy": "/img/productivity.png",
   "Land Transport Authority": "/img/land-transport-authority.png",
-  "Kaleoscopic Communications": "/img/anext_bank1.png",
+  "Kaleoscopic Communications": "/img/V1_White.webp",
   "NIE": "/img/NIE.png",
   "Ministry of Manpower": "/img/mom.png",
   "Workforce Singapore": "/img/wsg.png",
