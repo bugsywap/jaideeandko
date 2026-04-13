@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Video, Share2, Users, CalendarDays, PenTool, Code2, BookOpen, Mic, Radio, MessageSquare, Briefcase, CheckCircle2, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
-import { QuickContact } from "@/components/sections/QuickContact"
+import { CallToAction } from "@/components/sections/CallToAction"
 
 const allServices = [
   {
@@ -247,8 +247,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <QuickContact />
+      <CallToAction 
+        title={<>Need a tailored <span className="text-primary italic">solution</span>?</>}
+        description="Whether you need a massive brand overhaul or ongoing social clips, we've got you covered."
+      />
     </div>
   )
 }

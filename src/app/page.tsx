@@ -8,6 +8,7 @@ import { QuickContact } from "@/components/sections/QuickContact"
 import { PortfolioGrid } from "@/components/sections/PortfolioGrid"
 import { TestimonialsSection } from "@/components/sections/Testimonials"
 import { LeadMagnetBanner } from "@/components/sections/LeadMagnetBanner"
+import { CallToAction } from "@/components/sections/CallToAction"
 import { BlogCarousel } from "@/components/sections/BlogCarousel"
 import { ExitIntentPopup } from "@/components/ui/ExitPopup"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
@@ -40,6 +41,10 @@ export default function Home() {
       <ScrollReveal>
         <LeadMagnetBanner />
       </ScrollReveal>
+      <CallToAction 
+        title={<>Ready to command <span className="text-primary italic">attention</span>?</>}
+        description="Let's build a video strategy that accelerates growth for your company."
+      />
       
       <ExitIntentPopup />
     </>

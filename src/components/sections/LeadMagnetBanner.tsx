@@ -12,17 +12,13 @@ export function LeadMagnetBanner() {
     setStatus("submitting")
     
     const formData = new FormData(e.currentTarget)
-    const sheetData = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      formType: "Lead Magnet",
-      interest: ""
-    }
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
 
     const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      _subject: `New Lead - Guide Download: ${formData.get("name")}`,
+      name: name,
+      email: email,
+      _subject: `New Lead - Guide Download: ${name}`,
       _cc: "gkoay@jaideeandko.com",
       _template: "table"
     }
@@ -32,7 +28,14 @@ export function LeadMagnetBanner() {
       fetch("https://script.google.com/macros/s/AKfycbwkfXZlqYaO5I_ATWpcbi7edBN0bfSHAlHEbhI3tbEbsw8DMc8Yvrb9NRg6NBM7ImZ0qA/exec", {
         method: "POST",
         mode: "no-cors",
-        body: JSON.stringify(sheetData)
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify({
+          formType: "home",
+          name: name,
+          email: email,
+        })
       }).catch(err => console.error("Sheet Sync Error:", err))
 
       // 2. Primary push to FormSubmit to deliver the Email Lead notification to team

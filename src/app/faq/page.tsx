@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { QuickContact } from "@/components/sections/QuickContact"
+import { CallToAction } from "@/components/sections/CallToAction"
 import { Badge } from "@/components/ui/badge"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
 import { motion, AnimatePresence } from "framer-motion"
@@ -223,16 +223,10 @@ export default function FAQPage() {
       </section>
 
       {/* Footer Contact CTA */}
-      <section className="mt-16 lg:mt-32 relative">
-        <div className="absolute inset-0 bg-primary/5 -skew-y-2 transform -z-10 origin-bottom-left" />
-        <div className="container mx-auto px-6 max-w-7xl pt-16 pb-8">
-          <div className="mb-12 text-center">
-             <h2 className="text-3xl font-bold text-foreground mb-4">Still have questions?</h2>
-             <p className="text-lg text-foreground/70 max-w-xl mx-auto font-medium">We're here to help. Drop us a message below and our team will get back to you within 24 hours.</p>
-          </div>
-          <QuickContact />
-        </div>
-      </section>
+      <CallToAction 
+        title={<>Still have <span className="text-primary italic">questions</span>?</>}
+        description="If you couldn't find your answer here, our inbox is always open."
+      />
     </div>
   )
 }

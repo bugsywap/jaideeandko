@@ -4,7 +4,6 @@ import "./globals.css";
 
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { FloatingSocials } from "@/components/ui/FloatingSocials";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,7 +25,6 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased flex min-h-screen flex-col`}>
         <Header />
         <main className="flex-1 pt-16">{children}</main>
-        <FloatingSocials />
         <Footer />
       </body>
     </html>

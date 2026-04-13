@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import { QuickContact } from "@/components/sections/QuickContact"
+import { CallToAction } from "@/components/sections/CallToAction"
 
 const stages = [
   {
@@ -171,8 +171,10 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <QuickContact />
+      <CallToAction 
+        title={<>Ready to start the <span className="text-primary italic">process</span>?</>}
+        description="We make video production seamless and predictable. Let's schedule a deep dive today."
+      />
     </div>
   )
 }

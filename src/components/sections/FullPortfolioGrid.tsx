@@ -30,7 +30,7 @@ const clientLogoMap: Record<string, string> = {
 
 const getFilterCategory = (client: string) => {
   const govt = ["Enterprise Singapore", "Land Transport Authority", "NIE", "Ministry of Manpower", "Workforce Singapore"];
-  const mission = ["Young Founders School", "3 Degrees", "Green Chapter"];
+  const mission = ["Young Founders School", "3 Degrees", "Green Chapter", "Productivity Joy"];
   if (govt.includes(client)) return "government";
   if (mission.includes(client)) return "mission-driven";
   return "corporates";

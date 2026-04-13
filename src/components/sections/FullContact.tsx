@@ -24,6 +24,25 @@ export function FullContact() {
     }
 
     try {
+      // 1. Silent invisible push to Google Sheets
+      fetch("https://script.google.com/macros/s/AKfycbwkfXZlqYaO5I_ATWpcbi7edBN0bfSHAlHEbhI3tbEbsw8DMc8Yvrb9NRg6NBM7ImZ0qA/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify({
+          formType: "contact",
+          firstName: formData.get("first-name"),
+          lastName: formData.get("last-name"),
+          company: formData.get("company"),
+          email: formData.get("email"),
+          industry: formData.get("industry"),
+          message: formData.get("message"),
+        })
+      }).catch(err => console.error("Sheet Sync Error:", err))
+
+      // 2. Primary push to FormSubmit
       const response = await fetch("https://formsubmit.co/ajax/admin@getnifty.xyz", {
         method: "POST",
         headers: {

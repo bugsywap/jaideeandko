@@ -1,4 +1,4 @@
-import { QuickContact } from "@/components/sections/QuickContact"
+import { CallToAction } from "@/components/sections/CallToAction"
 import { Badge } from "@/components/ui/badge"
 import { BlogGrid } from "@/components/sections/BlogGrid"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
@@ -42,16 +42,10 @@ export default async function BlogPage() {
         )}
       </div>
 
-      <section className="mt-16 lg:mt-32 relative">
-        <div className="absolute inset-0 bg-primary/5 transform -z-10 origin-bottom-left" />
-        <ScrollReveal className="container mx-auto px-6 max-w-7xl pt-16 pb-8">
-          <div className="mb-12 text-center">
-             <h2 className="text-3xl font-bold text-foreground mb-4">Want insights delivered?</h2>
-             <p className="text-lg text-foreground/70 max-w-xl mx-auto">Drop us a message and we'll let you know when our first strategic deep-dive goes live.</p>
-          </div>
-          <QuickContact />
-        </ScrollReveal>
-      </section>
+      <CallToAction 
+        title={<>Want to put this strategy into <span className="text-primary italic">action</span>?</>}
+        description="Speak with our strategists to see how we can apply these concepts directly to your brand."
+      />
     </div>
   )
 }

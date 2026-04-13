@@ -5,7 +5,7 @@ import { ShieldCheck, Heart, Sparkles, Target, Users, ArrowRight, Play, Star } f
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { QuickContact } from "@/components/sections/QuickContact"
+import { CallToAction } from "@/components/sections/CallToAction"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
 
 export default function AboutPage() {
@@ -312,23 +312,10 @@ export default function AboutPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-32 lg:py-48 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary/5 -z-10" />
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center flex flex-col items-center gap-12">
-          <ScrollReveal className="flex flex-col gap-6">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight text-foreground leading-tight">
-              Let's Start Your <span className="text-primary italic">Story</span>
-            </h2>
-            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-              Ready to bridge the gap between your brand and your audience? We're with you every step of the way.
-            </p>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.2} className="w-full max-w-xl">
-            <QuickContact />
-          </ScrollReveal>
-        </div>
-      </section>
+      <CallToAction 
+        title={<>Let's grow <span className="text-primary italic">together.</span></>}
+        description="We love meeting new visionaries. Let's explore how our team can integrate with yours."
+      />
     </div>
   )
 }

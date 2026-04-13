@@ -2,7 +2,7 @@
 
 import { FullContact } from "@/components/sections/FullContact"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Mail, Clock, Phone } from "lucide-react"
+import { MapPin, Mail, Linkedin, Phone } from "lucide-react"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
 
 export default function ContactPage() {
@@ -64,17 +64,22 @@ export default function ContactPage() {
               </div>
             </div>
             
-            <div className="flex gap-x-6 p-6 rounded-2xl bg-surface border border-border transition-colors hover:border-primary/50 group">
+            <a 
+              href="https://www.linkedin.com/company/jaidee-ko" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex gap-x-6 p-6 rounded-2xl bg-surface border border-border transition-colors hover:border-primary/50 group"
+            >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 group-hover:bg-primary transition-colors">
-                <Clock className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                <Linkedin className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
               </div>
               <div>
-                <h3 className="text-lg font-bold leading-7 text-foreground">Availability</h3>
-                <p className="mt-2 text-foreground/70 leading-relaxed">
-                  Currently accepting <strong className="text-primary font-bold">2</strong> new clients for Q1 2026.
+                <h3 className="text-lg font-bold leading-7 text-foreground">Linkedin</h3>
+                <p className="mt-2 text-foreground/70 leading-relaxed font-bold group-hover:text-primary transition-colors">
+                  Jaidee & Ko
                 </p>
               </div>
-            </div>
+            </a>
             
           </ScrollReveal>
 

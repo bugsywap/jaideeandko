@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { X, Download } from "lucide-react"
+import { X, Mail } from "lucide-react"
 
 export function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false)
@@ -31,12 +31,26 @@ export function ExitIntentPopup() {
     const formData = new FormData(e.currentTarget)
     const data = {
       email: formData.get("email"),
-      _subject: `New Lead from Exit Popup: ${formData.get("email")}`,
+      _subject: `New Newsletter Signup: ${formData.get("email")}`,
       _cc: "gkoay@jaideeandko.com",
       _template: "table"
     }
 
     try {
+      // 1. Silent invisible push to Google Sheets
+      fetch("https://script.google.com/macros/s/AKfycbwkfXZlqYaO5I_ATWpcbi7edBN0bfSHAlHEbhI3tbEbsw8DMc8Yvrb9NRg6NBM7ImZ0qA/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify({
+          formType: "newsletter",
+          email: formData.get("email"),
+        })
+      }).catch(err => console.error("Sheet Sync Error:", err))
+
+      // 2. Secondary push to FormSubmit
       const response = await fetch("https://formsubmit.co/ajax/admin@getnifty.xyz", {
         method: "POST",
         headers: {
@@ -84,11 +98,11 @@ export function ExitIntentPopup() {
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                   <h3 className="text-2xl font-bold leading-6 text-foreground mb-4" id="modal-title">
-                    Wait! Don't leave empty-handed.
+                    Before you go…
                   </h3>
                   <div className="mt-2 text-foreground/70">
                     <p>
-                      Get our exclusive <strong>Video Marketing Checklist</strong> for B2B brands and NGOs. Ensure your next project is structured for maximum ROI.
+                      Want occasional tips, ideas, and inspiration for your next project? Join our newsletter.
                     </p>
                   </div>
                   
@@ -116,15 +130,15 @@ export function ExitIntentPopup() {
                           "Sent!"
                         ) : (
                           <>
-                            <Download className="w-4 h-4" />
-                            Send Me The Checklist
+                            <Mail className="w-4 h-4" />
+                            Join the Newsletter
                           </>
                         )}
                       </button>
                     </div>
                   </form>
                   <p className="mt-4 text-xs text-foreground/70 text-center sm:text-left">
-                    No spam. Unsubscribe at any time.
+                    No spam. Just value. Unsubscribe anytime.
                   </p>
                 </div>
               </div>
