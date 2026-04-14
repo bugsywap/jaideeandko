@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight, BookOpen, Mail, Sparkles, Loader2 } from "lucide-react"
+import { GOOGLE_SCRIPT_URL, FORM_SUBMIT_EMAIL, CC_EMAIL } from "@/lib/constants"
 
 export function LeadMagnetBanner() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle")
@@ -19,13 +20,13 @@ export function LeadMagnetBanner() {
       name: name,
       email: email,
       _subject: `New Lead - Guide Download: ${name}`,
-      _cc: "gkoay@jaideeandko.com",
+      _cc: CC_EMAIL,
       _template: "table"
     }
 
     try {
       // 1. Silent invisible push to Google Sheets 
-      fetch("https://script.google.com/macros/s/AKfycbwkfXZlqYaO5I_ATWpcbi7edBN0bfSHAlHEbhI3tbEbsw8DMc8Yvrb9NRg6NBM7ImZ0qA/exec", {
+      fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         headers: {
@@ -39,7 +40,7 @@ export function LeadMagnetBanner() {
       }).catch(err => console.error("Sheet Sync Error:", err))
 
       // 2. Primary push to FormSubmit to deliver the Email Lead notification to team
-      const response = await fetch("https://formsubmit.co/ajax/admin@getnifty.xyz", {
+      const response = await fetch(`https://formsubmit.co/ajax/${FORM_SUBMIT_EMAIL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
