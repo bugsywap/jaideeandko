@@ -121,22 +121,30 @@ export default function ResourcesPage() {
                   </div>
                 </div>
 
-                <div className="lg:w-1/2 bg-muted/30 relative flex items-center justify-center p-12 overflow-hidden border-t lg:border-t-0 lg:border-l border-border/50">
-                  {/* Decorative Elements */}
-                  <div className="absolute inset-0 bg-primary/5 opacity-50" />
-                  <div className="w-full max-w-[320px] aspect-[3/4] bg-surface rounded-2xl shadow-2xl border border-border/50 relative z-10 transform rotate-2 group-hover:rotate-0 transition-transform duration-500 flex flex-col p-6">
-                    <div className="h-4 w-24 bg-primary/20 rounded-full mb-8" />
-                    <div className="h-8 w-full bg-foreground/5 rounded-lg mb-4" />
-                    <div className="h-8 w-2/3 bg-foreground/5 rounded-lg mb-12" />
-                    <div className="mt-auto flex justify-between items-end">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                        <BookOpen className="w-6 h-6" />
-                      </div>
-                      <div className="h-6 w-16 bg-primary/20 rounded-full" />
+                <div className="lg:w-1/2 relative min-h-[400px] overflow-hidden group/img">
+                  {featuredResource.imageUrl && (
+                    <div className="absolute inset-0">
+                      <img 
+                        src={featuredResource.imageUrl} 
+                        alt={featuredResource.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-surface via-transparent to-transparent lg:block hidden" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent lg:hidden block" />
+                    </div>
+                  )}
+                  {/* Floating badge for image */}
+                  <div className="absolute bottom-10 right-10 bg-surface/80 backdrop-blur-md border border-border/50 p-6 rounded-2xl shadow-2xl transform translate-y-4 opacity-0 group-hover/img:translate-y-0 group-hover/img:opacity-100 transition-all duration-500">
+                    <div className="flex items-center gap-4">
+                       <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                          <BookOpen className="w-5 h-5" />
+                       </div>
+                       <div>
+                          <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40">Resource Type</p>
+                          <p className="text-sm font-bold">{featuredResource.category}</p>
+                       </div>
                     </div>
                   </div>
-                  {/* Floating Elements */}
-                  <div className="absolute top-1/4 right-1/4 w-12 h-12 bg-primary/10 blur-xl rounded-full animate-bounce" />
                 </div>
               </div>
             </div>
@@ -181,48 +189,68 @@ export default function ResourcesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredResources.filter(r => !r.isFeatured).map((resource, index) => (
             <ScrollReveal key={resource.id} delay={0.1 * index} className="h-full">
-              <div className="group bg-surface/40 backdrop-blur-md border border-border/50 rounded-[2rem] p-8 h-full flex flex-col transition-all hover:bg-surface hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1">
-                <div className="flex items-start justify-between mb-8">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors group-hover:scale-110 duration-500 ${
-                    resource.category === 'Template' ? 'bg-blue-500/10 text-blue-500' :
-                    resource.category === 'Playbook' ? 'bg-purple-500/10 text-purple-500' :
-                    resource.category === 'Checklist' ? 'bg-orange-500/10 text-orange-500' :
-                    'bg-primary/10 text-primary'
-                  }`}>
-                    {resource.category === 'Template' && <Layout className="w-6 h-6" />}
-                    {resource.category === 'Playbook' && <FileBox className="w-6 h-6" />}
-                    {resource.category === 'Checklist' && <CheckCircle className="w-6 h-6" />}
-                    {resource.category === 'Guide' && <BookOpen className="w-6 h-6" />}
+              <div className="group bg-surface/40 backdrop-blur-md border border-border/50 rounded-[2rem] overflow-hidden h-full flex flex-col transition-all hover:bg-surface hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1">
+                
+                {/* Image Header */}
+                <div className="relative h-48 overflow-hidden">
+                  {resource.imageUrl ? (
+                    <img 
+                      src={resource.imageUrl} 
+                      alt={resource.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-primary/5 flex items-center justify-center">
+                       <FileBox className="w-12 h-12 text-primary/20" />
+                    </div>
+                  )}
+                  <div className="absolute top-4 right-4">
+                    <Badge variant="outline" className="bg-surface/80 backdrop-blur-md border-border/50 text-[10px] font-bold uppercase tracking-widest text-primary px-3 py-1">
+                      {resource.category}
+                    </Badge>
                   </div>
-                  <Badge variant="outline" className="border-border/50 text-[10px] font-bold uppercase tracking-widest text-foreground/40 px-3 py-1">
-                    {resource.category}
-                  </Badge>
                 </div>
 
-                <h3 className="text-xl font-black mb-4 leading-tight group-hover:text-primary transition-colors">
-                  {resource.title}
-                </h3>
-                
-                <p className="text-foreground/50 text-sm leading-relaxed mb-auto">
-                  {resource.description}
-                </p>
+                <div className="p-8 flex flex-col flex-1">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors group-hover:scale-110 duration-500 ${
+                      resource.category === 'Template' ? 'bg-blue-500/10 text-blue-500' :
+                      resource.category === 'Playbook' ? 'bg-purple-500/10 text-purple-500' :
+                      resource.category === 'Checklist' ? 'bg-orange-500/10 text-orange-500' :
+                      'bg-primary/10 text-primary'
+                    }`}>
+                      {resource.category === 'Template' && <Layout className="w-5 h-5" />}
+                      {resource.category === 'Playbook' && <FileBox className="w-5 h-5" />}
+                      {resource.category === 'Checklist' && <CheckCircle className="w-5 h-5" />}
+                      {resource.category === 'Guide' && <BookOpen className="w-5 h-5" />}
+                    </div>
+                  </div>
 
-                <div className="mt-10 pt-8 border-t border-border/50 flex items-center justify-between">
-                  <span className="text-[10px] font-black uppercase tracking-tighter text-foreground/30">
-                    {resource.fileType} • Free
-                  </span>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="group/btn h-10 px-4 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-primary hover:text-primary-foreground"
-                    onClick={() => handleDownloadClick(resource)}
-                  >
-                    {resource.downloadUrl === '#' ? (
-                      <>Soon <Sparkles className="ml-2 w-3.5 h-3.5" /></>
-                    ) : (
-                      <>Download <Download className="ml-2 w-3.5 h-3.5 group-hover/btn:animate-bounce" /></>
-                    )}
-                  </Button>
+                  <h3 className="text-xl font-black mb-4 leading-tight group-hover:text-primary transition-colors">
+                    {resource.title}
+                  </h3>
+                  
+                  <p className="text-foreground/50 text-sm leading-relaxed mb-auto">
+                    {resource.description}
+                  </p>
+
+                  <div className="mt-10 pt-8 border-t border-border/50 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-tighter text-foreground/30">
+                      {resource.fileType} • Free
+                    </span>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="group/btn h-10 px-4 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-primary hover:text-primary-foreground"
+                      onClick={() => handleDownloadClick(resource)}
+                    >
+                      {resource.downloadUrl === '#' ? (
+                        <>Soon <Sparkles className="ml-2 w-3.5 h-3.5" /></>
+                      ) : (
+                        <>Download <Download className="ml-2 w-3.5 h-3.5 group-hover/btn:animate-bounce" /></>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </ScrollReveal>

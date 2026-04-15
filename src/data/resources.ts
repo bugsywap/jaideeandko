@@ -5,6 +5,7 @@ export interface Resource {
   category: "Guide" | "Template" | "Playbook" | "Checklist";
   downloadUrl: string;
   fileType: "PDF" | "ZIP" | "DOCX" | "XLSX";
+  imageUrl?: string;
   isFeatured?: boolean;
 }
 
@@ -15,15 +16,17 @@ export const RESOURCES: Resource[] = [
     description: "Discover the definitive video assets that drive trust and shorten B2B sales cycles in Southeast Asia.",
     category: "Guide",
     downloadUrl: "/5_Videos_Every_B2B_Needs_Roadmap.pdf",
+    imageUrl: "/res-featured-thumb.png",
     fileType: "PDF",
     isFeatured: true,
   },
   {
     id: "marketing-checklist",
-    title: "Marketing Checklist",
-    description: "A comprehensive roadmap for launching and scaling high-impact B2B marketing campaigns in Southeast Asia. Coming soon.",
+    title: "Video Marketing Checklist",
+    description: "A comprehensive roadmap for launching and scaling high-impact video marketing campaigns. Everything you need to plan, launch, and improve.",
     category: "Checklist",
-    downloadUrl: "#", 
+    downloadUrl: "/Video Marketing Checklist_Jaideeko Resource.pdf", 
+    imageUrl: "/res-checklist-thumb.png",
     fileType: "PDF",
   }
 ];
