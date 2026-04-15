@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
 import { Button } from "@/components/ui/button"
@@ -19,11 +20,24 @@ import {
 import { RESOURCES, Resource } from "@/data/resources"
 import { ResourceDownloadModal } from "@/components/resources/ResourceDownloadModal"
 
-export default function ResourcesPage() {
+function ResourcesContent() {
+  const searchParams = useSearchParams()
   const [activeCategory, setActiveCategory] = useState<string>("All")
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  // Handle auto-opening from URL params (e.g., ?id=b2b-video-roadmap)
+  useEffect(() => {
+    const resourceId = searchParams.get("id")
+    if (resourceId) {
+      const match = RESOURCES.find(r => r.id === resourceId)
+      if (match) {
+        setSelectedResource(match)
+        setIsModalOpen(true)
+      }
+    }
+  }, [searchParams])
 
   const categories = ["All", ...Array.from(new Set(RESOURCES.map(r => r.category)))]
   
@@ -43,14 +57,14 @@ export default function ResourcesPage() {
   }
 
   return (
-    <div className="bg-background min-h-screen relative overflow-x-hidden">
+    <div className="bg-background min-h-screen relative overflow-x-hidden pt-32 pb-32">
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 inset-x-0 h-[500px] pointer-events-none -z-10">
         <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full animate-pulse" />
         <div className="absolute top-[10%] -left-[10%] w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full" />
       </div>
 
-      <div className="container mx-auto px-6 max-w-7xl pt-32 pb-32">
+      <div className="container mx-auto px-6 max-w-7xl">
         
         {/* Navigation */}
         <ScrollReveal>
@@ -278,5 +292,13 @@ export default function ResourcesPage() {
         onClose={() => setIsModalOpen(false)}
       />
     </div>
+  )
+}
+
+export default function ResourcesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <ResourcesContent />
+    </Suspense>
   )
 }

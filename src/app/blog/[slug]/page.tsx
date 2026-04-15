@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowLeft, Clock, User, Calendar, Share2 } from "lucide-react"
+import { ArrowLeft, Clock, User, Calendar, Share2, Download, Sparkles } from "lucide-react"
 
 import { Metadata } from "next"
 import { getPostBySlug, getPosts } from "@/lib/hygraph"
@@ -29,6 +29,76 @@ export async function generateStaticParams() {
   }))
 }
 
+// Global Resource Link Integration (Link-Focus Only)
+function enrichContent(html: string) {
+  const mappings = [
+    {
+      keywords: ["5 Videos Every B2B Brand Needs", "B2B video strategy", "B2B video roadmap", "B2B video marketing", "b2b video"],
+      id: "b2b-video-roadmap",
+    },
+    {
+      keywords: ["Video Marketing Checklist", "marketing checklist", "practical checklist", "checklist"],
+      id: "marketing-checklist",
+    }
+  ];
+
+  const allKeywordsSorted = mappings.flatMap(m => m.keywords.map(k => ({ keyword: k, id: m.id })))
+    .sort((a, b) => b.keyword.length - a.keyword.length);
+
+  let processedHtml = html;
+  const placeholders: string[] = [];
+
+  // Phase 1: Consolidated Link Detection
+  // We strictly ONLY look for existing <a> tags or blocks that contain <a> tags.
+  // This heals split links while honoring the "only look for links" requirement.
+  const blockRegex = /(<(p|li|div)[^>]*?>)([\s\S]*?)(<\/\2>)/gi;
+  processedHtml = processedHtml.replace(blockRegex, (fullBlock, openingTag, tagName, innerContent, closingTag) => {
+    const lowercaseInner = innerContent.toLowerCase();
+    
+    // Does this block contain an existing <a> tag AND one of our keywords?
+    const hasExistingLink = /<a[^>]*?>/i.test(innerContent);
+    const match = allKeywordsSorted.find(m => lowercaseInner.includes(m.keyword.toLowerCase()));
+    
+    // Only consolidate if there's already a link intent here
+    if (hasExistingLink && match && innerContent.length < 350 && /(download|guide|checklist|roadmap|free|get)/i.test(innerContent)) {
+      const cleanContent = innerContent.replace(/<a[^>]*?>/gi, '').replace(/<\/a>/gi, '');
+      const placeholder = `__RESOURCE_CTA_PLACEHOLDER_${placeholders.length}__`;
+      const transformedBlock = `${openingTag}<a href="/resources?id=${match.id}" class="text-primary font-black underline decoration-primary/30 underline-offset-4 hover:decoration-primary transition-all">${cleanContent}</a>${closingTag}`;
+      
+      placeholders.push(transformedBlock);
+      return placeholder;
+    }
+    
+    return fullBlock;
+  });
+
+  // Phase 2: Extract and upgrade any remaining standalone <a> tags
+  const linkRegex = /<a[^>]*?>([\s\S]*?)<\/a>/gi;
+  processedHtml = processedHtml.replace(linkRegex, (fullTag, innerText) => {
+    const lowercaseInner = innerText.toLowerCase();
+    const match = allKeywordsSorted.find(m => lowercaseInner.includes(m.keyword.toLowerCase()));
+    
+    const placeholder = `__RESOURCE_LINK_PLACEHOLDER_${placeholders.length}__`;
+    if (match) {
+      // Upgrade existing link
+      placeholders.push(`<a href="/resources?id=${match.id}" class="text-primary font-black underline decoration-primary/30 underline-offset-4 hover:decoration-primary transition-all">${innerText}</a>`);
+    } else {
+      // Keep original non-resource link
+      placeholders.push(fullTag);
+    }
+    return placeholder;
+  });
+
+  // Restore all placeholders
+  // We perform no Phase 3 (standalone keyword wrapping) to honor the request.
+  placeholders.forEach((tag, index) => {
+    processedHtml = processedHtml.replace(`__RESOURCE_CTA_PLACEHOLDER_${index}__`, tag);
+    processedHtml = processedHtml.replace(`__RESOURCE_LINK_PLACEHOLDER_${index}__`, tag);
+  });
+
+  return processedHtml;
+}
+
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const post = await getPostBySlug(resolvedParams.slug)
@@ -37,8 +107,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound()
   }
 
-  // Fallback for HTML
-  const contentHtml = post.content?.html || '';
+  // Fallback for HTML and enrichment
+  const originalHtml = post.content?.html || '';
+  const contentHtml = enrichContent(originalHtml);
 
   return (
     <article className="bg-background min-h-screen pb-24 overflow-hidden">
@@ -122,7 +193,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         </div>
 
-        <div className="flex justify-center w-full">
+        <div className="flex flex-col items-center w-full">
           <div 
             className="prose dark:prose-invert max-w-[70ch] w-full
             prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-foreground
