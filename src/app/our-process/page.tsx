@@ -1,14 +1,17 @@
 "use client"
 
+import { useState, useEffect, useRef } from "react"
 import { Badge } from "@/components/ui/badge"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { CallToAction } from "@/components/sections/CallToAction"
+import { cn } from "@/lib/utils"
 
 const stages = [
   {
     number: "01",
+    id: "stage-01",
     title: "Discovery",
     subtitle: "Understand before we act",
     description: "We immerse in your world - goals, audience, existing assets, and what success actually looks like. Nothing moves forward without a shared foundation.",
@@ -21,6 +24,7 @@ const stages = [
   },
   {
     number: "02",
+    id: "stage-02",
     title: "Strategy & Concept",
     subtitle: "Build the idea before the asset",
     description: "We develop the creative and strategic framework guiding all execution. Angles are decided, narratives shaped, and every output earns its place.",
@@ -33,6 +37,7 @@ const stages = [
   },
   {
     number: "03",
+    id: "stage-03",
     title: "Production",
     subtitle: "Execute with precision",
     description: "Strategy becomes reality. Whether on set, in design, in code, or in copy - we execute with the same standard regardless of medium. Frictionless for your team.",
@@ -45,6 +50,7 @@ const stages = [
   },
   {
     number: "04",
+    id: "stage-04",
     title: "Delivery & Review",
     subtitle: "Polish, refine, hand over",
     description: "Work goes through structured review before it reaches a client screen. Revisions are managed within agreed rounds. Every deliverable is documented for handoff.",
@@ -57,6 +63,7 @@ const stages = [
   },
   {
     number: "05",
+    id: "stage-05",
     title: "Distribution & Impact",
     subtitle: "Launch is not the finish line",
     description: "Delivery without distribution is a file sitting in a folder. We support the launch, advise on amplification, and track what the work achieves in the real world.",
@@ -70,95 +77,285 @@ const stages = [
 ]
 
 export default function ProcessPage() {
+  const [activeStage, setActiveStage] = useState(0)
+  const [isFloating, setIsFloating] = useState(false)
+  const ghostRef = useRef<HTMLDivElement>(null)
+  const stageRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  // State Tracking: Monitor scroll position for the "Floating" state
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFloating(!entry.isIntersecting)
+      },
+      { threshold: 0, rootMargin: "-100px 0px 0px 0px" }
+    )
+
+    if (ghostRef.current) {
+      observer.observe(ghostRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  // Active Stage Tracking
+  useEffect(() => {
+    const stageObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = stageRefs.current.findIndex(ref => ref === entry.target)
+            if (index !== -1) setActiveStage(index)
+          }
+        })
+      },
+      { threshold: 0.4, rootMargin: "-20% 0px -20% 0px" }
+    )
+
+    stageRefs.current.forEach((ref) => {
+      if (ref) stageObserver.observe(ref)
+    })
+
+    return () => stageObserver.disconnect()
+  }, [])
+
+  const scrollToStage = (index: number) => {
+    const target = stageRefs.current[index]
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      })
+    }
+  }
+
   return (
     <div className="bg-background min-h-screen">
-      {/* Hero Section */}
+      {/* Article Hero */}
       <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden border-b border-border/50">
         <div className="absolute inset-0 bg-primary/5 -skew-y-2 transform -z-10 origin-bottom-left" />
         <ScrollReveal className="container mx-auto px-6 max-w-5xl relative z-10 text-center flex flex-col items-center">
-          <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest mb-8">
+          <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
             Working Methodology
           </Badge>
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-foreground uppercase leading-[1.05]">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tighter text-foreground uppercase leading-[1] mb-8">
             From Brief <br />
             <span className="text-primary italic">To Impact</span>
           </h1>
           <p className="mt-8 text-xl md:text-2xl leading-relaxed text-foreground/70 font-medium max-w-2xl">
-            How every project moves - regardless of medium.
-          </p>
-          <p className="mt-6 text-lg text-foreground/60 max-w-3xl leading-relaxed">
-            Every engagement at <span className="font-bold text-foreground">Jaidee & Ko</span> moves through five stages. The stages are consistent whether the project is a brand film, a social campaign, a design system, or a content strategy. What changes is the medium. <span className="italic text-primary font-bold">What doesn't change is the discipline.</span>
+            Our systematic framework for predictable creative success.
           </p>
         </ScrollReveal>
       </section>
 
-      {/* End-to-End Flow Summary */}
-      <section className="bg-surface py-24 border-b border-border/50">
-        <ScrollReveal className="container mx-auto px-6 max-w-7xl">
-          <h4 className="text-sm font-black uppercase tracking-[0.2em] text-foreground/40 mb-8 text-center md:text-left">
-            End-To-End Flow
-          </h4>
-          
-          <div className="flex flex-col md:flex-row gap-4 md:gap-2 lg:gap-4 justify-between items-center bg-background p-6 rounded-[2rem] border border-border/60 shadow-lg">
+      {/* Ghost Anchor for original design placement */}
+      <div ref={ghostRef} className="container mx-auto px-6 max-w-7xl pt-24">
+        <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/20 mb-8 text-center md:text-left">
+          End-To-End Flow
+        </h4>
+        
+        {/* INTERACTIVE COMPONENT 1: Inline Nav (Fades out when floating) */}
+        <div className="min-h-[120px] w-full relative">
+          <AnimatePresence>
+            {!isFloating && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-col md:flex-row gap-4 md:gap-1 lg:gap-3 justify-between items-center bg-background p-5 rounded-[2rem] border border-border/60 shadow-lg"
+              >
+                {stages.map((stage, idx) => (
+                  <button
+                    key={stage.number}
+                    onClick={() => scrollToStage(idx)}
+                    className="group flex items-center gap-4 shrink-0 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={cn(
+                        "w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-all duration-500 border-2",
+                        activeStage === idx 
+                          ? "bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.5)] scale-110" 
+                          : "bg-background text-foreground/40 border-border group-hover:border-primary/50 group-hover:text-primary"
+                      )}>
+                        {stage.number}
+                      </div>
+
+                      <span className={cn(
+                        "text-foreground font-black text-[10px] lg:text-xs uppercase tracking-widest whitespace-nowrap transition-colors",
+                        activeStage === idx ? "text-primary" : "group-hover:text-primary"
+                      )}>
+                        {stage.title}
+                      </span>
+                    </div>
+
+                    {idx < stages.length - 1 && (
+                      <ArrowRight className="w-3 h-3 text-border rotate-90 md:rotate-0 hidden md:block opacity-30 ml-2" />
+                    )}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* INTERACTIVE COMPONENT 2: Floating Nav (Fades in when scrolling down) */}
+      <AnimatePresence>
+        {isFloating && (
+          <motion.nav 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="fixed left-8 top-1/2 -translate-y-1/2 z-[100] hidden xl:flex flex-col gap-8 p-6 bg-background/80 backdrop-blur-3xl border border-primary/20 rounded-[2.5rem] shadow-[0_0_60px_rgba(0,0,0,0.15)] py-12 w-fit"
+          >
             {stages.map((stage, idx) => (
-              <div key={stage.number} className="flex items-center gap-4 shrink-0 w-full md:w-auto justify-center md:justify-start">
-                <span className="text-foreground font-black text-xs lg:text-sm uppercase tracking-widest whitespace-nowrap flex items-center group cursor-default">
-                  <span className="text-primary mr-2 transition-colors">{stage.number}</span>
-                  <span className="group-hover:text-primary transition-colors">{stage.title}</span>
-                </span>
-                {idx < stages.length - 1 && (
-                  <ArrowRight className="w-4 h-4 text-border rotate-90 md:rotate-0 hidden md:block" />
-                )}
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-      </section>
+              <button
+                key={stage.number}
+                onClick={() => scrollToStage(idx)}
+                className="group relative flex flex-col items-center gap-1 w-full"
+              >
+                <div className={cn(
+                  "w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-all duration-500 border-2",
+                  activeStage === idx 
+                    ? "bg-primary text-primary-foreground border-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.5)] scale-110" 
+                    : "bg-background text-foreground/40 border-border group-hover:border-primary/50 group-hover:text-primary"
+                )}>
+                  {stage.number}
+                </div>
 
-      {/* Stages Section */}
-      <section className="bg-background">
+                {/* Vertical Active Line Indicator */}
+                {activeStage === idx && (
+                  <motion.div 
+                    layoutId="active-nav-dot"
+                    className="absolute left-[-24px] top-1/2 -translate-y-1/2 w-1.5 h-8 bg-primary rounded-full shadow-[0_0_15px_rgba(var(--primary-rgb),0.4)]"
+                  />
+                )}
+
+                {/* Floating Tooltip Label */}
+                <div className="absolute left-full ml-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-[-10px] group-hover:translate-x-0 whitespace-nowrap pointer-events-none">
+                  <span className="bg-foreground text-background text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-xl shadow-2xl border border-foreground/10">
+                    {stage.title}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Floating Pill (Always Fades in/out) */}
+      <AnimatePresence>
+        {isFloating && (
+          <motion.div 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 50, opacity: 0 }}
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] xl:hidden"
+          >
+            <div className="flex bg-background/90 backdrop-blur-2xl p-3 rounded-full border border-primary/20 shadow-2xl gap-2">
+              {stages.map((stage, idx) => (
+                <button
+                  key={stage.number}
+                  onClick={() => scrollToStage(idx)}
+                  className={cn(
+                    "w-12 h-12 rounded-full flex items-center justify-center text-[10px] font-black transition-all",
+                    activeStage === idx 
+                      ? "bg-primary text-primary-foreground shadow-lg scale-110" 
+                      : "text-foreground/40 hover:text-primary"
+                  )}
+                >
+                  {stage.number}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Stages Detail Section */}
+      <section className="bg-background pt-12 pb-32">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col">
             {stages.map((stage, index) => (
-              <div key={stage.number} className="py-20 lg:py-32 border-b border-border/50 relative">
+              <div 
+                key={stage.number} 
+                ref={(el) => { (stageRefs.current[index] = el) }}
+                className="py-24 lg:py-32 border-b border-border/50 relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] -z-10 translate-x-1/3 -translate-y-1/4" />
+                
                 <ScrollReveal>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
                     
-                    {/* Left side: Stage Info sticky */}
-                    <div className="lg:col-span-5 lg:sticky top-32">
-                      <div className="flex items-center gap-4 mb-6">
-                        <span className="text-sm font-black uppercase tracking-[0.3em] text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
-                          Stage {stage.number}
-                        </span>
-                      </div>
-                      
-                      <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-foreground mb-6 leading-none">
-                        {stage.title}
-                      </h2>
-                      
-                      <p className="text-xl italic font-medium text-foreground/60 mb-8 pl-4 border-l-2 border-primary/40 leading-snug">
-                        {stage.subtitle}
-                      </p>
-                      
-                      <p className="text-lg leading-relaxed text-foreground/70 font-medium">
-                        {stage.description}
-                      </p>
+                    {/* Left: Stage Info */}
+                    <div className="lg:col-span-5 lg:sticky top-40">
+                      <motion.div
+                        animate={{ opacity: activeStage === index ? 1 : 0.3 }}
+                        transition={{ duration: 0.8 }}
+                      >
+                        <div className="flex items-center gap-4 mb-8">
+                          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary bg-primary/10 px-4 py-2 rounded-full border border-primary/20 shadow-sm">
+                            Phase {stage.number}
+                          </span>
+                        </div>
+                        
+                        <h2 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-foreground mb-8 leading-[0.95]">
+                          {stage.title}
+                        </h2>
+                        
+                        <p className="text-xl md:text-2xl italic font-medium text-foreground/50 mb-8 pl-6 border-l-4 border-primary/30 leading-snug">
+                          {stage.subtitle}
+                        </p>
+                        
+                        <p className="text-lg md:text-xl leading-relaxed text-foreground/70 font-medium max-w-xl mb-12">
+                          {stage.description}
+                        </p>
+
+                        <div className="flex items-center gap-8">
+                           {index < stages.length - 1 && (
+                             <button 
+                              onClick={() => scrollToStage(index + 1)}
+                              className="group flex items-center gap-4 text-xs font-black uppercase tracking-[0.3em] text-primary hover:text-foreground transition-all px-8 py-4 border border-primary/20 rounded-full bg-primary/5 hover:bg-primary/10"
+                             >
+                               Next Phase <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                             </button>
+                           )}
+                           <span className="text-[10px] font-black text-foreground/20 uppercase tracking-[0.6em]">
+                             {index + 1} // {stages.length}
+                           </span>
+                        </div>
+                      </motion.div>
                     </div>
                     
-                    {/* Right side: Sub-items grid */}
-                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-8 lg:mt-0">
+                    {/* Right: Sub-items */}
+                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 lg:mt-8">
                       {stage.items.map((item, idx) => (
                         <motion.div 
                           key={idx}
-                          whileHover={{ y: -5 }}
-                          className="bg-surface/50 border border-border/60 p-8 rounded-[2rem] hover:bg-surface hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-xl group"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: idx * 0.1, duration: 0.5 }}
+                          className="bg-surface/50 border border-border/40 hover:border-primary/30 transition-all duration-500 rounded-[2rem] p-8 md:p-10 flex flex-col group overflow-hidden relative shadow-sm hover:shadow-xl hover:bg-surface"
                         >
-                          <h4 className="text-xl font-black text-foreground mb-3 tracking-tight group-hover:text-primary transition-colors">
-                            {item.title}
-                          </h4>
-                          <p className="text-foreground/60 font-medium leading-relaxed">
-                            {item.desc}
-                          </p>
+                          {/* Giant Background Watermark */}
+                          <div className="absolute -right-2 -bottom-6 text-[100px] lg:text-[120px] font-black text-foreground/[0.03] group-hover:text-primary/10 transition-colors leading-none tracking-tighter select-none pointer-events-none">
+                            0{idx + 1}
+                          </div>
+
+                          <div className="flex flex-col relative z-10 h-full">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-black text-xs text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                               0{idx + 1}
+                            </div>
+                            <h4 className="text-lg md:text-xl font-black text-foreground mb-3 tracking-tight group-hover:text-primary transition-colors">
+                              {item.title}
+                            </h4>
+                            <p className="text-foreground/60 font-medium leading-[1.7] text-sm md:text-base mt-auto">
+                              {item.desc}
+                            </p>
+                          </div>
                         </motion.div>
                       ))}
                     </div>
@@ -172,10 +369,9 @@ export default function ProcessPage() {
       </section>
 
       <CallToAction 
-        title={<>Ready to start the <span className="text-primary italic">process</span>?</>}
-        description="We make video production seamless and predictable. Let's schedule a deep dive today."
+        title={<>Ready to start the <span className="text-primary italic font-black">process</span>?</>}
+        description="We make video production seamless and predictable. Let's schedule a Consultation today."
       />
     </div>
   )
 }
-
