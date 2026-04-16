@@ -27,6 +27,9 @@ export function BlogGrid({ posts }: BlogGridProps) {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  // Toggle this to TRUE when you have populated Hygraph and want to show the full grid again.
+  const showRemainingGrid = false;
+
   return (
     <div className="flex flex-col gap-16 lg:gap-24">
       {/* Featured Post if on first page and there are posts */}
@@ -81,98 +84,130 @@ export function BlogGrid({ posts }: BlogGridProps) {
         </motion.article>
       )}
 
-      {/* Grid for remaining posts */}
-      {(currentPosts.length > (currentPage === 1 ? 1 : 0)) && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {currentPosts.slice(currentPage === 1 ? 1 : 0).map((post, idx) => (
-            <motion.article 
-              key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1, duration: 0.8 }}
-              className="group flex flex-col bg-surface rounded-[2.5rem] overflow-hidden border border-border/50 hover:border-primary/30 transition-all duration-500 shadow-md hover:shadow-2xl hover:-translate-y-2 relative"
-            >
-              {/* Card Glow */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
-              
-              <Link href={`/blog/${post.slug}`} className="relative h-64 overflow-hidden z-10 m-3 rounded-[2rem]">
-                <img 
-                  src={post.image} 
-                  alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-20" />
-                <div className="absolute top-5 left-5">
-                  <Badge className="bg-white/90 text-primary hover:bg-white backdrop-blur-md px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] border-none shadow-sm">
-                    {post.category || 'Insights'}
-                  </Badge>
-                </div>
-              </Link>
-              
-              <div className="flex-1 p-8 pt-4 flex flex-col relative z-10">
-                <div className="flex items-center gap-4 text-foreground/40 text-[9px] font-black uppercase tracking-[0.2em] mb-4">
-                  <span className="flex items-center gap-1.5"><User className="w-3 h-3 text-primary/70" /> {post.authorName || post.author?.name || 'Jaidee & Ko Team'}</span>
-                  <span className="flex items-center gap-1.5"><Clock className="w-3 h-3 text-primary/70" /> {post.readTime || '5 min read'}</span>
-                </div>
-                
-                <h3 className="text-2xl font-black text-foreground mb-4 leading-tight tracking-tight group-hover:text-primary transition-colors duration-300 line-clamp-3">
-                  <Link href={`/blog/${post.slug}`} className="before:absolute before:inset-0">
-                    {post.title}
+      {/* 
+        TEMPORARY COMING SOON TOGGLE:
+        When showRemainingGrid is false, we show the modern "Coming Soon" section.
+        When true, it restores your animated grid and pagination.
+      */}
+      {showRemainingGrid ? (
+        <>
+          {/* Grid for remaining posts */}
+          {(currentPosts.length > (currentPage === 1 ? 1 : 0)) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+              {currentPosts.slice(currentPage === 1 ? 1 : 0).map((post, idx) => (
+                <motion.article 
+                  key={post.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1, duration: 0.8 }}
+                  className="group flex flex-col bg-surface rounded-[2.5rem] overflow-hidden border border-border/50 hover:border-primary/30 transition-all duration-500 shadow-md hover:shadow-2xl hover:-translate-y-2 relative"
+                >
+                  {/* Card Glow */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
+                  
+                  <Link href={`/blog/${post.slug}`} className="relative h-64 overflow-hidden z-10 m-3 rounded-[2rem]">
+                    <img 
+                      src={post.image} 
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-20" />
+                    <div className="absolute top-5 left-5">
+                      <Badge className="bg-white/90 text-primary hover:bg-white backdrop-blur-md px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] border-none shadow-sm">
+                        {post.category || 'Insights'}
+                      </Badge>
+                    </div>
                   </Link>
-                </h3>
-                
-                <p className="text-foreground/60 text-sm leading-relaxed mb-8 line-clamp-3">
-                  {post.excerpt}
-                </p>
-                
-                <div className="mt-auto pt-6 border-t border-border/30">
-                  <span className="inline-flex items-center gap-2 text-primary font-black uppercase tracking-[0.2em] text-[10px] group/read transition-all">
-                    Read Article
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-2" />
-                  </span>
-                </div>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      )}
+                  
+                  <div className="flex-1 p-8 pt-4 flex flex-col relative z-10">
+                    <div className="flex items-center gap-4 text-foreground/40 text-[9px] font-black uppercase tracking-[0.2em] mb-4">
+                      <span className="flex items-center gap-1.5"><User className="w-3 h-3 text-primary/70" /> {post.authorName || post.author?.name || 'Jaidee & Ko Team'}</span>
+                      <span className="flex items-center gap-1.5"><Clock className="w-3 h-3 text-primary/70" /> {post.readTime || '5 min read'}</span>
+                    </div>
+                    
+                    <h3 className="text-2xl font-black text-foreground mb-4 leading-tight tracking-tight group-hover:text-primary transition-colors duration-300 line-clamp-3">
+                      <Link href={`/blog/${post.slug}`} className="before:absolute before:inset-0">
+                        {post.title}
+                      </Link>
+                    </h3>
+                    
+                    <p className="text-foreground/60 text-sm leading-relaxed mb-8 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    
+                    <div className="mt-auto pt-6 border-t border-border/30">
+                      <span className="inline-flex items-center gap-2 text-primary font-black uppercase tracking-[0.2em] text-[10px] group/read transition-all">
+                        Read Article
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-2" />
+                      </span>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          )}
 
-      {/* Elegant Pagination */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-6 py-12">
-          <button
-            onClick={() => paginate(Math.max(1, currentPage - 1))}
-            disabled={currentPage === 1}
-            className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-border/50 hover:border-primary hover:text-primary disabled:opacity-30 disabled:hover:border-border/50 disabled:hover:text-foreground transition-all duration-300"
-          >
-            <ArrowRight className="w-5 h-5 rotate-180" />
-          </button>
-          
-          <div className="flex items-center gap-3 bg-surface border border-border/30 rounded-full p-2 shadow-sm">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+          {/* Elegant Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-6 py-12">
               <button
-                key={number}
-                onClick={() => paginate(number)}
-                className={cn(
-                  "w-10 h-10 rounded-full font-black text-xs transition-all duration-300 flex items-center justify-center",
-                  currentPage === number 
-                    ? "bg-primary text-white shadow-md shadow-primary/20 scale-110" 
-                    : "hover:bg-primary/10 text-foreground/50 hover:text-primary"
-                )}
+                onClick={() => paginate(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-border/50 hover:border-primary hover:text-primary disabled:opacity-30 disabled:hover:border-border/50 disabled:hover:text-foreground transition-all duration-300"
               >
-                {number}
+                <ArrowRight className="w-5 h-5 rotate-180" />
               </button>
-            ))}
-          </div>
+              
+              <div className="flex items-center gap-3 bg-surface border border-border/30 rounded-full p-2 shadow-sm">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+                  <button
+                    key={number}
+                    onClick={() => paginate(number)}
+                    className={cn(
+                      "w-10 h-10 rounded-full font-black text-xs transition-all duration-300 flex items-center justify-center",
+                      currentPage === number 
+                        ? "bg-primary text-white shadow-md shadow-primary/20 scale-110" 
+                        : "hover:bg-primary/10 text-foreground/50 hover:text-primary"
+                    )}
+                  >
+                    {number}
+                  </button>
+                ))}
+              </div>
 
-          <button
-            onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
-            disabled={currentPage === totalPages}
-            className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-border/50 hover:border-primary hover:text-primary disabled:opacity-30 disabled:hover:border-border/50 disabled:hover:text-foreground transition-all duration-300"
-          >
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+              <button
+                onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
+                disabled={currentPage === totalPages}
+                className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-border/50 hover:border-primary hover:text-primary disabled:opacity-30 disabled:hover:border-border/50 disabled:hover:text-foreground transition-all duration-300"
+              >
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative rounded-[3rem] overflow-hidden border border-border/50 bg-background hover:bg-surface/30 transition-colors duration-700 px-6 py-24 sm:py-32 flex flex-col items-center justify-center text-center mt-4 mb-8 group"
+        >
+          {/* Subtle Pulse Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10 group-hover:bg-primary/10 transition-colors duration-700" />
+          
+          <Badge className="bg-primary/10 text-primary border border-primary/20 backdrop-blur-md px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.3em] mb-10 shadow-sm">
+            Content Pipeline
+          </Badge>
+          
+          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground mb-8 tracking-tighter leading-[1.1]">
+            More insights <br className="hidden sm:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary/40 italic">dropping soon.</span>
+          </h3>
+          
+          <p className="text-foreground/50 max-w-2xl mx-auto text-lg lg:text-xl leading-relaxed font-medium">
+            We are currently documenting our latest strategic frameworks, client case studies, and corporate video methodologies. Check back shortly for deep-dives into what is working right now.
+          </p>
+        </motion.div>
       )}
     </div>
   )
