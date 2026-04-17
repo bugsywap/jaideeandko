@@ -231,9 +231,9 @@ export default function AboutPage() {
                         </span>
                         <span className="text-[10px] font-black tracking-[0.2em] uppercase text-primary">Director's Cut</span>
                       </div>
-                      <h4 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">Showreel 2024</h4>
-                      <p className="text-foreground/60 font-medium text-base sm:text-lg max-w-sm">
-                        A cinematic glimpse into the visual impact we create for our partners globally.
+                      <h4 className="text-3xl sm:text-4xl font-black text-foreground tracking-tight">Director&rsquo;s Showreel 2018</h4>
+                      <p className="text-foreground/60 font-medium text-base sm:text-lg max-w-lg">
+                        A glimpse into Gary&rsquo;s personal ethos, work ethic, and clients served. The Ko, in Jaidee & Ko.
                       </p>
                     </div>
                   </div>
