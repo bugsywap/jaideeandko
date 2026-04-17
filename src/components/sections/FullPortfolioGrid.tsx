@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { Play, Filter, LayoutGrid, MonitorPlay, Calendar, Heart, ArrowRight } from "lucide-react"
+import { Play, Filter, LayoutGrid, MonitorPlay, Calendar, Heart, ArrowRight, ChevronDown } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { caseStudies } from "@/data/case-studies"
@@ -124,6 +124,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
 
 export function FullPortfolioGrid() {
   const [filter, setFilter] = useState("all")
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   // Generate mapped cases with their internal filter
   const mappedStudies = useMemo(() => {
@@ -137,27 +138,48 @@ export function FullPortfolioGrid() {
     filter === "all" ? mappedStudies : mappedStudies.filter(item => item.internalFilter === filter)
   , [filter, mappedStudies])
 
+  const handleFilterClick = (id: string) => {
+    setFilter(id);
+    setIsDropdownOpen(false);
+  }
+
   return (
-    <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+    <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
       
       {/* Sticky Left Sidebar */}
-      <div className="w-full lg:w-64 shrink-0 lg:sticky lg:top-32 flex flex-col gap-6 z-10 bg-background/80 backdrop-blur-3xl p-6 lg:p-8 rounded-[2.5rem] border border-border/50 shadow-2xl">
-        <div className="flex items-center gap-3 text-foreground/50 text-[10px] font-black uppercase tracking-[0.2em] mb-2 pb-6 border-b border-border/50">
+      <div className="w-full lg:w-64 shrink-0 lg:sticky lg:top-32 flex flex-col gap-4 lg:gap-6 z-20 bg-background/80 backdrop-blur-3xl p-5 lg:p-8 rounded-[1.5rem] lg:rounded-[2.5rem] border border-border/50 shadow-2xl relative">
+        <div className="hidden lg:flex items-center gap-3 text-foreground/50 text-[10px] font-black uppercase tracking-[0.2em] mb-2 pb-6 border-b border-border/50">
           <Filter className="w-4 h-4" />
           Filter Collection
         </div>
+
+        {/* Mobile Dropdown Toggle */}
+        <button 
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          className="flex lg:hidden items-center justify-between w-full bg-surface border border-border/50 px-5 py-4 rounded-2xl hover:border-primary/50 transition-colors"
+        >
+          <div className="flex items-center gap-3 text-xs sm:text-sm font-black uppercase tracking-widest text-foreground">
+            <Filter className="w-4 h-4 text-primary" />
+            {categories.find(c => c.id === filter)?.name || "Filter Collection"}
+          </div>
+          <ChevronDown className={cn("w-4 h-4 text-foreground/50 transition-transform duration-300", isDropdownOpen && "rotate-180")} />
+        </button>
         
-        <div className="flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 no-scrollbar snap-x">
+        {/* Filter Options */}
+        <div className={cn(
+          "flex-col gap-2 overflow-hidden transition-all duration-300 lg:!flex lg:gap-3",
+          isDropdownOpen ? "flex" : "hidden"
+        )}>
           {categories.map((cat) => {
             const Icon = cat.icon
             const isActive = filter === cat.id
             return (
               <button
                 key={cat.id}
-                onClick={() => setFilter(cat.id)}
+                onClick={() => handleFilterClick(cat.id)}
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3.5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest transition-all duration-300 relative overflow-hidden group w-full text-left shrink-0 sm:shrink snap-start",
-                  isActive ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105" : "bg-surface text-foreground/90 border border-border/50 hover:border-primary/50 hover:text-foreground hover:bg-white/5"
+                  "flex items-center gap-3 px-4 py-3.5 rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest transition-all duration-300 relative group w-full text-left shrink-0",
+                  isActive ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-100 lg:scale-105" : "bg-surface text-foreground/90 border border-border/50 hover:border-primary/50 hover:text-foreground hover:bg-white/5"
                 )}
               >
                 <Icon className={cn("w-3.5 h-3.5 shrink-0 transition-colors", isActive ? "text-primary-foreground" : "text-primary group-hover:scale-110")} />

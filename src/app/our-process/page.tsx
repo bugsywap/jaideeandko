@@ -109,7 +109,7 @@ export default function ProcessPage() {
           }
         })
       },
-      { threshold: 0.4, rootMargin: "-20% 0px -20% 0px" }
+      { threshold: 0.1, rootMargin: "-20% 0px -30% 0px" }
     )
 
     stageRefs.current.forEach((ref) => {
@@ -124,7 +124,7 @@ export default function ProcessPage() {
     if (target) {
       target.scrollIntoView({
         behavior: "smooth",
-        block: "center"
+        block: "start"
       })
     }
   }
@@ -163,34 +163,47 @@ export default function ProcessPage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="flex flex-col md:flex-row gap-4 md:gap-1 lg:gap-3 justify-between items-center bg-background p-5 rounded-[2rem] border border-border/60 shadow-lg"
+                className="flex flex-col md:flex-row gap-3 md:gap-1 lg:gap-3 justify-between items-stretch md:items-center bg-transparent md:bg-background md:p-5 md:rounded-[2rem] md:border md:border-border/60 md:shadow-lg"
               >
                 {stages.map((stage, idx) => (
                   <button
                     key={stage.number}
                     onClick={() => scrollToStage(idx)}
-                    className="group flex items-center gap-4 shrink-0 transition-all duration-300"
+                    className={cn(
+                      "group flex flex-col md:flex-row items-center gap-3 shrink-0 transition-all duration-300 w-full md:w-auto relative",
+                      "p-4 md:p-0 rounded-2xl md:rounded-none border border-border/50 md:border-none shadow-sm md:shadow-none hover:shadow-md md:hover:shadow-none",
+                      activeStage === idx ? "bg-primary/5 border-primary/30" : "bg-surface md:bg-transparent"
+                    )}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className={cn(
-                        "w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-all duration-500 border-2",
-                        activeStage === idx 
-                          ? "bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.5)] scale-110" 
-                          : "bg-background text-foreground/40 border-border group-hover:border-primary/50 group-hover:text-primary"
-                      )}>
-                        {stage.number}
-                      </div>
+                    <div className="flex items-center gap-4 w-full justify-between md:justify-start">
+                      <div className="flex items-center gap-4">
+                        <div className={cn(
+                          "w-10 h-10 md:w-8 md:h-8 rounded-full flex items-center justify-center text-[10px] md:text-[10px] font-black transition-all duration-500 border-2 shrink-0",
+                          activeStage === idx 
+                            ? "bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.5)] scale-110" 
+                            : "bg-background text-foreground/40 border-border group-hover:border-primary/50 group-hover:text-primary"
+                        )}>
+                          {stage.number}
+                        </div>
 
-                      <span className={cn(
-                        "text-foreground font-black text-[10px] lg:text-xs uppercase tracking-widest whitespace-nowrap transition-colors",
-                        activeStage === idx ? "text-primary" : "group-hover:text-primary"
-                      )}>
-                        {stage.title}
-                      </span>
+                        <span className={cn(
+                          "text-foreground font-black text-xs md:text-[10px] lg:text-xs uppercase tracking-widest whitespace-nowrap transition-colors text-left",
+                          activeStage === idx ? "text-primary" : "group-hover:text-primary"
+                        )}>
+                          {stage.title}
+                        </span>
+                      </div>
+                      
+                      {/* Mobile Action Indicator */}
+                      <ArrowRight className={cn(
+                        "w-4 h-4 transition-transform md:hidden duration-300",
+                        activeStage === idx ? "text-primary" : "text-border opacity-50 group-hover:text-primary -rotate-45 group-hover:rotate-0"
+                      )} />
                     </div>
 
+                    {/* Desktop Arrow Right indicator */}
                     {idx < stages.length - 1 && (
-                      <ArrowRight className="w-3 h-3 text-border rotate-90 md:rotate-0 hidden md:block opacity-30 ml-2" />
+                      <ArrowRight className="w-3 h-3 text-border hidden md:block opacity-30 ml-2" />
                     )}
                   </button>
                 ))}
@@ -282,7 +295,7 @@ export default function ProcessPage() {
               <div 
                 key={stage.number} 
                 ref={(el) => { (stageRefs.current[index] = el) }}
-                className="py-24 lg:py-32 border-b border-border/50 relative overflow-hidden"
+                className="py-16 md:py-24 lg:py-32 border-b border-border/50 relative overflow-hidden shrink-0 scroll-mt-[150px]"
               >
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] -z-10 translate-x-1/3 -translate-y-1/4" />
                 
@@ -290,11 +303,8 @@ export default function ProcessPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
                     
                     {/* Left: Stage Info */}
-                    <div className="lg:col-span-5 lg:sticky top-40">
-                      <motion.div
-                        animate={{ opacity: activeStage === index ? 1 : 0.3 }}
-                        transition={{ duration: 0.8 }}
-                      >
+                    <div className="lg:col-span-5 lg:sticky top-40 z-10 transition-opacity duration-700 hover:opacity-100" style={{ opacity: activeStage === index ? 1 : 0.4 }}>
+                      <motion.div>
                         <div className="flex items-center gap-4 mb-8">
                           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary bg-primary/10 px-4 py-2 rounded-full border border-primary/20 shadow-sm">
                             Phase {stage.number}
