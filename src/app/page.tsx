@@ -14,8 +14,18 @@ import { ExitIntentPopup } from "@/components/ui/ExitPopup"
 import { ScrollReveal } from "@/components/ui/ScrollReveal"
 
 export const metadata = {
-  title: "Premium Corporate Video Production Singapore | Jaidee & Ko",
-  description: "Specializing in corporate vision films and social-first content for B2B tech companies, NGOs, and founders. We turn complex narratives into high-impact visual storytelling.",
+  title: "Jaidee & Ko | Premium Corporate Video & Social Content in Singapore",
+  description: "For B2B companies, NGOs, and founders. We turn complex ideas into clear, trusted narratives that drive visibility and opportunity.",
+  openGraph: {
+    images: [
+      {
+        url: "/logo-withbg.png",
+        width: 1200,
+        height: 630,
+        alt: "Jaidee & Ko - Premium Corporate Video & Social Content",
+      },
+    ],
+  },
 }
 
 export default function Home() {
