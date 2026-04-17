@@ -12,7 +12,17 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Jaidee & Ko | Premium Corporate Video & Social Content in Singapore",
-  description: "Capture expertise and build authority with premium corporate video production and social-first content. We empower B2B companies, NGOs, and founders in Singapore and Southeast Asia through strategic visual storytelling.",
+  description: "For B2B companies, NGOs, and founders. We turn complex ideas into clear, trusted narratives that drive visibility and opportunity.",
+  openGraph: {
+    images: [
+      {
+        url: "/logo-withbg.png",
+        width: 1200,
+        height: 630,
+        alt: "Jaidee & Ko - Premium Corporate Video & Social Content",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
