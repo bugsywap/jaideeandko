@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: "/logo-withbg.png",
+        url: "/img/logo-withbg.png",
         width: 1200,
         height: 630,
         alt: "Jaidee & Ko - Premium Corporate Video & Social Content",
