@@ -68,7 +68,7 @@ export default function PrivacyPolicyPage() {
           <div className="flex flex-col lg:flex-row gap-16 lg:items-start">
             
             {/* Sidebar Navigation */}
-            <div className="lg:w-80 shrink-0 sticky top-32">
+            <div className="lg:w-80 shrink-0 relative lg:sticky lg:top-32 z-20">
               <div className="flex flex-col gap-2 p-2 bg-surface rounded-3xl border border-border shadow-sm">
                 <button
                   onClick={() => setActiveTab("privacy")}
@@ -157,21 +157,6 @@ export default function PrivacyPolicyPage() {
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className="py-24 bg-surface/50 border-t border-border/50 text-center">
-        <div className="mx-auto max-w-2xl px-6">
-          <h2 className="text-3xl font-bold mb-6">Built on Integrity.</h2>
-          <p className="text-foreground/60 mb-10">
-            We value your partnership and your privacy equally. 
-          </p>
-          <Link 
-            href="/contact"
-            className="inline-flex items-center justify-center bg-foreground text-background px-8 py-4 rounded-full font-bold hover:bg-foreground/90 transition-all shadow-lg"
-          >
-            Start a Project Safely
-          </Link>
-        </div>
-      </section>
     </div>
   )
 }
