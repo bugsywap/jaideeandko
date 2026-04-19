@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://jaideeandko.netlify.app"),
   title: "Jaidee & Ko | Premium Corporate Video & Social Content in Singapore",
-  description: "For B2B companies, NGOs, and founders. We turn complex ideas into clear, trusted narratives that drive visibility and opportunity.",
+  description: "Elevate your brand with a premier strategic communications and video development agency. We transform complex ideas into clear, high-impact narratives that drive visibility for B2B companies, NGOs, and founders.",
   openGraph: {
     images: [
       {
